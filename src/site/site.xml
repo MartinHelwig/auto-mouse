@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Martin Helwig
+
+SPDX-License-Identifier: MIT
+-->
+
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 https://maven.apache.org/xsd/decoration-1.8.0.xsd"
+	name="auto-mouse">
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>2.0.0-M3</version>
+	</skin>
+
+	<bannerLeft>
+		<name>auto-mouse</name>
+		<src>images/auto-mouse_github.png</src>
+		<!-- <href>https://MartinHelwig.github.io</href>-->
+	</bannerLeft>
+	<bannerRight>
+		<src>images/update.gif</src>
+	</bannerRight>
+     
+	<publishDate position="left" format="yyyy-MM-dd" />
+		<version position="left" />
+	<edit/>
+	<poweredBy>
+		<logo name="auto-mouse" href="" img="images/auto-mouse_black.png" position="" alt="auto-mouse" border="0" width="50%" height="50%" target="_blank" title="auto-mouse" />
+	</poweredBy>
+
+	<body>
+		<links>
+			<item name="Martin Helwig" href="https://MartinHelwig.github.io" />
+		</links>
+     
+		<menu name="Overview">
+			<item name="Introduction" href="introduction.html"/>
+			<item name="Download" href="download.html"/>
+			<item name="Release Notes" href="release-notes.html" />
+		</menu>
+     
+		<menu ref="reports"/>
+	</body>
+</project>

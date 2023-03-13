@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2023 Martin Helwig
 SPDX-License-Identifier: MIT
 -->
 
-![auto-mouse](/src/io/github/martinhelwig/utility/automouse/images/auto-mouse_github.png?raw=true "auto-mouse")
+![auto-mouse](/src/main/resources/io/github/martinhelwig/utility/automouse/images/auto-mouse_github.png?raw=true "auto-mouse")
 
 [![CI](https://github.com/MartinHelwig/auto-mouse/actions/workflows/build.yml/badge.svg)](https://github.com/MartinHelwig/auto-mouse/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

@@ -87,7 +87,7 @@ SPDX-License-Identifier: MIT
 		<delete failonerror="true" includeemptydirs="true">
 			<fileset dir="${lib.dir}" includes="**/*" />
 		</delete>
-		<ivy:retrieve conf="runtime"/>
+		<ivy:retrieve conf="runtime" pattern="${lib.dir}/[artifact].[ext]"/>
 		<tar tarfile="${dist.dir}/${dist.file}" compression="gzip">
 			<tarfileset dir="${lib.dir}" prefix="${context.name}/lib">
 				<include name="*.jar" />
@@ -110,14 +110,13 @@ SPDX-License-Identifier: MIT
 		<delete failonerror="true" includeemptydirs="true">
 			<fileset dir="${lib.dir}" includes="**/*" />
 		</delete>
-		<ivy:retrieve conf="compile"/>
+		<ivy:retrieve conf="compile" pattern="${lib.dir}/[artifact].[ext]"/>
 		<javac destdir="${build.dir}/${src.dir}" includeantruntime="false" classpathref="project.classpath" debug="on" encoding="utf-8">
 			<src path="${src.dir}" />
 			<compilerarg line="${globalcompilerargs}"/>
 		</javac>
 		<copy todir="${build.dir}/${src.dir}">
-			<fileset dir="${src.dir}" includes="**/*.png"></fileset>
-			<fileset dir="${src.dir}" includes="**/*.properties"></fileset>
+			<fileset dir="${src.resources.dir}" includes="**/*"></fileset>
 		</copy>
 		
 		<jar destfile="${basedir}/${dist.dir}/${delivery.file}">
@@ -202,7 +201,7 @@ SPDX-License-Identifier: MIT
 		<delete failonerror="true" includeemptydirs="true">
 			<fileset dir="${lib.dir}" includes="**/*" />
 		</delete>
-		<ivy:retrieve conf="test" />
+		<ivy:retrieve conf="test" pattern="${lib.dir}/[artifact].[ext]"/>
 		<javac destdir="${build.dir}/${test.dir}" includeantruntime="false" classpathref="project.classpath" debug="on" encoding="utf-8">
 			<src path="${test.dir}" />
 			<compilerarg line="${globalcompilerargs}"/>
@@ -230,7 +229,7 @@ SPDX-License-Identifier: MIT
 	</target>
 	
 	<target name="ivy-report" description="creating an ivy report" depends="prepare-environment">
-		<ivy:retrieve />
+		<ivy:retrieve pattern="${lib.dir}/[artifact].[ext]"/>
 		<ivy:report todir="${build.dir}/reports/ivy-report"/>
 	</target>
 	
@@ -294,7 +293,7 @@ SPDX-License-Identifier: MIT
 		<delete failonerror="true" includeemptydirs="true">
 			<fileset dir="${lib.dir}" includes="**/*" />
 		</delete>
-		<ivy:retrieve conf="runtime"/>
+		<ivy:retrieve conf="runtime" pattern="${lib.dir}/[artifact].[ext]"/>
 		
 		<!-- <dependency-check projectname="${project.name} ${project.version}" reportoutputdirectory="${build.dir}/reports/dependency-check" dataDirectory="${buildenv.dir}/dependency-check-ant/data" reportformat="ALL" suppressionFile="${config.dir}/dependency-check/dependency-check-suppressions.xml"> -->
 		<dependency-check projectname="${project.name} ${project.version}" reportoutputdirectory="${build.dir}/reports/dependency-check" dataDirectory="${buildenv.dir}/dependency-check-ant/data" reportformat="ALL">

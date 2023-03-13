@@ -1,0 +1,421 @@
+<!-- SPDX-FileCopyrightText: 2023 Martin Helwig SPDX-License-Identifier: 
+	MIT -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>io.github.martinhelwig.utility.automouse</groupId>
+	<artifactId>auto-mouse</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>auto-mouse</name>
+	<description>The auto-mouse utility moves the mouse in a configurable intervall to stop locking the screen.</description>
+	<url>https://github.com/MartinHelwig/auto-mouse</url>
+	<inceptionYear>2023</inceptionYear>
+
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://raw.githubusercontent.com/MartinHelwig/MartinHelwig.github.io/main/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:https://github.com/MartinHelwig/auto-mouse.git</connection>
+		<developerConnection>scm:git:git@github.com:MartinHelwig/auto-mouse.git</developerConnection>
+		<url>https://github.com/MartinHelwig/auto-mouse</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>MartinHelwig</id>
+			<name>Martin Helwig</name>
+			<roles>
+				<role>owner</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Berlin</timezone>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/MartinHelwig/auto-mouse/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>GitHub Actions</system>
+		<url>https://github.com/MartinHelwig/auto-mouse/actions</url>
+	</ciManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/MartinHelwig/auto-mouse</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<!-- general properties -->
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- specific properties -->
+		<junit.skip>false</junit.skip>
+		<junit.testFailureIgnore>true</junit.testFailureIgnore>
+		<junit.reportDirectory>${project.basedir}/target/reports/junit</junit.reportDirectory>
+
+		<javadoc.skip>false</javadoc.skip>
+
+		<source.skip>false</source.skip>
+
+		<dependency-check-maven.skip>false</dependency-check-maven.skip>
+		<dependency-check-maven.failBuildOnAnyVulnerability>true</dependency-check-maven.failBuildOnAnyVulnerability>
+		<dependency-check-maven.dataDirectory>${project.basedir}/target/build-environment/dependencyCheckDataDirectory</dependency-check-maven.dataDirectory>
+		<dependency-check-maven.outputDirectory>${project.basedir}/target/reports/dependency-check</dependency-check-maven.outputDirectory>
+
+		<jacoco.skip>false</jacoco.skip>
+
+
+		<!-- dependency versions -->
+		<commons.logging.version>1.2</commons.logging.version>
+		<log4j.version>2.20.0</log4j.version>
+		<junit.version>5.9.2</junit.version>
+		<junit.platform.version>1.9.2</junit.platform.version>
+		<dependency-check-maven.version>8.1.2</dependency-check-maven.version>
+
+		<!-- plugin versions -->
+		<maven-surefire.version>3.0.0-M9</maven-surefire.version>
+		<maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
+		<maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+		<maven-site-plugin.version>4.0.0-M5</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>3.4.2</maven-project-info-reports-plugin.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons.logging.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-jcl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${maven-site-plugin.version}</version>
+				<configuration>
+					<locales>default</locales>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin.version}</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/assembly/distribution.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assemble-all</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven-dependency-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>io.github.martinhelwig.utility.automouse.AutoMouse</mainClass>
+							<addClasspath>false</addClasspath>
+							<!-- <classpathPrefix>lib</classpathPrefix> -->
+							<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Built-By>${user.name}</Built-By>
+							<Build-Number>${env.RUN_NUMBER}</Build-Number>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Class-Path>lib/</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<configuration>
+					<skipSource>${source.skip}</skipSource>
+					<archive>
+						<manifest>
+							<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Built-By>${user.name}</Built-By>
+							<Build-Number>${env.RUN_NUMBER}</Build-Number>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+						</manifestEntries>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<configuration>
+					<skip>${javadoc.skip}</skip>
+					<show>public</show>
+					<doclint>none</doclint>
+					<failOnWarnings>false</failOnWarnings>
+					<failOnError>true</failOnError>
+					<archive>
+						<manifest>
+							<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Built-By>${user.name}</Built-By>
+							<Build-Number>${env.RUN_NUMBER}</Build-Number>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+						</manifestEntries>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire.version}</version>
+				<configuration>
+					<skip>${surefire.skip}</skip>
+					<skipTests>${surefire.skip}</skipTests>
+					<testFailureIgnore>${surefire.testFailureIgnore}</testFailureIgnore>
+					<!--<reportsDirectory>${junit.reportDirectory}</reportsDirectory> -->
+					<failIfNoTests>false</failIfNoTests>
+
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${maven-surefire.version}</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>report-only</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--<reportsDirectory>${junit.reportDirectory}</reportsDirectory> -->
+					<!--<outputDirectory>${junit.reportDirectory}</outputDirectory> -->
+					<!--<outputName>JUnit-Examples-Test-Report</outputName> -->
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<configuration>
+					<skip>${jacoco.skip}</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/reports/jacoco</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>${dependency-check-maven.version}</version>
+				<configuration>
+					<skip>${dependency-check-mavenskip}</skip>
+					<cveValidForHours>12</cveValidForHours>
+					<failBuildOnAnyVulnerability>${dependency-check-mavenfailBuildOnAnyVulnerability}</failBuildOnAnyVulnerability>
+					<dataDirectory>${dependency-check-mavendataDirectory}</dataDirectory>
+					<outputDirectory>${dependency-check-mavenoutputDirectory}</outputDirectory>
+					<prettyPrint>true</prettyPrint>
+					<formats>
+						<format>ALL</format>
+					</formats>
+					<suppressionFiles>
+						<suppressionFile>src/main/resources/suppressions.xml</suppressionFile>
+					</suppressionFiles>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-dependency-chech</id>
+						<phase>test</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${maven-project-info-reports-plugin.version}</version>
+				<!--<reportSets> <reportSet> <reports> <report>index</report> </reports> 
+					</reportSet> </reportSets> -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<reportSets>
+					<reportSet><!-- aggregate reportSet, to define in poms having modules -->
+						<id>aggregate</id>
+						<inherited>false</inherited><!-- don't run aggregate in child modules -->
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${maven-surefire.version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>${dependency-check-maven.version}</version>
+				<configuration>
+					<cveValidForHours>12</cveValidForHours>
+					<dataDirectory>${dependency-check-mavendataDirectory}</dataDirectory>
+					<prettyPrint>true</prettyPrint>
+					<formats>
+						<format>ALL</format>
+					</formats>
+					<suppressionFiles>
+						<suppressionFile>src/main/resources/suppressions.xml</suppressionFile>
+					</suppressionFiles>
+				</configuration>
+				<!--<reportSets> <reportSet> <reports> <report>aggregate</report> </reports> 
+					</reportSet> </reportSets> -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<!-- select non-aggregate reports -->
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

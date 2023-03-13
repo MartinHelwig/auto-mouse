@@ -22,7 +22,7 @@ echo "BUILDROOT = $RPM_BUILD_ROOT"
 mkdir -p $RPM_BUILD_ROOT/opt/martinhelwig
 
 cd $RPM_BUILD_ROOT/opt/martinhelwig
-tar xvfz $RPM_BUILD_ROOT/../../../../dist/auto-mouse.tar.gz
+tar xvfz $RPM_BUILD_ROOT/../../../../distribution/auto-mouse.tar.gz
 cd auto-mouse
 exit
 
@@ -30,7 +30,7 @@ exit
 /opt/martinhelwig/auto-mouse/**
 
 %clean
-cp $RPM_BUILD_ROOT/../../RPMS/noarch/*.rpm $RPM_BUILD_ROOT/../../../../dist
+cp $RPM_BUILD_ROOT/../../RPMS/noarch/*.rpm $RPM_BUILD_ROOT/../../../../distribution
 
 %pre
 if [ "$1" == "1" ]; then
