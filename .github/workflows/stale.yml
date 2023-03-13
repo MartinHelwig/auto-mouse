@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+# SPDX-License-Identifier: MIT
+
+name: Close stale Pull Request
+on:
+  schedule:
+    - cron: 0 6 * * *
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v7
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-pr-message: This pull request is stale because it has been open 365 days with no activity. Remove stale label or comment or this will be closed in 30 days.
+          days-before-stale: 365
+          days-before-pr-close: 30

@@ -1,0 +1,323 @@
+<!--
+SPDX-FileCopyrightText: 2023 Martin Helwig
+
+SPDX-License-Identifier: MIT
+-->
+
+<project basedir="." default="distribute" xmlns:ac="antlib:net.sf.antcontrib" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:jacoco="antlib:org.jacoco.ant">
+	
+	<property file="project.properties" />
+	<property file="build.properties" />
+	
+	<property name="globalcompilerargs" value="-Xlint:-path"/>
+	
+	<path id="project.classpath">
+		<pathelement location="${basedir}/${config.dir}" />
+		<pathelement location="${build.dir}/${src.dir}" />
+		<pathelement location="${build.dir}/${test.dir}"/>
+		<fileset dir="${basedir}/${lib.dir}" includes="*.jar" />
+	</path>
+		
+	<target name="prepare-environment" description="preparing the build environment">
+		<echo message="ant version: ${ant.version}" level="info"/>
+				
+		<condition property="os" value="unix">
+		    <os family="unix"/>
+		</condition>
+		<condition property="os" value="windows">
+		    <os family="windows"/>
+		</condition>
+		
+		<mkdir dir="${basedir}/${buildenv.dir}" />
+		
+		<mkdir dir="${basedir}/${buildenv.dir}/ant-libraries" />
+		<get dest="${basedir}/${buildenv.dir}/ant-libraries" skipexisting="true">
+			<url url="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${buildenv.lib.ivy.version}/ivy-${buildenv.lib.ivy.version}.jar"/>
+			<url url="https://repo1.maven.org/maven2/org/apache/ant/ant-junitlauncher/${buildenv.lib.ant-junit-launcher.version}/ant-junitlauncher-${buildenv.lib.ant-junit-launcher.version}.jar"/>
+			<url url="https://repo1.maven.org/maven2/ant-contrib/ant-contrib/${buildenv.lib.ant-contrib.version}/ant-contrib-${buildenv.lib.ant-contrib.version}.jar"/>
+			<url url="https://repo1.maven.org/maven2/org/jacoco/org.jacoco.ant/${buildenv.lib.jacoco.version}/org.jacoco.ant-${buildenv.lib.jacoco.version}-nodeps.jar"/>
+			<url url="https://github.com/jeremylong/DependencyCheck/releases/download/v${buildenv.zip.dependency-check}/dependency-check-ant-${buildenv.zip.dependency-check}-release.zip"/>
+		</get>
+		
+		<unzip src="${buildenv.dir}/ant-libraries/dependency-check-ant-${buildenv.zip.dependency-check}-release.zip" dest="${buildenv.dir}/ant-libraries" overwrite="false"/>
+		
+		<property name="dependency-check.home" value="${buildenv.dir}/ant-libraries/dependency-check-ant"/>
+		<path id="dependency-check.path">
+		   <pathelement location="${dependency-check.home}/ant-libraries/dependency-check-ant.jar"/>
+		    <fileset dir="${dependency-check.home}/lib">
+		        <include name="*.jar"/>
+		    </fileset>
+		</path>
+		<taskdef resource="dependency-check-taskdefs.properties">
+		   <classpath refid="dependency-check.path" />
+		</taskdef>
+		
+		<taskdef uri="antlib:net.sf.antcontrib" resource="net/sf/antcontrib/antlib.xml" classpath="${basedir}/${buildenv.dir}/ant-libraries/ant-contrib-${buildenv.lib.ant-contrib.version}.jar" />
+		<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpath="${basedir}/${buildenv.dir}/ant-libraries/org.jacoco.ant-${buildenv.lib.jacoco.version}-nodeps.jar" />
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpath="${basedir}/${buildenv.dir}/ant-libraries/ivy-${buildenv.lib.ivy.version}.jar"/>
+		<ivy:info file="ivy.xml"/>
+	</target>
+	
+	<target name="init" description="initialize the build environment" depends="prepare-environment">
+		<delete failonerror="true" includeemptydirs="true" quiet="true">
+			<fileset dir="${build.dir}" includes="**/*"/>
+			<fileset dir="${dist.dir}" includes="**/*" />
+			<fileset dir="${lib.dir}" includes="**/*" />
+		</delete>
+				
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${lib.dir}" />
+		<mkdir dir="${build.dir}/${src.dir}" />
+		<mkdir dir="${build.dir}/${test.dir}" />
+		<mkdir dir="${build.dir}/includes/META-INF" />
+		
+		<copy todir="${build.dir}/includes/META-INF">
+			<fileset dir="${basedir}" includes="LICENSE" />
+		</copy>
+		
+		<tstamp >
+			<format property="build.date.human" pattern="yyyy-MM-dd HH:mm:ss zzz" locale="de,DE" timezone="Europe/Berlin"/>
+			<format property="build.date.tech" pattern="yyyy-MM-dd'T'HH:mm:ssXX" locale="de,DE" timezone="Europe/Berlin"/>
+		</tstamp>
+	</target>
+	
+	<target name="distribute" description="default distribute target to do all" depends="distribute-targz, distrbute-rpm"/>
+	
+	<target name="distribute-targz" description="distribute a tar.gz file" depends="package-all, junit, ivy-report, jacoco-report">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${lib.dir}" includes="**/*" />
+		</delete>
+		<ivy:retrieve conf="runtime"/>
+		<tar tarfile="${dist.dir}/${dist.file}" compression="gzip">
+			<tarfileset dir="${lib.dir}" prefix="${context.name}/lib">
+				<include name="*.jar" />
+			</tarfileset>
+			<tarfileset dir="${dist.dir}" prefix="${context.name}/lib">
+				<include name="${delivery.file}" />
+			</tarfileset>
+			<tarfileset dir="${config.dir}" prefix="${context.name}/config">
+				<include name="log4j2.xml" />
+			</tarfileset>
+			<tarfileset dir="${scripts.dir}" prefix="${context.name}">
+				<include name="start.cmd" />
+			</tarfileset>
+		</tar>
+	</target>
+	
+	<target name="package-all" description="package all jar files" depends="init, package-delivery, package-source, package-javadoc, sign"/>
+
+	<target name="package-delivery" description="package the delivery jar file" depends="init">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${lib.dir}" includes="**/*" />
+		</delete>
+		<ivy:retrieve conf="compile"/>
+		<javac destdir="${build.dir}/${src.dir}" includeantruntime="false" classpathref="project.classpath" debug="on" encoding="utf-8">
+			<src path="${src.dir}" />
+			<compilerarg line="${globalcompilerargs}"/>
+		</javac>
+		<copy todir="${build.dir}/${src.dir}">
+			<fileset dir="${src.dir}" includes="**/*.png"></fileset>
+			<fileset dir="${src.dir}" includes="**/*.properties"></fileset>
+		</copy>
+		
+		<jar destfile="${basedir}/${dist.dir}/${delivery.file}">
+			<fileset dir="${build.dir}/${src.dir}" />
+			<fileset dir="${build.dir}/includes">
+				<include name="**"/>
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${build.date.human}" />
+				<attribute name="Main-Class" value="${main.class}"/>
+				<section name="common">
+					<attribute name="Implementation-Title" value="${project.name}" />
+					<attribute name="Implementation-Version" value="${project.version}" />
+					<attribute name="Implementation-Vendor" value="${project.author}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="package-source" description="packages the source jar file" depends="init">
+		<jar destfile="${basedir}/${dist.dir}/${sources.file}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="${build.dir}/includes">
+				<include name="**"/>
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${build.date.human}" />
+				<section name="common">
+					<attribute name="Implementation-Title" value="${project.name}" />
+					<attribute name="Implementation-Version" value="${project.version}" />
+					<attribute name="Implementation-Vendor" value="${project.author}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="package-javadoc" description="package the javadoc jar file" depends="init">
+		<javadoc packagenames="io.github.martinhelwig.*"
+			sourcepath="${src.dir}"
+			excludepackagenames="com.example.*"
+			defaultexcludes="yes"
+			destdir="${build.dir}/javadoc"
+			author="true"
+			version="true"
+			use="true"
+			windowtitle="${project.name}"
+			failonerror="true"
+			failonwarning="true">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<doctitle><![CDATA[<h1>${project.name} - ${project.version}</h1>]]></doctitle>
+			<bottom><![CDATA[<i>${project.author}</i>]]></bottom>
+		</javadoc>
+		
+		<jar destfile="${basedir}/${dist.dir}/${javadoc.file}">
+			<fileset dir="${build.dir}/javadoc">
+				<include name="**/*"/>
+			</fileset>
+			<fileset dir="${build.dir}/includes">
+				<include name="**"/>
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${build.date.human}" />
+				<section name="common">
+					<attribute name="Implementation-Title" value="${project.name}" />
+					<attribute name="Implementation-Version" value="${project.version}" />
+					<attribute name="Implementation-Vendor" value="${project.author}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="junit" description="running junit tests with jacoco" depends="package-delivery">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${lib.dir}" includes="**/*" />
+		</delete>
+		<ivy:retrieve conf="test" />
+		<javac destdir="${build.dir}/${test.dir}" includeantruntime="false" classpathref="project.classpath" debug="on" encoding="utf-8">
+			<src path="${test.dir}" />
+			<compilerarg line="${globalcompilerargs}"/>
+		</javac>
+		
+		<mkdir dir="${build.dir}/reports/junit-report"/>
+		
+		<jacoco:agent property="jacocoagent" destfile="${build.dir}/jacoco.exec" />
+		<junitlauncher haltonfailure="false" printsummary="true">
+			<classpath refid="project.classpath" />
+			
+			<testclasses outputdir="${build.dir}/reports/junit-report">
+				<fork>
+					<jvmarg value="${jacocoagent}"/>
+				</fork>
+				<fileset dir="${build.dir}/${test.dir}">
+					<include name="**/*Test.class" />
+				</fileset>
+				<listener type="legacy-brief" sendSysOut="true"/>
+				<listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
+					
+			</testclasses>
+			
+		</junitlauncher>
+	</target>
+	
+	<target name="ivy-report" description="creating an ivy report" depends="prepare-environment">
+		<ivy:retrieve />
+		<ivy:report todir="${build.dir}/reports/ivy-report"/>
+	</target>
+	
+	<target name="jacoco-report" description="creating a jacoco report" depends="junit">
+		<jacoco:report>
+			<executiondata>
+				<file file="${build.dir}/jacoco.exec"/>
+			</executiondata>
+			<structure name="JaCoCo Ant Example">
+				<classfiles>
+					<fileset dir="${build.dir}/${src.dir}" />
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="${src.dir}"/>
+				</sourcefiles>
+			</structure>
+			<html destdir="${build.dir}/reports/jacoco-report"/>
+			<csv destfile="${build.dir}/reports/jacoco-report/jacoco.csv" />
+			<xml destfile="${build.dir}/reports/jacoco-report/jacoco.xml" />
+	    </jacoco:report>
+	</target>
+	
+	<target name="distrbute-rpm" description="create single binary rpm by spec file" depends="distribute-targz" if="rpm.spec.file">
+		<ac:if>
+			<equals arg1="${os}" arg2="unix" />
+			<then>
+				<echo message="try to create rpm" />
+				<delete dir="${build.dir}/RPM" />
+				<!-- Create directories -->
+				<mkdir dir="${build.dir}/RPM/BUILD"/>
+				<mkdir dir="${build.dir}/RPM/SOURCES"/>
+				<mkdir dir="${build.dir}/RPM/RPMS/noarch"/>
+				<mkdir dir="${build.dir}/RPM/SPECS"/>
+							
+				<copy tofile="${build.dir}/RPM/SPECS/project.spec" preservelastmodified="true" failonerror="true">
+					<fileset file="${rpm.spec.file}" />
+				</copy>
+				<replace file="${build.dir}/RPM/SPECS/project.spec" token="$VERSION$" value="${project.version}" />
+				<!-- <replace file="${build.dir}/RPM/SPECS/project.spec" token="$RELEASE$" value="${build.date.tech}" /> -->
+				<replace file="${build.dir}/RPM/SPECS/project.spec" token="$RELEASE$" value="SNAPSHOT" />
+					
+				<rpm
+					specFile="project.spec"
+					topDir="${build.dir}/RPM"
+					cleanBuildDir="false"
+					removeSpec="false"
+					removeSource="false"
+					command = "-bb"
+					failOnError="true"
+				/>
+			</then>
+			<else>
+				<echo level="warning" message="this is no linux maschine, rpm will not be created" />
+			</else>
+		</ac:if>
+	</target>
+	
+	<target name="dependency-check" description="Dependency-Check Analysis" depends="init">
+		<echo message="try to analyse libraries in directory ${lib.dir}." level="info"/>
+
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${lib.dir}" includes="**/*" />
+		</delete>
+		<ivy:retrieve conf="runtime"/>
+		
+		<!-- <dependency-check projectname="${project.name} ${project.version}" reportoutputdirectory="${build.dir}/reports/dependency-check" dataDirectory="${buildenv.dir}/dependency-check-ant/data" reportformat="ALL" suppressionFile="${config.dir}/dependency-check/dependency-check-suppressions.xml"> -->
+		<dependency-check projectname="${project.name} ${project.version}" reportoutputdirectory="${build.dir}/reports/dependency-check" dataDirectory="${buildenv.dir}/dependency-check-ant/data" reportformat="ALL">
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</dependency-check>
+	</target>
+	
+	<target name="sign" depends="prepare-environment">
+		<ac:if>
+			<available file="${buildenv.keystore.file}"/>
+			<then>
+				<echo message="Using ${buildenv.keystore.file} to sign... " level="warning"/>
+				<signjar tsaurl="http://timestamp.digicert.com" alias="${buildenv.keystore.alias}" sigfile="SIGN" keystore="${buildenv.keystore.file}" storepass="${buildenv.keystore.password}" lazy="true" >
+				  	<path>
+						<fileset dir="dist" includes="*.jar"/>
+					</path>
+				</signjar>
+			</then>
+			<else>
+				<echo message="No keystore available..." level="warning"/>
+			</else>
+		</ac:if>
+	</target>
+</project>

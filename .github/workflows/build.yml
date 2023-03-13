@@ -1,0 +1,104 @@
+# SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+# SPDX-License-Identifier: MIT
+
+# This workflow will build the project and run some basic tests.
+
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Build:
+    permissions:
+      contents: write
+      packages: write
+      checks: write
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set Project Name
+      run: |
+        echo MY_PROJECTNAME=$(pwd | xargs basename) >> $GITHUB_ENV
+        echo "# Project $(pwd | xargs basename)" >> $GITHUB_STEP_SUMMARY
+
+    - name: Check REUSE compliance
+      run: |
+        pip install reuse
+        echo "## REUSE Compliance" >> $GITHUB_STEP_SUMMARY
+        echo "For more information about REUSE see [official page](https://reuse.software/)."
+        reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
+
+    - name: Set Up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+  
+    - name: Prepare Build environment
+      run: ant -noinput -buildfile build.xml prepare-environment
+
+    - name: Build With Ant
+      run: xvfb-run ant -noinput -lib build-environment/ant-libraries -buildfile build.xml
+
+    - name: Add Headline Job Summary
+      run: echo "## JUnit " >> $GITHUB_STEP_SUMMARY
+      
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v3.7.4
+      if: success() || failure() # always run even if the previous step fails
+      with:
+        report_paths: build/reports/junit-report/TEST-*.xml
+        detailed_summary: true
+        include_passed: true
+        fail_on_failure: true
+        require_tests: true
+
+    - name: JaCoCo Code Coverage Report
+      id: jacoco_reporter
+      uses: PavanMudigonda/jacoco-reporter@v4.8
+      with:
+        coverage_results_path: build/reports/jacoco-report/jacoco.xml
+        coverage_report_name: Coverage
+        coverage_report_title: ${{ env.MY_PROJECTNAME }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        skip_check_run: false
+        minimum_coverage: 80
+        fail_below_threshold: false
+        publish_only_summary: false
+        
+    - name: Add Coverage Job Summary
+      run: echo "## Code Coverage ${{ env.coveragePercentageString }}" >> $GITHUB_STEP_SUMMARY
+      
+    - name: Upload Package
+      uses: actions/upload-artifact@v3
+      with:
+        name: auto-mouse_package
+        path: dist/auto-mouse.tar.gz
+        if-no-files-found: error
+
+    - name: Upload RPM
+      uses: actions/upload-artifact@v3
+      with:
+        name: auto-mouse_rpm
+        path: dist/*.rpm
+        if-no-files-found: error

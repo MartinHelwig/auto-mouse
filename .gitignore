@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+# SPDX-License-Identifier: MIT
+
+/bin/
+/dist/
+/build/
+/build-environment/
+/lib/
+/_TMP/
