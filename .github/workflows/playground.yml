@@ -5,18 +5,13 @@
 # This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
-name: Maven Package
+name: Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+  
 jobs:
   Build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,7 +27,12 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
   
-    - name: Publish to GitHub Packages Apache Maven
+    - name: Generate GitHub Page
+      run: xvfb-run mvn site -s $GITHUB_WORKSPACE/settings.xml --no-transfer-progress
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        
+    - name: Publish To GitHub Packages Apache Maven
       run: xvfb-run mvn deploy -s $GITHUB_WORKSPACE/settings.xml --no-transfer-progress
       env:
         GITHUB_TOKEN: ${{ github.token }}
