@@ -38,6 +38,13 @@
   "name":"java.lang.String"
 },
 {
+  "name":"javax.swing.plaf.basic.BasicMenuItemUI",
+  "methods":[
+    {"name":"createUI","parameterTypes":["javax.swing.JComponent"] }, 
+    {"name":"loadActionMap","parameterTypes":["javax.swing.plaf.basic.LazyActionMap"] }
+  ]
+},
+{
   "name":"javax.swing.plaf.basic.BasicOptionPaneUI",
   "methods":[
     {"name":"createUI","parameterTypes":["javax.swing.JComponent"] }, 
@@ -46,6 +53,10 @@
 },
 {
   "name":"javax.swing.plaf.basic.BasicPanelUI",
+  "methods":[{"name":"createUI","parameterTypes":["javax.swing.JComponent"] }]
+},
+{
+  "name":"javax.swing.plaf.basic.BasicPopupMenuUI",
   "methods":[{"name":"createUI","parameterTypes":["javax.swing.JComponent"] }]
 },
 {

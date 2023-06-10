@@ -1,27 +1,12 @@
 [
 {
-  "name":"[Lcom.sun.management.internal.DiagnosticCommandArgumentInfo;"
-},
-{
-  "name":"[Lcom.sun.management.internal.DiagnosticCommandInfo;"
-},
-{
   "name":"[Ljava.util.Locale;"
 },
 {
   "name":"[Lsun.java2d.loops.GraphicsPrimitive;"
 },
 {
-  "name":"com.sun.management.internal.DiagnosticCommandArgumentInfo",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String","java.lang.String","java.lang.String","boolean","boolean","boolean","int"] }]
-},
-{
-  "name":"com.sun.management.internal.DiagnosticCommandInfo",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String","java.lang.String","boolean","java.util.List"] }]
-},
-{
-  "name":"io.github.martinhelwig.utility.automouse.AutoMouse",
-  "methods":[{"name":"main","parameterTypes":["java.lang.String[]"] }]
+  "name":"com.sun.java.swing.plaf.windows.WindowsPopupWindow"
 },
 {
   "name":"java.awt.AWTEvent",
@@ -94,14 +79,6 @@
   ]
 },
 {
-  "name":"java.awt.Event",
-  "fields":[
-    {"name":"target"}, 
-    {"name":"x"}, 
-    {"name":"y"}
-  ]
-},
-{
   "name":"java.awt.Font",
   "fields":[
     {"name":"name"}, 
@@ -111,8 +88,7 @@
   ],
   "methods":[
     {"name":"getFont","parameterTypes":["java.lang.String"] }, 
-    {"name":"getFontPeer","parameterTypes":[] }, 
-    {"name":"getName","parameterTypes":[] }
+    {"name":"getFontPeer","parameterTypes":[] }
   ]
 },
 {
@@ -135,34 +111,12 @@
   "methods":[{"name":"<init>","parameterTypes":["int","int","int","int"] }]
 },
 {
-  "name":"java.awt.Menu",
-  "methods":[
-    {"name":"countItemsImpl","parameterTypes":[] }, 
-    {"name":"getItemImpl","parameterTypes":["int"] }
-  ]
-},
-{
-  "name":"java.awt.MenuComponent",
-  "methods":[{"name":"getFont_NoClientCode","parameterTypes":[] }]
-},
-{
-  "name":"java.awt.MenuItem",
-  "fields":[
-    {"name":"enabled"}, 
-    {"name":"label"}
-  ]
-},
-{
   "name":"java.awt.Point",
   "fields":[
     {"name":"x"}, 
     {"name":"y"}
   ],
   "methods":[{"name":"<init>","parameterTypes":["int","int"] }]
-},
-{
-  "name":"java.awt.PopupMenu",
-  "fields":[{"name":"isTrayIconPopup"}]
 },
 {
   "name":"java.awt.Rectangle",
@@ -234,8 +188,7 @@
     {"name":"primaryLevelUnicode"}, 
     {"name":"rawCode"}, 
     {"name":"scancode"}
-  ],
-  "methods":[{"name":"<init>","parameterTypes":["java.awt.Component","int","long","int","int","char","int"] }]
+  ]
 },
 {
   "name":"java.awt.event.MouseEvent",
@@ -388,12 +341,11 @@
   "methods":[{"name":"currentThread","parameterTypes":[] }]
 },
 {
-  "name":"java.util.Arrays",
-  "methods":[{"name":"asList","parameterTypes":["java.lang.Object[]"] }]
-},
-{
   "name":"java.util.Locale",
   "methods":[{"name":"forLanguageTag","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"javax.swing.Popup$HeavyWeightWindow"
 },
 {
   "name":"sun.awt.AWTAutoShutdown",
@@ -533,17 +485,6 @@
   "methods":[{"name":"nativeUpdateCursor","parameterTypes":["java.awt.Component"] }]
 },
 {
-  "name":"sun.awt.windows.WMenuItemPeer",
-  "fields":[
-    {"name":"isCheckbox"}, 
-    {"name":"shortcutLabel"}
-  ],
-  "methods":[
-    {"name":"getDefaultFont","parameterTypes":[] }, 
-    {"name":"handleAction","parameterTypes":["long","int"] }
-  ]
-},
-{
   "name":"sun.awt.windows.WObjectPeer",
   "fields":[
     {"name":"createError"}, 
@@ -596,10 +537,6 @@
     {"name":"getMapper","parameterTypes":[] }, 
     {"name":"getTableBytes","parameterTypes":["int"] }
   ]
-},
-{
-  "name":"sun.font.FontDesignMetrics",
-  "methods":[{"name":"getHeight","parameterTypes":[] }]
 },
 {
   "name":"sun.font.FontStrike",
@@ -860,19 +797,6 @@
     {"name":"d3dSet"}, 
     {"name":"offscreenSharingEnabled"}, 
     {"name":"setHighDPIAware"}
-  ]
-},
-{
-  "name":"sun.management.VMManagementImpl",
-  "fields":[
-    {"name":"compTimeMonitoringSupport"}, 
-    {"name":"currentThreadCpuTimeSupport"}, 
-    {"name":"objectMonitorUsageSupport"}, 
-    {"name":"otherThreadCpuTimeSupport"}, 
-    {"name":"remoteDiagnosticCommandsSupport"}, 
-    {"name":"synchronizerUsageSupport"}, 
-    {"name":"threadAllocatedMemorySupport"}, 
-    {"name":"threadContentionMonitoringSupport"}
   ]
 }
 ]
