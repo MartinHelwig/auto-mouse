@@ -33,7 +33,7 @@ jobs:
       - name: Build windows executable
         run: |
           #native-image -H:Path=build/native -cp dist/auto-mouse.jar -H:ResourceConfigurationFiles=config/resource-config.json -jar dist/auto-mouse.jar
-          native-image -H:Path=build/native -cp dist/auto-mouse.jar -H:ConfigurationFileDirectories=config -jar dist/auto-mouse.jar
+          native-image -H:Path=build/native -cp target/distribution/auto-mouse-1.0.0.jar -H:ConfigurationFileDirectories=config -jar target/distribution/auto-mouse-1.0.0.jar
       
       - name: Upload package
         uses: actions/upload-artifact@v2
