@@ -32,8 +32,8 @@ jobs:
 
       - name: Build windows executable
         run: |
-          #native-image -H:Path=build/native -cp target/distribution/auto-mouse-1.0.0.jar;target/lib/* -H:ConfigurationFileDirectories=src/main/config -jar target/distribution/auto-mouse-1.0.0.jar -H:+ReportExceptionStackTraces
-          native-image -H:Path=build/native -cp target/distribution/auto-mouse-1.0.0.jar;target/lib/commons-logging.jar -H:ConfigurationFileDirectories=src/main/config -jar target/distribution/auto-mouse-1.0.0.jar -H:+ReportExceptionStackTraces
+          #native-image -H:Path=build/native -cp 'target/distribution/auto-mouse-1.0.0.jar;target/lib/*' -H:ConfigurationFileDirectories=src/main/config -jar target/distribution/auto-mouse-1.0.0.jar -H:+ReportExceptionStackTraces
+          native-image -H:Path=build/native -cp 'target/distribution/auto-mouse-1.0.0.jar;target/lib/commons-logging.jar' -H:ConfigurationFileDirectories=src/main/config -jar target/distribution/auto-mouse-1.0.0.jar -H:+ReportExceptionStackTraces
       
       - name: Upload package
         uses: actions/upload-artifact@v2
