@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,6 +27,8 @@ import io.github.martinhelwig.utility.automouse.common.ExcludeFromCodeCoverage;
 public class AutoMouse {
 
 	private static Log logger = LogFactory.getLog(AutoMouse.class);
+	private static ResourceBundle resourceBundle = ResourceBundle
+			.getBundle("io.github.martinhelwig.utility.automouse.languages.ApplicationResources");
 	
 	/**
 	 * Default constructor.
@@ -75,7 +78,7 @@ public class AutoMouse {
 
 
 	public static void main(String[] args) {
-		logger.info("AutoMouse started...");
+		logger.info(resourceBundle.getString("programName") + " started...");
 		try {
 			AutoMouse mainProgram = new AutoMouse();
 			mainProgram.logLibraries();
