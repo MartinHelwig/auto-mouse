@@ -1,46 +1,45 @@
 {
-	"bundles": [
-		{
-			"name": "com.sun.swing.internal.plaf.basic.resources.basic",
-			"classNames": [
-				"com.sun.swing.internal.plaf.basic.resources.basic",
-				"com.sun.swing.internal.plaf.basic.resources.basic_de"
-			]
-		},
-		{
-			"name": "com.sun.swing.internal.plaf.metal.resources.metal",
-			"classNames": [
-				"com.sun.swing.internal.plaf.metal.resources.metal",
-				"com.sun.swing.internal.plaf.metal.resources.metal_de"
-			]
-		},
-		{
-			"name": "io.github.martinhelwig.utility.automouse.languages.ApplicationResources",
-			"locales": [
-				"",
-				"de-DE"
-			]
-		},
-		{
-			"name": "sun.awt.resources.awt",
-			"classNames": [
-				"sun.awt.resources.awt",
-				"sun.awt.resources.awt_de"
-			]
-		},
-		{
-			"name": "sun.awt.windows.awtLocalization",
-			"classNames": [
-				"sun.awt.windows.awtLocalization",
-				"sun.awt.windows.awtLocalization_de"
-			]
-		}
-	],
-	"resources": {
-		"includes": [
-			{
-				"pattern": ".*/*.png$"
-			}
-		]
-	}
+  "resources":{
+  "includes":[
+    {
+      "pattern": ".*/*.png$"
+    }
+  ]},
+  "bundles":[
+    {
+      "name":"com.sun.swing.internal.plaf.basic.resources.basic",
+      "classNames":[
+        "com.sun.swing.internal.plaf.basic.resources.basic", 
+        "com.sun.swing.internal.plaf.basic.resources.basic_de"
+      ]
+    }, 
+    {
+      "name":"com.sun.swing.internal.plaf.metal.resources.metal",
+      "classNames":[
+        "com.sun.swing.internal.plaf.metal.resources.metal", 
+        "com.sun.swing.internal.plaf.metal.resources.metal_de"
+      ]
+    }, 
+    {
+      "name":"io.github.martinhelwig.utility.automouse.languages.ApplicationResources",
+      "locales":[
+        "", 
+        "de-DE"
+      ]
+    }, 
+    {
+      "name":"sun.awt.resources.awt",
+      "classNames":[
+        "sun.awt.resources.awt", 
+        "sun.awt.resources.awt_de"
+      ]
+    }, 
+    {
+      "name":"sun.awt.windows.awtLocalization",
+      "classNames":[
+        "sun.awt.windows.awtLocalization", 
+        "sun.awt.windows.awtLocalization_de"
+      ]
+    }
+  ]
 }

@@ -35,6 +35,9 @@
   ]
 },
 {
+  "name":"java.lang.String"
+},
+{
   "name":"javax.swing.plaf.basic.BasicOptionPaneUI",
   "methods":[
     {"name":"createUI","parameterTypes":["javax.swing.JComponent"] }, 
@@ -60,6 +63,24 @@
 {
   "name":"javax.swing.plaf.metal.MetalTextFieldUI",
   "methods":[{"name":"createUI","parameterTypes":["javax.swing.JComponent"] }]
+},
+{
+  "name":"org.apache.commons.logging.LogFactory"
+},
+{
+  "name":"org.apache.commons.logging.impl.Jdk14Logger",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"org.apache.commons.logging.impl.Log4JLogger"
+},
+{
+  "name":"org.apache.commons.logging.impl.LogFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.commons.logging.impl.WeakHashtable",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"sun.awt.Symbol",
