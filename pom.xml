@@ -70,14 +70,17 @@ SPDX-License-Identifier: MIT
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+		<project.properties.file>${project.basedir}/project.properties</project.properties.file>
+		
 		<!-- specific properties -->
 		<junit.skip>false</junit.skip>
 		<junit.testFailureIgnore>true</junit.testFailureIgnore>
 		<junit.reportDirectory>${project.basedir}/target/reports/junit</junit.reportDirectory>
 
 		<javadoc.skip>false</javadoc.skip>
-
 		<source.skip>false</source.skip>
+		<dependency-check.skip>false</dependency-check.skip>
+		<nsis.skip>false</nsis.skip>
 
 		<dependency-check-maven.skip>false</dependency-check-maven.skip>
 		<dependency-check-maven.failBuildOnAnyVulnerability>true</dependency-check-maven.failBuildOnAnyVulnerability>
@@ -95,15 +98,18 @@ SPDX-License-Identifier: MIT
 		<dependency-check-maven.version>8.1.2</dependency-check-maven.version>
 
 		<!-- plugin versions -->
-		<maven-surefire.version>3.0.0-M9</maven-surefire.version>
-		<maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
-		<maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
+		<maven-surefire.version>3.1.2</maven-surefire.version>
+		<maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+		<maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
 		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-		<maven-site-plugin.version>4.0.0-M5</maven-site-plugin.version>
+		<maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
 		<maven-project-info-reports-plugin.version>3.4.2</maven-project-info-reports-plugin.version>
+		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
+		<mvn-jlink-wrapper.version>1.2.1</mvn-jlink-wrapper.version>
+		<properties-maven-plugin.version>1.2.0</properties-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -132,6 +138,26 @@ SPDX-License-Identifier: MIT
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>${properties-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>${project.properties.file}</file>
+							</files>
+							<quiet>true</quiet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -330,7 +356,7 @@ SPDX-License-Identifier: MIT
 				<artifactId>dependency-check-maven</artifactId>
 				<version>${dependency-check-maven.version}</version>
 				<configuration>
-					<skip>${dependency-check-mavenskip}</skip>
+					<skip>${dependency-check.skip}</skip>
 					<cveValidForHours>12</cveValidForHours>
 					<failBuildOnAnyVulnerability>${dependency-check-mavenfailBuildOnAnyVulnerability}</failBuildOnAnyVulnerability>
 					<dataDirectory>${dependency-check-mavendataDirectory}</dataDirectory>
@@ -349,6 +375,78 @@ SPDX-License-Identifier: MIT
 						<phase>test</phase>
 						<goals>
 							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.igormaznitsa</groupId>
+				<artifactId>mvn-jlink-wrapper</artifactId>
+				<version>${mvn-jlink-wrapper.version}</version>
+				<executions>
+					<execution>
+						<id>cache-linux-jre</id>
+						<goals>
+							<goal>cache-jdk</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+							<jdkPathProperty>linux.jre.path</jdkPathProperty>
+							<jdkCachePath>${project.build.directory}${file.separator}jdkCache</jdkCachePath>
+							<provider>URL</provider>
+							<providerConfig>
+								<id>linux-jre</id>
+								<url>https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.8.1%2B1/OpenJDK17U-jre_x64_linux_hotspot_17.0.8.1_1.tar.gz</url>
+								<sha256>ab68857594792474a3049ede09ea1178e42df29803a6a41be771794f571b2d4e</sha256>
+							</providerConfig>
+						</configuration>
+					</execution>
+					<execution>
+						<id>cache-windows-jre</id>
+						<goals>
+							<goal>cache-jdk</goal>
+						</goals>
+						<configuration>
+							<skip>${nsis.skip}</skip>
+							<jdkPathProperty>windows.jre.path</jdkPathProperty>
+							<jdkCachePath>${project.build.directory}${file.separator}jdkCache</jdkCachePath>
+							<provider>URL</provider>
+							<providerConfig>
+								<id>windows-jre</id>
+								<url>https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.8.1%2B1/OpenJDK17U-jre_x64_windows_hotspot_17.0.8.1_1.zip</url>
+								<sha256>a43a96a10c8bd531b7fadd2f3dcf5b839c81c79affcfba0141f1e8b4ffefe521</sha256>
+							</providerConfig>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.digitalmediaserver</groupId>
+				<artifactId>nsis-maven-plugin</artifactId>
+				<version>${nsis-maven-plugin.version}</version>
+				<configuration>
+					<disabled>${nsis.skip}</disabled>
+					<makensisExecutable>C:/Program Files (x86)/NSIS/Bin/makensis.exe</makensisExecutable>
+					<makensisExecutableLinux>/usr/bin/makensis</makensisExecutableLinux>
+					<compression>lzma</compression>
+					<compressionIsFinal>true</compressionIsFinal>
+					<compressionDictSize>64</compressionDictSize>
+					<defines>
+						<PROJECT_NAME_SHORT>${project.name.short}</PROJECT_NAME_SHORT>
+						<PROJECT_NAME_CAMEL>${project.name.camel}</PROJECT_NAME_CAMEL>
+					</defines>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-windows-installer</id>
+						<configuration>
+							<scriptFile>${project.basedir}/src/nsis/auto-mouse.nsi</scriptFile>
+							<outputFile>auto-mouse_installer.exe</outputFile>
+						</configuration>
+						<goals>
+							<goal>make</goal>
 						</goals>
 					</execution>
 				</executions>
