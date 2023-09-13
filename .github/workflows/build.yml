@@ -55,7 +55,9 @@ jobs:
         distribution: 'temurin'
   
     - name: Prepare Build environment
-      run: ant -noinput -buildfile build.xml prepare-environment
+      run: |
+        sudo apt-get install nsis
+        ant -noinput -buildfile build.xml prepare-environment
 
     - name: Build With Ant
       run: xvfb-run ant -noinput -lib target/build-environment/ant-libraries -buildfile build.xml
