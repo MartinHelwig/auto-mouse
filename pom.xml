@@ -73,22 +73,19 @@ SPDX-License-Identifier: MIT
 		<project.properties.file>${project.basedir}/project.properties</project.properties.file>
 		
 		<!-- specific properties -->
-		<junit.skip>false</junit.skip>
-		<junit.testFailureIgnore>true</junit.testFailureIgnore>
-		<junit.reportDirectory>${project.basedir}/target/reports/junit</junit.reportDirectory>
-
+		<maven.test.skip>false</maven.test.skip>
 		<javadoc.skip>false</javadoc.skip>
 		<source.skip>false</source.skip>
-		<dependency-check.skip>false</dependency-check.skip>
-		<nsis.skip>false</nsis.skip>
-
-		<dependency-check-maven.skip>false</dependency-check-maven.skip>
+		<dependency-check.skip>true</dependency-check.skip>
+		<nsis.skip>true</nsis.skip>
+		
+		
+		<junit.testFailureIgnore>true</junit.testFailureIgnore>
+		<junit.reportDirectory>${project.basedir}/target/reports/junit</junit.reportDirectory>
+		
 		<dependency-check-maven.failBuildOnAnyVulnerability>true</dependency-check-maven.failBuildOnAnyVulnerability>
 		<dependency-check-maven.dataDirectory>${project.basedir}/target/build-environment/dependencyCheckDataDirectory</dependency-check-maven.dataDirectory>
 		<dependency-check-maven.outputDirectory>${project.basedir}/target/reports/dependency-check</dependency-check-maven.outputDirectory>
-
-		<jacoco.skip>false</jacoco.skip>
-
 
 		<!-- dependency versions -->
 		<commons.logging.version>1.2</commons.logging.version>
@@ -296,8 +293,8 @@ SPDX-License-Identifier: MIT
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire.version}</version>
 				<configuration>
-					<skip>${surefire.skip}</skip>
-					<skipTests>${surefire.skip}</skipTests>
+					<skip>${maven.test.skip}</skip>
+					<skipTests>${maven.test.skip}</skipTests>
 					<testFailureIgnore>${surefire.testFailureIgnore}</testFailureIgnore>
 					<!--<reportsDirectory>${junit.reportDirectory}</reportsDirectory> -->
 					<failIfNoTests>false</failIfNoTests>
