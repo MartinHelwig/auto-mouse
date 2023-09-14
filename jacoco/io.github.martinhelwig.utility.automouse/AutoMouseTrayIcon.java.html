@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AutoMouseTrayIcon.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">auto-mouse</a> &gt; <a href="index.source.html" class="el_package">io.github.martinhelwig.utility.automouse</a> &gt; <span class="el_source">AutoMouseTrayIcon.java</span></div><h1>AutoMouseTrayIcon.java</h1><pre class="source lang-java linenums">// SPDX-FileCopyrightText: 2023 Martin Helwig
+//
+// SPDX-License-Identifier: MIT
+
+package io.github.martinhelwig.utility.automouse;
+
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+import java.awt.TrayIcon.MessageType;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+/**
+ * @author Martin Helwig
+ *
+ * @since 1.0.0
+ */
+public class AutoMouseTrayIcon extends AutoMouseCommon implements AutoMouseInterface {
+
+<span class="nc" id="L34">	private static Log logger = LogFactory.getLog(AutoMouseTrayIcon.class);</span>
+<span class="nc" id="L35">	private static ResourceBundle resourceBundle = ResourceBundle</span>
+<span class="nc" id="L36">			.getBundle(&quot;io.github.martinhelwig.utility.automouse.languages.ApplicationResources&quot;);</span>
+<span class="nc" id="L37">	private static String programName = resourceBundle.getString(&quot;programName&quot;);</span>
+<span class="nc" id="L38">	private TrayIcon trayIcon = null;</span>
+	
+	public AutoMouseTrayIcon() throws AWTException {
+<span class="nc" id="L41">		super();</span>
+<span class="nc" id="L42">		this.initSystemTray();</span>
+<span class="nc" id="L43">	}</span>
+
+	/**
+	 * initialize the systemTray
+	 * 
+	 * @throws AWTException
+	 */
+	private void initSystemTray() throws AWTException {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		if (SystemTray.isSupported()) {</span>
+<span class="nc" id="L52">			logger.debug(&quot;system tray is supported&quot;);</span>
+		}
+<span class="nc" id="L54">		SystemTray systemTray = SystemTray.getSystemTray();</span>
+<span class="nc" id="L55">		Image trayImage = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource(&quot;images/auto-mouse_white.png&quot;));</span>
+<span class="nc" id="L56">		Icon icon = new ImageIcon(new ImageIcon(trayImage).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));</span>
+
+<span class="nc" id="L58">		JPopupMenu popupMenu = new JPopupMenu();</span>
+
+<span class="nc" id="L60">		JMenuItem menuItemConfig = new JMenuItem(resourceBundle.getString(&quot;popupMenu.config&quot;));</span>
+<span class="nc" id="L61">		menuItemConfig.addActionListener(actionListener -&gt; {</span>
+<span class="nc" id="L62">			new AutoMouseConfigurationPanel(this.getConfiguration()).setVisible(true);</span>
+<span class="nc" id="L63">		});</span>
+<span class="nc" id="L64">		popupMenu.add(menuItemConfig);</span>
+
+<span class="nc" id="L66">		JMenuItem menuItemInfo = new JMenuItem(resourceBundle.getString(&quot;popupMenu.info&quot;));</span>
+<span class="nc" id="L67">		menuItemInfo.addActionListener(actionListener -&gt; JOptionPane.showMessageDialog(null,</span>
+<span class="nc" id="L68">				resourceBundle.getString(&quot;copyright&quot;), programName,</span>
+				JOptionPane.INFORMATION_MESSAGE, icon));
+<span class="nc" id="L70">		popupMenu.add(menuItemInfo);</span>
+
+<span class="nc" id="L72">		JMenuItem menuItemExit = new JMenuItem(resourceBundle.getString(&quot;popupMenu.exit&quot;));</span>
+<span class="nc" id="L73">		menuItemExit.addActionListener(actionListener -&gt; System.exit(0));</span>
+<span class="nc" id="L74">		popupMenu.add(menuItemExit);</span>
+
+<span class="nc" id="L76">		trayIcon = new TrayIcon(trayImage, programName);</span>
+<span class="nc" id="L77">		trayIcon.setImageAutoSize(true);</span>
+<span class="nc" id="L78">		systemTray.add(trayIcon);</span>
+		
+<span class="nc" id="L80">		trayIcon.addMouseListener(new MouseAdapter() {</span>
+		    @Override
+		    public void mouseReleased(MouseEvent e) {
+<span class="nc" id="L83">		        maybeShowPopup(e);</span>
+<span class="nc" id="L84">		    }</span>
+
+		    @Override
+		    public void mousePressed(MouseEvent e) {
+<span class="nc" id="L88">		        maybeShowPopup(e);</span>
+<span class="nc" id="L89">		    }</span>
+
+		    private void maybeShowPopup(MouseEvent e) {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">		        if (e.isPopupTrigger()) {</span>
+<span class="nc" id="L93">		        	popupMenu.setLocation(e.getX(), e.getY());</span>
+<span class="nc" id="L94">		        	popupMenu.setInvoker(popupMenu);</span>
+<span class="nc" id="L95">		        	popupMenu.setVisible(true);</span>
+		        }
+<span class="nc" id="L97">		    }</span>
+		});
+		
+<span class="nc" id="L100">		trayIcon.setToolTip(programName + &quot; - &quot; + resourceBundle.getString(&quot;copyright&quot;));</span>
+<span class="nc" id="L101">		trayIcon.displayMessage(programName, resourceBundle.getString(&quot;messages.start&quot;), MessageType.INFO);</span>
+<span class="nc" id="L102">	}</span>
+    
+	@Override
+	public void pushMessage(String message, MessageType messageType) {
+<span class="nc" id="L106">		trayIcon.displayMessage(programName, message, messageType);</span>
+<span class="nc" id="L107">		super.pushMessage(message, messageType);</span>
+<span class="nc" id="L108">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
