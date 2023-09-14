@@ -442,7 +442,7 @@ SPDX-License-Identifier: MIT
 					<execution>
 						<id>build-windows-installer</id>
 						<configuration>
-							<scriptFile>${project.basedir}/src/nsis/auto-mouse.nsi</scriptFile>
+							<scriptFile>${project.basedir}/src/nsis/installer.nsi</scriptFile>
 							<outputFile>auto-mouse_installer.exe</outputFile>
 						</configuration>
 						<goals>
