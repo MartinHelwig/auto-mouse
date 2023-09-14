@@ -29,7 +29,7 @@ SPDX-License-Identifier: MIT
 
 	<scm>
 		<connection>scm:git:https://github.com/MartinHelwig/auto-mouse.git</connection>
-		<developerConnection>scm:git:git@github.com:MartinHelwig/auto-mouse.git</developerConnection>
+		<developerConnection>scm:git:ssh@github.com:MartinHelwig/auto-mouse.git</developerConnection>
 		<url>https://github.com/MartinHelwig/auto-mouse</url>
 	</scm>
 
@@ -61,6 +61,11 @@ SPDX-License-Identifier: MIT
 			<name>GitHub Packages</name>
 			<url>https://maven.pkg.github.com/MartinHelwig/auto-mouse</url>
 		</repository>
+		<site>
+			<id>github</id>
+			<name>GitHub Pages</name>
+			<url>scm:git:https://github.com/MartinHelwig/auto-mouse.git</url>
+		</site>
 	</distributionManagement>
 
 	<properties>
@@ -104,6 +109,7 @@ SPDX-License-Identifier: MIT
 		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 		<maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
 		<maven-project-info-reports-plugin.version>3.4.2</maven-project-info-reports-plugin.version>
+		<maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
 		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
 		<mvn-jlink-wrapper.version>1.2.1</mvn-jlink-wrapper.version>
 		<properties-maven-plugin.version>1.2.0</properties-maven-plugin.version>
@@ -447,6 +453,17 @@ SPDX-License-Identifier: MIT
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-publish-plugin</artifactId>
+				<version>${maven-scm-publish-plugin.version}</version>
+				<configuration>
+					<scmBranch>gh-pages</scmBranch>
+					<username>x-access-token</username>
+					<password>${env.GITHUB_TOKEN}</password>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
