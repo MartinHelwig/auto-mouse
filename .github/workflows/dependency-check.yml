@@ -13,6 +13,21 @@ on:
 
 jobs:
   Dependency-Check:
+    permissions:
+      contents: write
+      packages: write
+      checks: write
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+  
     runs-on: ubuntu-latest
 
     steps:
