@@ -111,6 +111,7 @@ SPDX-License-Identifier: MIT
 		<maven-project-info-reports-plugin.version>3.4.2</maven-project-info-reports-plugin.version>
 		<maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
 		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
+		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<mvn-jlink-wrapper.version>1.2.1</mvn-jlink-wrapper.version>
 		<properties-maven-plugin.version>1.2.0</properties-maven-plugin.version>
 	</properties>
@@ -177,6 +178,8 @@ SPDX-License-Identifier: MIT
 					<descriptors>
 						<descriptor>src/assembly/distribution.xml</descriptor>
 					</descriptors>
+					<finalName>${project.artifactId}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
@@ -425,6 +428,30 @@ SPDX-License-Identifier: MIT
 				</executions>
 			</plugin>
 			
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${maven-antrun-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<skip>${nsis.skip}</skip>
+							<target>
+								<echo level="info" message="extract file ${project.artifactId}.tar.gz"/>
+								<untar compression="gzip" dest="target/" src="target/${project.artifactId}.tar.gz"/>
+								<mkdir dir="target/${project.artifactId}/jre"/>
+								<copy todir="target/${project.artifactId}/jre">
+									<fileset dir="${windows.jre.path}" includes="**"/>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.digitalmediaserver</groupId>
 				<artifactId>nsis-maven-plugin</artifactId>
