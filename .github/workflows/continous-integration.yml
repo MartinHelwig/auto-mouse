@@ -70,7 +70,7 @@ jobs:
 
       - name: JaCoCo Code Coverage Report
         id: jacoco_reporter
-        uses: PavanMudigonda/jacoco-reporter@ffe0b95c14292be4d076e56d50ba6c3b94c43a77 # v4.8
+        uses: PavanMudigonda/jacoco-reporter@b08db7d89b6bf9e3ea3c2bba7735e2e7faf02282 # v4.9
         with:
           coverage_results_path: target/reports/jacoco/jacoco.xml
           coverage_report_name: Coverage
