@@ -17,7 +17,7 @@ permissions: read-all
 jobs:
   Dependency-Check:
     permissions:
-      contents: none
+      contents: write # required by: maven-dependency-submission-action
       packages: none
       checks: none
       actions: none
