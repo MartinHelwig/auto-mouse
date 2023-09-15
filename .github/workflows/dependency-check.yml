@@ -17,9 +17,9 @@ permissions: read-all
 jobs:
   Dependency-Check:
     permissions:
-      contents: write
-      packages: write
-      checks: write
+      contents: none
+      packages: none
+      checks: none
       actions: none
       deployments: none
       id-token: none
