@@ -12,5 +12,6 @@ SPDX-License-Identifier: MIT
 ![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Website&logo=github%20pages&up_color=green&up_message=online&url=https%3A%2F%2FMartinHelwig.github.io%2Fauto-mouse)
 ![Maintenance](https://img.shields.io/maintenance/yes/2023?label=Maintained)
 [![REUSE](https://img.shields.io/badge/REUSE-conform%20process-blue)](https://reuse.software/)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/MartinHelwig/auto-mouse/badge)](https://securityscorecards.dev/viewer/?uri=github.com/MartinHelwig/auto-mouse)
 
 The auto-mouse utility moves the mouse in a configurable intervall to stop locking the screen.
