@@ -1,0 +1,11 @@
+#SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+#SPDX-License-Identifier: MIT
+
+# To get the hashes use the following commands
+# pip install hashin
+# hashin reuse==2.1.0
+
+reuse==2.1.0 \
+    --hash=sha256:4211e91caa4c9e433802618a89a2d49a67e2bf76a8029d6708090892f0cdebec \
+    --hash=sha256:b214e756582766c9a8c84e195707a4ee86f58640bc2b0c5eac85279f5fd7d9de
