@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
 [![CI](https://github.com/MartinHelwig/auto-mouse/actions/workflows/build.yml/badge.svg)](https://github.com/MartinHelwig/auto-mouse/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md)
-![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Website&logo=github%20pages&up_color=green&up_message=online&url=https%3A%2F%2FMartinHelwig.github.io)
+![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Website&logo=github%20pages&up_color=green&up_message=online&url=https%3A%2F%2FMartinHelwig.github.io%2Fauto-mouse)
 ![Maintenance](https://img.shields.io/maintenance/yes/2023?label=Maintained)
 [![REUSE](https://img.shields.io/badge/REUSE-conform%20process-blue)](https://reuse.software/)
 
