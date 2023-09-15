@@ -52,6 +52,13 @@ jobs:
         run: |
           sudo apt-get install nsis
 
+      - name: Check REUSE compliance
+        run: |
+          pip install -r src/main/config/requirements.txt
+          echo "## REUSE Compliance" >> $GITHUB_STEP_SUMMARY
+          echo "For more information about REUSE see [official page](https://reuse.software/)."
+          reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
+          
       - name: Build With Maven
         run: xvfb-run mvn -B package -Dmaven.test.skip=false -Djavadoc.skip=false -Dource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false
 
