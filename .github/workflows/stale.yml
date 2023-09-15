@@ -7,9 +7,26 @@ on:
   schedule:
     - cron: 0 6 * * *
 
+permissions: {}
+
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      actions: none
+      checks: none
+      contents: write
+      deployments: none
+      id-token: none
+      issues: write
+      discussions: none
+      packages: none
+      pages: none
+      pull-requests: write
+      repository-projects: none
+      security-events: none
+      statuses: none
+
     steps:
       - uses: actions/stale@v7
         with:
