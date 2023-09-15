@@ -46,7 +46,7 @@ jobs:
 
       - name: Check REUSE compliance
         run: |
-          pip install reuse
+          echo "pip install reuse" > install.sh && chmod +x install.sh && ./install.sh
           echo "## REUSE Compliance" >> $GITHUB_STEP_SUMMARY
           echo "For more information about REUSE see [official page](https://reuse.software/)."
           reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
