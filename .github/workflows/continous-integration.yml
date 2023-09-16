@@ -16,6 +16,7 @@ permissions: read-all
 
 jobs:
   build:
+    name: Continuous Integration
     permissions:
       contents: read
       packages: write
@@ -62,7 +63,7 @@ jobs:
           reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
           
       - name: Build With Maven
-        run: xvfb-run mvn -B package -Dmaven.test.skip=false -Djavadoc.skip=false -Dource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false
+        run: xvfb-run mvn -B package -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true
 
       - name: Add Headline Job Summary
         run: echo "## JUnit " >> $GITHUB_STEP_SUMMARY
