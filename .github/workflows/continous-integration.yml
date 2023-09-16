@@ -90,6 +90,11 @@ jobs:
         
       - name: Add Coverage Job Summary
         run: echo "## Code Coverage ${{ env.coveragePercentageString }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Add Authors Summary
+        run: |
+          echo "## Authors Summary" >> $GITHUB_STEP_SUMMARY
+          git shortlog -sce --all >> $GITHUB_STEP_SUMMARY
         
       - name: Upload Package
         uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
