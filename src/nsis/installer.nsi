@@ -10,7 +10,7 @@
 !define PRODUCT_EXECUTABLE				"start.cmd"
 !define PRODUCT_EXECUTABLE_ICON			"icon.ico"
 !define PRODUCT_PUBLISHER 				"Martin Helwig"
-!define PRODUCT_WEBSITE 				"https://martinhelwig.github.io"
+!define PRODUCT_WEBSITE 				"https://martinhelwig.github.io/auto-mouse"
 !define PRODUCT_REGISTRY_KEY 			"Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_REGISTRY_ROOT   		"HKCU"
 !define PRODUCT_LICENSEFILE             "..\..\LICENSE"
@@ -159,7 +159,7 @@ SectionEnd
 
 Section -AdditionalIcons
 	CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
-	CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_EXECUTABLE}" "" "$INSTDIR\${PRODUCT_EXECUTABLE_ICON}"
+	CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_EXECUTABLE}" "" "$INSTDIR\uninstall.exe"
 	CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 	WriteINIStr "$SMPROGRAMS\${PRODUCT_NAME}\Information.url" "InternetShortcut" "URL" "${PRODUCT_WEBSITE}"
 SectionEnd
