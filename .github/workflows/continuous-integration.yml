@@ -51,7 +51,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Prepare Build environment
+      - name: Prepare Build Environment
         run: |
           sudo apt-get install nsis
 
@@ -61,6 +61,7 @@ jobs:
           echo "## REUSE Compliance" >> $GITHUB_STEP_SUMMARY
           echo "For more information about REUSE see [official page](https://reuse.software/)."
           reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
+          reuse lint --quiet
           
       - name: Build And Publish With Maven
         run: xvfb-run mvn -B deploy -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true --no-transfer-progress
