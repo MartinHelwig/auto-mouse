@@ -83,6 +83,7 @@ SPDX-License-Identifier: MIT
 		<source.skip>false</source.skip>
 		<dependency-check.skip>true</dependency-check.skip>
 		<nsis.skip>true</nsis.skip>
+		<jre.skip>true</jre.skip>
 		
 		
 		<junit.testFailureIgnore>true</junit.testFailureIgnore>
@@ -415,6 +416,7 @@ SPDX-License-Identifier: MIT
 						</goals>
 						<configuration>
 							<skip>${nsis.skip}</skip>
+							<skip>${jre.skip}</skip>
 							<jdkPathProperty>windows.jre.path</jdkPathProperty>
 							<jdkCachePath>${project.build.directory}${file.separator}jdkCache</jdkCachePath>
 							<provider>URL</provider>
@@ -440,9 +442,32 @@ SPDX-License-Identifier: MIT
 								<echo level="info" message="extract file ${project.artifactId}.tar.gz"/>
 								<untar compression="gzip" dest="target/" src="target/${project.artifactId}.tar.gz"/>
 								<mkdir dir="target/${project.artifactId}/jre"/>
-								<copy todir="target/${project.artifactId}/jre">
+								<copy todir="target/${project.artifactId}/jre" failonerror="false" quiet="true">
 									<fileset dir="${windows.jre.path}" includes="**"/>
 								</copy>
+								<delete includeemptydirs="true">
+									<fileset dir="target/${project.artifactId}/jre">
+    									<and>
+											<size value="0"/>
+											<type type="dir"/>
+										</and>
+									</fileset>
+								</delete>
+
+								<fail message="no jre found">
+									<condition>
+										<and>
+											<not>
+												<equals arg1="${jre.skip}" arg2="true" trim="true" casesensitive="false"/>
+											</not>
+											<not>
+												<resourceexists>
+                									<file file="target/${project.artifactId}/jre/bin/java.exe"/>
+            									</resourceexists>
+											</not>
+										</and>
+									</condition>
+								</fail>
 							</target>
 						</configuration>
 						<goals>
