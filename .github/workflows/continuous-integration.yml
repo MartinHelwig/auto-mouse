@@ -9,7 +9,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    types: [opened, reopened]
 
 # Declare default permissions as read only.
 permissions: read-all
