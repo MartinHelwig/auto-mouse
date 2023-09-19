@@ -13,14 +13,23 @@ import org.apache.commons.logging.LogFactory;
 import io.github.martinhelwig.utility.automouse.AutoMouseConfiguration;
 import io.github.martinhelwig.utility.automouse.AutoMouseConfigurationPanel;
 
-public class TestConfigurationPanel {
+public final class TestConfigurationPanel {
 
-	private static Log logger = LogFactory.getLog(TestConfigurationPanel.class);
-	
+    /**
+     * The Logger.
+     */
+    private static Log logger = LogFactory.getLog(TestConfigurationPanel.class);
+
+    /**
+     * The default constructor.
+     */
+    private TestConfigurationPanel() {
+    }
+
     /**
      * @param args actually no args required
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         // set look and feel to the system look and feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -29,7 +38,8 @@ public class TestConfigurationPanel {
         }
 
         SwingUtilities.invokeLater(() -> {
-        	new AutoMouseConfigurationPanel(new AutoMouseConfiguration()).setVisible(true);
-		});
+            new AutoMouseConfigurationPanel(new AutoMouseConfiguration())
+                    .setVisible(true);
+        });
     }
 }

@@ -4,27 +4,38 @@
 
 package io.github.martinhelwig.utility.automouse;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
+import io.github.martinhelwig.utility.automouse.common.Constants;
+
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class AutoMouseConfigurationPanelTest {
 
-	private AutoMouseConfigurationPanel configurationPanel = null;
-	
-	@BeforeEach
-	public void setUp() {
-		
-	}
+    /**
+     * The configuration panel.
+     */
+    private AutoMouseConfigurationPanel configurationPanel = null;
 
-	@Test
-	@Order(1)
-	protected void testDefaultValues() {
-		configurationPanel = new AutoMouseConfigurationPanel(new AutoMouseConfiguration());
-		configurationPanel.setVisible(false);
-	}
+    /**
+     * Setup.
+     */
+    @BeforeEach
+    public void setUp() {
+
+    }
+
+    /**
+     * Test 1.
+     */
+    @Test @Order(Constants.ONE)
+    protected void testDefaultValues() {
+        configurationPanel = new AutoMouseConfigurationPanel(
+                new AutoMouseConfiguration());
+        configurationPanel.setVisible(false);
+    }
 }

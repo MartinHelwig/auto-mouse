@@ -20,29 +20,38 @@ import org.junit.jupiter.api.Order;
 @TestMethodOrder(OrderAnnotation.class)
 public class AutoMouseTrayIconTest {
 
-	private AutoMouseInterface autoMouse = null;
-	
-	@BeforeEach
-	public void setUp() {
-		assumeTrue(SystemTray.isSupported());
-		try {
-			autoMouse = new AutoMouseTrayIcon();
-		} catch (AWTException e) {
-			fail(e);
-		}
-	}
+    /**
+     * The auto-mouse interface.
+     */
+    private AutoMouseInterface autoMouse = null;
 
-	@Test
-	@Order(1)
-	protected void testPushMessage() {
-		assumeTrue(SystemTray.isSupported());
-		try {
-			autoMouse.pushMessage("JUnit execution - ERROR", MessageType.ERROR);
-			autoMouse.pushMessage("JUnit execution - WARNING", MessageType.WARNING);
-			autoMouse.pushMessage("JUnit execution - INFO", MessageType.INFO);
-			autoMouse.pushMessage("JUnit execution - NONE", MessageType.NONE);
-		} catch (Exception e) {
-			fail(e);
-		}
-	}
+    /**
+     * Setup.
+     */
+    @BeforeEach
+    public void setUp() {
+        assumeTrue(SystemTray.isSupported());
+        try {
+            autoMouse = new AutoMouseTrayIcon();
+        } catch (AWTException e) {
+            fail(e);
+        }
+    }
+
+    /**
+     * Test 1.
+     */
+    @Test @Order(1)
+    protected void testPushMessage() {
+        assumeTrue(SystemTray.isSupported());
+        try {
+            autoMouse.pushMessage("JUnit execution - ERROR", MessageType.ERROR);
+            autoMouse.pushMessage("JUnit execution - WARNING",
+                    MessageType.WARNING);
+            autoMouse.pushMessage("JUnit execution - INFO", MessageType.INFO);
+            autoMouse.pushMessage("JUnit execution - NONE", MessageType.NONE);
+        } catch (Exception e) {
+            fail(e);
+        }
+    }
 }

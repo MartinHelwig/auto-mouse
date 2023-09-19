@@ -4,9 +4,7 @@ SPDX-FileCopyrightText: 2023 Martin Helwig
 SPDX-License-Identifier: MIT
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.github.martinhelwig.utility.automouse</groupId>
@@ -76,7 +74,7 @@ SPDX-License-Identifier: MIT
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<project.properties.file>${project.basedir}/project.properties</project.properties.file>
-		
+
 		<!-- specific properties -->
 		<maven.test.skip>false</maven.test.skip>
 		<javadoc.skip>false</javadoc.skip>
@@ -84,11 +82,11 @@ SPDX-License-Identifier: MIT
 		<dependency-check.skip>true</dependency-check.skip>
 		<nsis.skip>true</nsis.skip>
 		<jre.skip>true</jre.skip>
-		
-		
+
+
 		<junit.testFailureIgnore>true</junit.testFailureIgnore>
 		<junit.reportDirectory>${project.basedir}/target/reports/junit</junit.reportDirectory>
-		
+
 		<dependency-check-maven.failBuildOnAnyVulnerability>true</dependency-check-maven.failBuildOnAnyVulnerability>
 		<dependency-check-maven.dataDirectory>${project.basedir}/target/build-environment/dependencyCheckDataDirectory</dependency-check-maven.dataDirectory>
 		<dependency-check-maven.outputDirectory>${project.basedir}/target/reports/dependency-check</dependency-check-maven.outputDirectory>
@@ -111,6 +109,8 @@ SPDX-License-Identifier: MIT
 		<maven-site-plugin.version>4.0.0-M9</maven-site-plugin.version>
 		<maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
 		<maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
+		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+		<maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
 		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<mvn-jlink-wrapper.version>1.2.1</mvn-jlink-wrapper.version>
@@ -162,7 +162,7 @@ SPDX-License-Identifier: MIT
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -308,7 +308,6 @@ SPDX-License-Identifier: MIT
 					<testFailureIgnore>${surefire.testFailureIgnore}</testFailureIgnore>
 					<!--<reportsDirectory>${junit.reportDirectory}</reportsDirectory> -->
 					<failIfNoTests>false</failIfNoTests>
-
 				</configuration>
 			</plugin>
 
@@ -353,6 +352,9 @@ SPDX-License-Identifier: MIT
 						</goals>
 						<configuration>
 							<outputDirectory>target/reports/jacoco</outputDirectory>
+							<formats>HTML</formats>
+							<formats>CSV</formats>
+							<formats>XML</formats>
 						</configuration>
 					</execution>
 				</executions>
@@ -386,7 +388,32 @@ SPDX-License-Identifier: MIT
 					</execution>
 				</executions>
 			</plugin>
-			
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+				<configuration>
+					<configLocation>sun_checks.xml</configLocation>
+					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+					<encoding>UTF-8</encoding>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<failOnViolation>true</failOnViolation>
+					<linkXRef>true</linkXRef>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>com.igormaznitsa</groupId>
 				<artifactId>mvn-jlink-wrapper</artifactId>
@@ -429,7 +456,7 @@ SPDX-License-Identifier: MIT
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>${maven-antrun-plugin.version}</version>
@@ -439,17 +466,17 @@ SPDX-License-Identifier: MIT
 						<configuration>
 							<skip>${nsis.skip}</skip>
 							<target>
-								<echo level="info" message="extract file ${project.artifactId}.tar.gz"/>
-								<untar compression="gzip" dest="target/" src="target/${project.artifactId}.tar.gz"/>
-								<mkdir dir="target/${project.artifactId}/jre"/>
+								<echo level="info" message="extract file ${project.artifactId}.tar.gz" />
+								<untar compression="gzip" dest="target/" src="target/${project.artifactId}.tar.gz" />
+								<mkdir dir="target/${project.artifactId}/jre" />
 								<copy todir="target/${project.artifactId}/jre" failonerror="false" quiet="true">
-									<fileset dir="${windows.jre.path}" includes="**"/>
+									<fileset dir="${windows.jre.path}" includes="**" />
 								</copy>
 								<delete includeemptydirs="true">
 									<fileset dir="target/${project.artifactId}/jre">
-    									<and>
-											<size value="0"/>
-											<type type="dir"/>
+										<and>
+											<size value="0" />
+											<type type="dir" />
 										</and>
 									</fileset>
 								</delete>
@@ -458,12 +485,12 @@ SPDX-License-Identifier: MIT
 									<condition>
 										<and>
 											<not>
-												<equals arg1="${jre.skip}" arg2="true" trim="true" casesensitive="false"/>
+												<equals arg1="${jre.skip}" arg2="true" trim="true" casesensitive="false" />
 											</not>
 											<not>
 												<resourceexists>
-                									<file file="target/${project.artifactId}/jre/bin/java.exe"/>
-            									</resourceexists>
+													<file file="target/${project.artifactId}/jre/bin/java.exe" />
+												</resourceexists>
 											</not>
 										</and>
 									</condition>
@@ -506,7 +533,7 @@ SPDX-License-Identifier: MIT
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-scm-publish-plugin</artifactId>
@@ -535,9 +562,10 @@ SPDX-License-Identifier: MIT
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven-javadoc-plugin.version}</version>
 				<reportSets>
-					<reportSet><!-- aggregate reportSet, to define in poms having modules -->
+					<reportSet>
+						<!-- aggregate reportSet, to define in poms having modules -->
 						<id>aggregate</id>
-						<inherited>false</inherited><!-- don't run aggregate in child modules -->
+						<inherited>false</inherited> <!-- don't run aggregate in child modules -->
 						<reports>
 							<report>aggregate</report>
 						</reports>
@@ -582,6 +610,25 @@ SPDX-License-Identifier: MIT
 						</reports>
 					</reportSet>
 				</reportSets>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>

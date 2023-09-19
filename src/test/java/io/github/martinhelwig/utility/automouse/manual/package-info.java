@@ -8,4 +8,4 @@
  * @author Martin Helwig
  * @version 1.0.0
  */
-package io.github.martinhelwig.utility.automouse.common;
+package io.github.martinhelwig.utility.automouse.manual;

@@ -6,6 +6,7 @@ SPDX-License-Identifier: MIT
 
 ![auto-mouse](/src/main/resources/io/github/martinhelwig/utility/automouse/images/auto-mouse_github.png?raw=true "auto-mouse")
 
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/MartinHelwig/tests?color=white)
 [![Continuous Integration](https://github.com/MartinHelwig/auto-mouse/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/MartinHelwig/auto-mouse/actions/workflows/continuous-integration.yml)
 [![CodeQL](https://github.com/MartinHelwig/auto-mouse/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MartinHelwig/auto-mouse/actions/workflows/github-code-scanning/codeql)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
