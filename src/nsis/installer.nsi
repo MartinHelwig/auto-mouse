@@ -16,7 +16,7 @@
 !define PRODUCT_LICENSEFILE             "..\..\LICENSE"
 !define PRODUCT_DISTRIBUTION_DIRECTORY	"..\..\target\auto-mouse"
 !define PRODUCT_INSTALLDIR              "$LOCALAPPDATA\Programs\${PRODUCT_NAME_SHORT}"
-!define PRODUCT_MAJOR_VERSION			"1"
+!define PRODUCT_MAJOR_VERSION			"0"
 !define PRODUCT_MINOR_VERSION			"0"
 !define PRODUCT_PATCH_VERSION			"0"
 !define PRODUCT_BUILD_VERSION			"1"
