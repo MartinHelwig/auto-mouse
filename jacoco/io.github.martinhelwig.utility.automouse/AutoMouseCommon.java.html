@@ -15,174 +15,206 @@ import java.awt.desktop.UserSessionListener;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import javax.management.timer.Timer;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import io.github.martinhelwig.utility.automouse.common.ExcludeFromCodeCoverage;
 
 /**
- * AutoMouseCommon is the common implementation of the {@link AutoMouseInterface}.
- * 
+ * AutoMouseCommon is the common implementation of the
+ * {@link AutoMouseInterface}.
+ *
  * @author Martin Helwig
  *
  */
 public class AutoMouseCommon implements AutoMouseInterface {
 
-<span class="fc" id="L31">	private static Log logger = LogFactory.getLog(AutoMouseCommon.class);</span>
-<span class="fc" id="L32">	private static ResourceBundle resourceBundle = ResourceBundle.getBundle(&quot;io.github.martinhelwig.utility.automouse.languages.ApplicationResources&quot;);</span>
-<span class="fc" id="L33">	private Point lastLocation = null;</span>
-<span class="fc" id="L34">	private AutoMouseConfiguration configuration = null;</span>
-<span class="fc" id="L35">	protected boolean isScreenLocked = false;</span>
-
-
-	/**
-	 * Default constructor.
-	 * 
-	 * @since 1.0.0
-	 */
-<span class="fc" id="L43">	public AutoMouseCommon() {</span>
-<span class="fc" id="L44">		this.lastLocation = MouseInfo.getPointerInfo().getLocation();</span>
-<span class="fc" id="L45">		this.configuration = new AutoMouseConfiguration();</span>
-<span class="fc" id="L46">		this.addEventListener();</span>
-<span class="fc" id="L47">	}</span>
-
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 */
-	@Override
-	public Point moveMouse() throws AWTException {
-<span class="fc" id="L56">		Point actualLocation = MouseInfo.getPointerInfo().getLocation();</span>
-<span class="fc" id="L57">		logger.debug(&quot;actual location: x=&quot; + actualLocation.x + &quot;, y=&quot; + actualLocation.y);</span>
-<span class="fc" id="L58">		logger.debug(&quot;last location: x=&quot; + lastLocation.x + &quot;, y=&quot; + lastLocation.y);</span>
-<span class="pc bpc" id="L59" title="2 of 4 branches missed.">		if (lastLocation.x == actualLocation.x &amp;&amp; lastLocation.y == actualLocation.y) {</span>
-<span class="fc" id="L60">			this.moveMouse(new Point(1, 1));</span>
-<span class="fc" id="L61">			this.moveMouse(new Point(lastLocation.x, lastLocation.y));</span>
-		}
-<span class="fc" id="L63">		lastLocation = actualLocation;</span>
-<span class="fc" id="L64">		return actualLocation;</span>
-	}
-
-
-	/**
-     * {@inheritDoc}
-     * 
+    /**
+     * The logger.
+     *
+     * @since 1.0.0
      */
-	@Override
-	public Point moveMouse(Point point) throws AWTException {
-<span class="fc" id="L74">		Robot robot = new Robot();</span>
-<span class="fc" id="L75">		robot.mouseMove(point.x, point.y);</span>
-<span class="fc" id="L76">		logger.debug(&quot;mouse moved to x=&quot; + point.x + &quot;, y=&quot; + point.y);</span>
-<span class="fc" id="L77">		return point;</span>
-	}
+<span class="fc" id="L39">    private static Log logger = LogFactory.getLog(AutoMouseCommon.class);</span>
 
-
-	/**
-     * {@inheritDoc}
-     * 
+    /**
+     * The reource bundle.
+     *
+     * @since 1.0.0
      */
-	@Override
-	public void pushMessage(String message, MessageType messageType) {
-<span class="pc bpc" id="L87" title="1 of 5 branches missed.">		switch (messageType) {</span>
-		case ERROR:
-<span class="fc" id="L89">			logger.error(message);</span>
-<span class="fc" id="L90">			break;</span>
-		case WARNING:
-<span class="fc" id="L92">			logger.warn(message);</span>
-<span class="fc" id="L93">			break;</span>
-		case INFO:
-<span class="fc" id="L95">			logger.info(message);</span>
-<span class="fc" id="L96">			break;</span>
-		case NONE:
-<span class="fc" id="L98">			logger.info(message);</span>
-			break;
-		}
-<span class="fc" id="L101">	}</span>
-
-
-	/**
-     * {@inheritDoc}
-     * 
+<span class="fc" id="L46">    private static ResourceBundle resourceBundle = ResourceBundle</span>
+<span class="fc" id="L47">            .getBundle(&quot;io.github.martinhelwig.utility.automouse.languages.&quot;</span>
+                    + &quot;ApplicationResources&quot;);
+    /**
+     * Last location point.
+     *
+     * @since 1.0.0
      */
-	@Override
-	public Point getLastLocation() {
-<span class="fc" id="L110">		return this.lastLocation;</span>
-	}
+<span class="fc" id="L54">    private Point lastLocation = null;</span>
 
-
-	/**
-     * {@inheritDoc}
-     * 
+    /**
+     * Configuration.
+     *
+     * @since 1.0.0
      */
-	@Override
-	public void run() {
-<span class="fc" id="L120">		boolean run = true;</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">		while (run) {</span>
-			try {
-<span class="pc bpc" id="L123" title="1 of 2 branches missed.">				if (!isScreenLocked) {</span>
-<span class="fc" id="L124">					this.moveMouse();</span>
-				}
-<span class="fc" id="L126">				Thread.sleep(configuration.getTimer() * 1000);</span>
-<span class="nc" id="L127">			} catch (Exception e) {</span>
-<span class="nc" id="L128">				logger.error(e.getMessage(), e);</span>
-<span class="nc" id="L129">				Thread.currentThread().interrupt();</span>
-<span class="pc" id="L130">			}</span>
-		}
-<span class="nc" id="L132">		pushMessage(resourceBundle.getString(&quot;messages.exit&quot;), MessageType.ERROR);</span>
-<span class="nc" id="L133">	}</span>
+<span class="fc" id="L61">    private AutoMouseConfiguration autoMouseConfiguration = null;</span>
 
-
-	/**
-     * {@inheritDoc}
-     * 
+    /**
+     * Screen locked.
+     *
+     * @since 1.0.0
      */
-	@Override
-	public AutoMouseConfiguration getConfiguration() {
-<span class="fc" id="L142">		return this.configuration;</span>
-	}
+<span class="fc" id="L68">    private boolean isScreenLocked = false;</span>
 
-
-	/**
-     * {@inheritDoc}
-     * 
+    /**
+     * Default constructor.
+     *
+     * @since 1.0.0
      */
-	@Override
-	public void setCofiguration(AutoMouseConfiguration configuration) throws IOException {
-<span class="fc" id="L152">		this.configuration = configuration;</span>
-<span class="fc" id="L153">		configuration.saveConfiguration();</span>
-<span class="fc" id="L154">	}</span>
+<span class="fc" id="L75">    public AutoMouseCommon() {</span>
+<span class="fc" id="L76">        this.lastLocation = MouseInfo.getPointerInfo().getLocation();</span>
+<span class="fc" id="L77">        this.autoMouseConfiguration = new AutoMouseConfiguration();</span>
+<span class="fc" id="L78">        this.addEventListener();</span>
+<span class="fc" id="L79">    }</span>
 
-
-	/**
+    /**
      * {@inheritDoc}
-     * 
+     *
      */
-	@Override
-	public boolean isScreenLocked() {
-<span class="fc" id="L163">		return this.isScreenLocked;</span>
-	}
+    @Override
+    public Point moveMouse() throws AWTException {
+<span class="fc" id="L87">        Point actualLocation = MouseInfo.getPointerInfo().getLocation();</span>
+<span class="fc" id="L88">        logger.debug(&quot;actual location: x=&quot; + actualLocation.x + &quot;, y=&quot;</span>
+                + actualLocation.y);
+<span class="fc" id="L90">        logger.debug(</span>
+                &quot;last location: x=&quot; + lastLocation.x + &quot;, y=&quot; + lastLocation.y);
+<span class="pc bpc" id="L92" title="2 of 4 branches missed.">        if (lastLocation.x == actualLocation.x</span>
+                &amp;&amp; lastLocation.y == actualLocation.y) {
+<span class="fc" id="L94">            this.moveMouse(new Point(1, 1));</span>
+<span class="fc" id="L95">            this.moveMouse(new Point(lastLocation.x, lastLocation.y));</span>
+        }
+<span class="fc" id="L97">        lastLocation = actualLocation;</span>
+<span class="fc" id="L98">        return actualLocation;</span>
+    }
 
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public Point moveMouse(final Point point) throws AWTException {
+<span class="fc" id="L107">        Robot robot = new Robot();</span>
+<span class="fc" id="L108">        robot.mouseMove(point.x, point.y);</span>
+<span class="fc" id="L109">        logger.debug(&quot;mouse moved to x=&quot; + point.x + &quot;, y=&quot; + point.y);</span>
+<span class="fc" id="L110">        return point;</span>
+    }
 
-	/**
-	 * Adds an AppEventListener to verify if the screen is locked or not.
-	 */
-	@ExcludeFromCodeCoverage
-	private void addEventListener() {
-<span class="fc" id="L172">		Desktop desktop = Desktop.getDesktop();</span>
-<span class="fc" id="L173">		desktop.addAppEventListener(new UserSessionListener() {</span>
-			@Override
-			@ExcludeFromCodeCoverage
-			public void userSessionDeactivated(UserSessionEvent e) {
-<span class="nc" id="L177">				isScreenLocked = true;</span>
-<span class="nc" id="L178">			}</span>
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public void pushMessage(final String message,
+            final MessageType messageType) {
+<span class="pc bpc" id="L120" title="1 of 5 branches missed.">        switch (messageType) {</span>
+        case ERROR:
+<span class="fc" id="L122">            logger.error(message);</span>
+<span class="fc" id="L123">            break;</span>
+        case WARNING:
+<span class="fc" id="L125">            logger.warn(message);</span>
+<span class="fc" id="L126">            break;</span>
+        case INFO:
+<span class="fc" id="L128">            logger.info(message);</span>
+<span class="fc" id="L129">            break;</span>
+        case NONE:
+<span class="fc" id="L131">            logger.info(message);</span>
+<span class="fc" id="L132">            break;</span>
+        default:
+<span class="nc" id="L134">            logger.info(message);</span>
+        }
+<span class="fc" id="L136">    }</span>
 
-			@Override
-			@ExcludeFromCodeCoverage
-			public void userSessionActivated(UserSessionEvent e) {
-<span class="nc" id="L183">				isScreenLocked = false;</span>
-<span class="nc" id="L184">			}</span>
-		});
-<span class="fc" id="L186">	}</span>
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public Point getLastLocation() {
+<span class="fc" id="L144">        return this.lastLocation;</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public void run() {
+<span class="fc" id="L153">        boolean run = true;</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">        while (run) {</span>
+            try {
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                if (!isScreenLocked) {</span>
+<span class="fc" id="L157">                    this.moveMouse();</span>
+                }
+<span class="fc" id="L159">                Thread.sleep(this.autoMouseConfiguration.getTimer()</span>
+                        * Timer.ONE_SECOND);
+<span class="nc" id="L161">            } catch (Exception e) {</span>
+<span class="nc" id="L162">                logger.error(e.getMessage(), e);</span>
+<span class="nc" id="L163">                Thread.currentThread().interrupt();</span>
+<span class="pc" id="L164">            }</span>
+        }
+<span class="nc" id="L166">        pushMessage(resourceBundle.getString(&quot;messages.exit&quot;),</span>
+                MessageType.ERROR);
+<span class="nc" id="L168">    }</span>
+
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public AutoMouseConfiguration getConfiguration() {
+<span class="fc" id="L176">        return this.autoMouseConfiguration;</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public void setCofiguration(final AutoMouseConfiguration configuration)
+            throws IOException {
+<span class="fc" id="L186">        this.autoMouseConfiguration = configuration;</span>
+<span class="fc" id="L187">        configuration.saveConfiguration();</span>
+<span class="fc" id="L188">    }</span>
+
+    /**
+     * {@inheritDoc}
+     *
+     */
+    @Override
+    public boolean isScreenLocked() {
+<span class="fc" id="L196">        return this.isScreenLocked;</span>
+    }
+
+    /**
+     * Adds an AppEventListener to verify if the screen is locked or not.
+     *
+     * @since 1.0.0
+     */
+    @ExcludeFromCodeCoverage
+    private void addEventListener() {
+<span class="fc" id="L206">        Desktop desktop = Desktop.getDesktop();</span>
+<span class="fc" id="L207">        desktop.addAppEventListener(new UserSessionListener() {</span>
+            @Override @ExcludeFromCodeCoverage
+            public void userSessionDeactivated(final UserSessionEvent e) {
+<span class="nc" id="L210">                isScreenLocked = true;</span>
+<span class="nc" id="L211">            }</span>
+
+            @Override @ExcludeFromCodeCoverage
+            public void userSessionActivated(final UserSessionEvent e) {
+<span class="nc" id="L215">                isScreenLocked = false;</span>
+<span class="nc" id="L216">            }</span>
+        });
+<span class="fc" id="L218">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -15,136 +15,170 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * AutoMouseConfiguration provides the whole configuration of the AutoMouse program.
- * 
+ * AutoMouseConfiguration provides the whole configuration of the AutoMouse
+ * program.
+ *
  * @author Martin Helwig
  * @version 1.0.0
  *
  */
 public class AutoMouseConfiguration {
 
-<span class="fc" id="L26">	private static Log logger = LogFactory.getLog(AutoMouseConfiguration.class);</span>
-	private static final String CONFIG_KEY_TIMER=&quot;timer&quot;;
-<span class="fc" id="L28">	private String configurationFile = DEFAULT_CONFIGURATIONFILE;</span>
-<span class="fc" id="L29">	private Properties configurationProperties = new Properties();</span>
-	
-	protected static final long DEFAULT_TIMER = 60;
-<span class="fc" id="L32">	protected static final String DEFAULT_CONFIGURATIONFILE = System.getProperty(&quot;user.home&quot;) + &quot;/.auto-mouse/auto-mouse.properties&quot;;</span>
-	
-	
-	/**
-	 * The default constructor.
-	 * Loads the default configuration from the file if it exists.
-	 * 
-	 * @since 1.0.0
-	 */
-<span class="fc" id="L41">	public AutoMouseConfiguration() {</span>
-<span class="fc" id="L42">	    logger.trace(&quot;AutoMouseConfiguration() - start&quot;); //$NON-NLS-1$</span>
-		
-	    try {
-<span class="fc" id="L45">			this.reloadConfiguration();</span>
-<span class="fc" id="L46">		} catch (NullPointerException | IOException e) {</span>
-<span class="fc" id="L47">			logger.warn(&quot;using default configuration&quot;, e);</span>
-<span class="fc" id="L48">		}</span>
-		
-<span class="fc" id="L50">	    logger.trace(&quot;AutoMouseConfiguration() - end&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L51">	}</span>
-	
-	
-	/**
-	 * Getting the configuration file.
-     * 
+    /**
+     * The logger.
+     *
+     * @since 1.0.0
+     */
+<span class="fc" id="L32">    private static Log logger = LogFactory.getLog(AutoMouseConfiguration.class);</span>
+
+    /**
+     * Timer Constant.
+     *
+     * @since 1.0.0
+     */
+    private static final String CONFIG_KEY_TIMER = &quot;timer&quot;;
+
+    /**
+     * Default configuration file.
+     *
+     * @since 1.0.0
+     */
+<span class="fc" id="L46">    private String configFile = DEFAULT_CONFIGURATIONFILE;</span>
+
+    /**
+     * Configuration properties.
+     *
+     * @since 1.0.0
+     */
+<span class="fc" id="L53">    private Properties configurationProperties = new Properties();</span>
+
+    /**
+     * Default timer constant.
+     *
+     * @since 1.0.0
+     */
+    protected static final long DEFAULT_TIMER = 60;
+
+    /**
+     * Default configuration file.
+     *
+     * @since 1.0.0
+     */
+<span class="fc" id="L67">    protected static final String DEFAULT_CONFIGURATIONFILE = System</span>
+<span class="fc" id="L68">            .getProperty(&quot;user.home&quot;) + &quot;/.auto-mouse/auto-mouse.properties&quot;;</span>
+
+    /**
+     * The default constructor. Loads the default configuration from the file if
+     * it exists.
+     *
+     * @since 1.0.0
+     */
+<span class="fc" id="L76">    public AutoMouseConfiguration() {</span>
+<span class="fc" id="L77">        logger.trace(&quot;AutoMouseConfiguration() - start&quot;); //$NON-NLS-1$</span>
+
+        try {
+<span class="fc" id="L80">            this.reloadConfiguration();</span>
+<span class="fc" id="L81">        } catch (NullPointerException | IOException e) {</span>
+<span class="fc" id="L82">            logger.warn(&quot;using default configuration&quot;, e);</span>
+<span class="fc" id="L83">        }</span>
+
+<span class="fc" id="L85">        logger.trace(&quot;AutoMouseConfiguration() - end&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * Getting the configuration file.
+     *
      * @return the configurationFile
      * @see String
      * @since 1.0.0
      */
-	public String getConfigurationFile() {
-<span class="nc" id="L62">        logger.trace(&quot;getConfigurationFile() - start&quot;); //$NON-NLS-1$</span>
-<span class="nc" id="L63">        logger.trace(&quot;getConfigurationFile() - end - return value=&quot; + this.configurationFile); //$NON-NLS-1$</span>
-<span class="nc" id="L64">		return this.configurationFile;</span>
-	}
-	
+    public String getConfigurationFile() {
+<span class="nc" id="L96">        logger.trace(&quot;getConfigurationFile() - start&quot;); //$NON-NLS-1$</span>
+<span class="nc" id="L97">        logger.trace(&quot;getConfigurationFile() - end - return value=&quot;</span>
+                + this.configFile); // $NON-NLS-1$
+<span class="nc" id="L99">        return this.configFile;</span>
+    }
 
-	/**
-	 * Sets the configuration file to use.
-	 * 
-	 * @param configurationFile the configurationFile to set
-	 * @since 1.0.0
-	 */
-	public void setConfigurationFile(String configurationFile) {
-<span class="fc" id="L75">        logger.trace(&quot;setConfigurationFile(String configurationFile=&quot; + configurationFile + &quot;) - start&quot;); //$NON-NLS-1$ //$NON-NLS-2$</span>
-        
-<span class="fc" id="L77">		this.configurationFile = configurationFile;</span>
+    /**
+     * Sets the configuration file to use.
+     *
+     * @param configurationFile the configurationFile to set
+     * @since 1.0.0
+     */
+    public void setConfigurationFile(final String configurationFile) {
+<span class="fc" id="L109">        logger.trace(&quot;setConfigurationFile(String configurationFile=&quot;</span>
+                + configurationFile + &quot;) - start&quot;); // $NON-NLS-2$ //$NON-NLS-2$
 
-<span class="fc" id="L79">        logger.trace(&quot;setConfigurationFile(String) - end&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L80">	}</span>
+<span class="fc" id="L112">        this.configFile = configurationFile;</span>
 
+<span class="fc" id="L114">        logger.trace(&quot;setConfigurationFile(String) - end&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L115">    }</span>
 
-	/**
-	 * Gets the timer value.
-	 * 
-	 * @return the timer
-	 * @see Long
-	 * @since 1.0.0
-	 */
-	public Long getTimer() {
-<span class="fc" id="L91">        logger.trace(&quot;getTimer() - start&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L92">        long timer = Long.parseLong(configurationProperties.getProperty(CONFIG_KEY_TIMER, Long.toString(DEFAULT_TIMER)));</span>
-<span class="fc" id="L93">        logger.trace(&quot;getTimer() - end&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L94">		return timer;</span>
-	}
+    /**
+     * Gets the timer value.
+     *
+     * @return the timer
+     * @see Long
+     * @since 1.0.0
+     */
+    public Long getTimer() {
+<span class="fc" id="L125">        logger.trace(&quot;getTimer() - start&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L126">        long timer = Long.parseLong(configurationProperties</span>
+<span class="fc" id="L127">                .getProperty(CONFIG_KEY_TIMER, Long.toString(DEFAULT_TIMER)));</span>
+<span class="fc" id="L128">        logger.trace(&quot;getTimer() - end&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L129">        return timer;</span>
+    }
 
+    /**
+     * Sets the timer value.
+     *
+     * @param timer the timer to set
+     * @since 1.0.0
+     */
+    public void setTimer(final long timer) {
+<span class="fc" id="L139">        logger.trace(&quot;setTimer(long) - start&quot;); //$NON-NLS-1$</span>
 
-	/**
-	 * Sets the timer value.
-	 * 
-	 * @param timer the timer to set
-	 * @since 1.0.0
-	 */
-	public void setTimer(long timer) {
-<span class="fc" id="L105">        logger.trace(&quot;setTimer(long) - start&quot;); //$NON-NLS-1$</span>
-        
-<span class="fc" id="L107">		configurationProperties.setProperty(CONFIG_KEY_TIMER, Long.toString(timer));</span>
+<span class="fc" id="L141">        configurationProperties.setProperty(CONFIG_KEY_TIMER,</span>
+<span class="fc" id="L142">                Long.toString(timer));</span>
 
-<span class="fc" id="L109">        logger.trace(&quot;setTimer(long) - end&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L110">	}</span>
-	
-	
-	/**
-	 * Reloads the configuration from file.
-	 * 
-	 * @throws IOException if configuration file cannot be read
-	 * @since 1.0.0
-	 */
-	public void reloadConfiguration() throws IOException {
-<span class="fc" id="L120">	    logger.trace(&quot;reloadConfiguration() - start&quot;); //$NON-NLS-1$</span>
-        
-<span class="fc" id="L122">    	try (InputStream inputStream = new FileInputStream(this.configurationFile);) {</span>
-<span class="fc" id="L123">    		configurationProperties.load(inputStream);</span>
-		}
+<span class="fc" id="L144">        logger.trace(&quot;setTimer(long) - end&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L145">    }</span>
 
-<span class="fc" id="L126">        logger.trace(&quot;reloadConfiguration() - end&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L127">	}</span>
+    /**
+     * Reloads the configuration from file.
+     *
+     * @throws IOException if configuration file cannot be read
+     * @since 1.0.0
+     */
+    public void reloadConfiguration() throws IOException {
+<span class="fc" id="L154">        logger.trace(&quot;reloadConfiguration() - start&quot;); //$NON-NLS-1$</span>
 
+<span class="fc" id="L156">        try (InputStream inputStream = new FileInputStream(this.configFile);) {</span>
+<span class="fc" id="L157">            configurationProperties.load(inputStream);</span>
+        }
 
-	/**
-	 * Saves the configuration to file.
-	 * 
-	 * @throws IOException if configuration file cannot be written
-	 * @since 1.0.0
-	 */
-	public void saveConfiguration() throws IOException {
-<span class="fc" id="L137">        logger.trace(&quot;saveConfiguration() - start&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L160">        logger.trace(&quot;reloadConfiguration() - end&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L161">    }</span>
 
-<span class="fc" id="L139">		File configFile = new File(configurationFile);</span>
-<span class="fc" id="L140">		File configDirectory = new File(configFile.getParent());</span>
-<span class="fc" id="L141">    	configDirectory.mkdirs();</span>
-    	
-<span class="fc" id="L143">    	try (FileOutputStream fileOutputStream = new FileOutputStream(configFile);) {</span>
-<span class="fc" id="L144">    		configurationProperties.store(fileOutputStream, &quot;AutoMouse&quot;);</span>
-    	}
+    /**
+     * Saves the configuration to file.
+     *
+     * @throws IOException if configuration file cannot be written
+     * @since 1.0.0
+     */
+    public void saveConfiguration() throws IOException {
+<span class="fc" id="L170">        logger.trace(&quot;saveConfiguration() - start&quot;); //$NON-NLS-1$</span>
 
-<span class="fc" id="L147">        logger.trace(&quot;saveConfiguration() - end&quot;); //$NON-NLS-1$</span>
-<span class="fc" id="L148">	}</span>
+<span class="fc" id="L172">        File saveConfigFile = new File(this.configFile);</span>
+<span class="fc" id="L173">        File configDirectory = new File(saveConfigFile.getParent());</span>
+<span class="fc" id="L174">        configDirectory.mkdirs();</span>
+
+<span class="fc" id="L176">        try (FileOutputStream fileOutputStream = new FileOutputStream(</span>
+                saveConfigFile);) {
+<span class="fc" id="L178">            configurationProperties.store(fileOutputStream, &quot;AutoMouse&quot;);</span>
+        }
+
+<span class="fc" id="L181">        logger.trace(&quot;saveConfiguration() - end&quot;); //$NON-NLS-1$</span>
+<span class="fc" id="L182">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
