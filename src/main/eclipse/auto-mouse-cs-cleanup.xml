@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Martin Helwig
+
+SPDX-License-Identifier: MIT
+-->
+
 <profiles version="2">
    <profile kind="CleanUpProfile"
              name="CheckStyle-Generated auto-mouse"
