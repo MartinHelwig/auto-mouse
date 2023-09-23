@@ -72,6 +72,7 @@ SPDX-License-Identifier: MIT
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.assembly.id>${project.version}</project.assembly.id>
 
 		<project.properties.file>${project.basedir}/project.properties</project.properties.file>
 
@@ -105,14 +106,16 @@ SPDX-License-Identifier: MIT
 		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 		<maven-site-plugin.version>4.0.0-M9</maven-site-plugin.version>
 		<maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
 		<maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
 		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
 		<maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
-		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+		<buildnumber-maven-plugin.version>3.2.0</buildnumber-maven-plugin.version>
+		<git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version>
+		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
 		<mvn-jlink-wrapper.version>1.2.1</mvn-jlink-wrapper.version>
 		<properties-maven-plugin.version>1.2.0</properties-maven-plugin.version>
 	</properties>
@@ -180,7 +183,7 @@ SPDX-License-Identifier: MIT
 						<descriptor>src/assembly/distribution.xml</descriptor>
 					</descriptors>
 					<finalName>${project.artifactId}</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
+					<appendAssemblyId>true</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
@@ -216,6 +219,20 @@ SPDX-License-Identifier: MIT
 			</plugin>
 
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>${buildnumber-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>create</goal>
+							<goal>create-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>${maven-jar-plugin.version}</version>
@@ -230,9 +247,10 @@ SPDX-License-Identifier: MIT
 						</manifest>
 						<manifestEntries>
 							<Built-By>${user.name}</Built-By>
-							<Build-Number>${env.RUN_NUMBER}</Build-Number>
 							<Build-Time>${maven.build.timestamp}</Build-Time>
-							<Class-Path>lib/</Class-Path>
+							<Commit-Time>${git.commit.time}</Commit-Time>
+							<Commit-Id>${git.commit.id.full}</Commit-Id>
+							<Class-Path>lib/*</Class-Path>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -251,8 +269,9 @@ SPDX-License-Identifier: MIT
 						</manifest>
 						<manifestEntries>
 							<Built-By>${user.name}</Built-By>
-							<Build-Number>${env.RUN_NUMBER}</Build-Number>
 							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Commit-Time>${git.commit.time}</Commit-Time>
+							<Commit-Id>${git.commit.id.full}</Commit-Id>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -283,8 +302,9 @@ SPDX-License-Identifier: MIT
 						</manifest>
 						<manifestEntries>
 							<Built-By>${user.name}</Built-By>
-							<Build-Number>${env.RUN_NUMBER}</Build-Number>
 							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Commit-Time>${git.commit.time}</Commit-Time>
+							<Commit-Id>${git.commit.id.full}</Commit-Id>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -396,7 +416,6 @@ SPDX-License-Identifier: MIT
 				<configuration>
 					<configLocation>sun_checks.xml</configLocation>
 					<suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-					<encoding>UTF-8</encoding>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 					<failOnViolation>true</failOnViolation>
@@ -467,7 +486,7 @@ SPDX-License-Identifier: MIT
 							<skip>${nsis.skip}</skip>
 							<target>
 								<echo level="info" message="extract file ${project.artifactId}.tar.gz" />
-								<untar compression="gzip" dest="target/" src="target/${project.artifactId}.tar.gz" />
+								<untar compression="gzip" dest="target/" src="target/${project.artifactId}-${project.version}.tar.gz" />
 								<mkdir dir="target/${project.artifactId}/jre" />
 								<copy todir="target/${project.artifactId}/jre" failonerror="false" quiet="true">
 									<fileset dir="${windows.jre.path}" includes="**" />
@@ -516,8 +535,10 @@ SPDX-License-Identifier: MIT
 					<compressionIsFinal>true</compressionIsFinal>
 					<compressionDictSize>64</compressionDictSize>
 					<defines>
-						<PROJECT_NAME_SHORT>${project.name.short}</PROJECT_NAME_SHORT>
-						<PROJECT_NAME_CAMEL>${project.name.camel}</PROJECT_NAME_CAMEL>
+						<PRODUCT_MAJOR_VERSION>${project.artifact.selectedVersion.majorVersion}</PRODUCT_MAJOR_VERSION>
+						<PRODUCT_MINOR_VERSION>${project.artifact.selectedVersion.minorVersion}</PRODUCT_MINOR_VERSION>
+						<PRODUCT_PATCH_VERSION>${project.artifact.selectedVersion.incrementalVersion}</PRODUCT_PATCH_VERSION>
+						<PRODUCT_BUILD_VERSION>${project.artifact.selectedVersion.buildNumber}</PRODUCT_BUILD_VERSION>
 					</defines>
 				</configuration>
 				<executions>
@@ -525,9 +546,10 @@ SPDX-License-Identifier: MIT
 						<id>build-windows-installer</id>
 						<configuration>
 							<scriptFile>${project.basedir}/src/nsis/installer.nsi</scriptFile>
-							<outputFile>auto-mouse_installer.exe</outputFile>
+							<outputFile>${project.artifactId}-${project.version}.exe</outputFile>
 						</configuration>
 						<goals>
+							<goal>generate-headerfile</goal>
 							<goal>make</goal>
 						</goals>
 					</execution>
@@ -544,6 +566,30 @@ SPDX-License-Identifier: MIT
 					<password>${env.GITHUB_TOKEN}</password>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>${git-commit-id-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <!--<includeOnlyProperties>
+                        <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+                        <includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
+                    </includeOnlyProperties>-->
+                    <commitIdGenerationMode>full</commitIdGenerationMode>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 

@@ -3,8 +3,9 @@
 #SPDX-License-Identifier: MIT
 
 #####################################################################################################
-!define PRODUCT_NAME 					"auto-mouse"
-!define PRODUCT_NAME_SHORT 				"auto-mouse"
+
+!define PRODUCT_NAME 					"${PROJECT_ARTIFACT_ID}"
+!define PRODUCT_NAME_SHORT 				"${PROJECT_ARTIFACT_ID}"
 !define PRODUCT_COMMENT                 "A utility to prevent screen locking."
 !define PRODUCT_CONTACT                 "Martin Helwig <115872657+MartinHelwig@users.noreply.github.com>"
 !define PRODUCT_EXECUTABLE				"start.cmd"
@@ -16,11 +17,54 @@
 !define PRODUCT_LICENSEFILE             "..\..\LICENSE"
 !define PRODUCT_DISTRIBUTION_DIRECTORY	"..\..\target\auto-mouse"
 !define PRODUCT_INSTALLDIR              "$LOCALAPPDATA\Programs\${PRODUCT_NAME_SHORT}"
-!define PRODUCT_MAJOR_VERSION			"0"
-!define PRODUCT_MINOR_VERSION			"0"
-!define PRODUCT_PATCH_VERSION			"0"
-!define PRODUCT_BUILD_VERSION			"1"
-!define PRODUCT_VERSION 				"${PRODUCT_MAJOR_VERSION}.${PRODUCT_MINOR_VERSION}.${PRODUCT_PATCH_VERSION}.${PRODUCT_BUILD_VERSION}"
+!define PRODUCT_FILE_NAME               "${PROJECT_FINAL_NAME}.exe"              
+#!define PRODUCT_MAJOR_VERSION			"0"
+#!define PRODUCT_MINOR_VERSION			"0"
+#!define PRODUCT_PATCH_VERSION			"0"
+#!define PRODUCT_BUILD_VERSION			"1"
+!define PRODUCT_VERSION					"${PRODUCT_MAJOR_VERSION}.${PRODUCT_MINOR_VERSION}.${PRODUCT_PATCH_VERSION}.${PRODUCT_BUILD_VERSION}"
+
+#####################################################################################################
+
+VIProductVersion "${PRODUCT_VERSION}"
+
+#Descriptions for the parameter from https://learn.microsoft.com/en-us/windows/win32/menurc/stringfileinfo-block 
+
+#Name of the product with which the file is distributed. This string is required.
+VIAddVersionKey /LANG=0 "ProductName" "${PRODUCT_NAME}"
+
+#Additional information that should be displayed for diagnostic purposes.
+VIAddVersionKey /LANG=0 "Comments" "${PRODUCT_COMMENT}"
+
+#Company that produced the file—for example, "Microsoft Corporation" or "Standard Microsystems Corporation, Inc." This string is required.
+#VIAddVersionKey /LANG=0 "CompanyName" "${PRODUCT_PUBLISHER}"
+
+#Copyright notices that apply to the file. This should include the full text of all notices, legal symbols, copyright dates, and so on. This string is optional.
+VIAddVersionKey /LANG=0 "LegalCopyright" "Copyright © 2023 ${PRODUCT_PUBLISHER}"
+
+#File description to be presented to users. This string may be displayed in a list box when the user is choosing files to install—for example, "Keyboard Driver for AT-Style Keyboards". This string is required.
+VIAddVersionKey /LANG=0 "FileDescription" "${PRODUCT_COMMENT}"
+
+#Version number of the file—for example, "3.10" or "5.00.RC2". This string is required.
+#VIAddVersionKey /LANG=0 "FileVersion" "${PRODUCT_VERSION}"
+
+#Version of the product with which the file is distributed—for example, "3.10" or "5.00.RC2". This string is required.
+VIAddVersionKey /LANG=0 "ProductVersion" "${PRODUCT_VERSION}"
+
+#Internal name of the file, if one exists—for example, a module name if the file is a dynamic-link library. If the file has no internal name, this string should be the original filename, without extension. This string is required.
+VIAddVersionKey /LANG=0 "InternalName" "${PRODUCT_NAME_SHORT}"
+
+#Original name of the file, not including a path. This information enables an application to determine whether a file has been renamed by a user. The format of the name depends on the file system for which the file was created. This string is required.
+VIAddVersionKey /LANG=0 "OriginalFilename" "${PRODUCT_FILE_NAME}"
+
+#Information about a private version of the file—for example, "Built by TESTER1 on \TESTBED". This string should be present only if VS_FF_PRIVATEBUILD is specified in the fileflags parameter of the root block.
+#VIAddVersionKey /LANG=0 "PrivateBuild" ""
+
+#Text that specifies how this version of the file differs from the standard version—for example, "Private build for TESTER1 solving mouse problems on M250 and M250E computers". This string should be present only if VS_FF_SPECIALBUILD is specified in the fileflags parameter of the root block.
+#VIAddVersionKey /LANG=0 "SpecialBuild" ""
+
+#Trademarks and registered trademarks that apply to the file. This should include the full text of all notices, legal symbols, trademark numbers, and so on. This string is optional.
+#VIAddVersionKey /LANG=0 "LegalTrademarks" ""
 
 #####################################################################################################
 
@@ -37,7 +81,7 @@ ShowInstDetails hide
 ShowUninstDetails hide
 InstallDirRegKey "${PRODUCT_REGISTRY_ROOT}" "${PRODUCT_REGISTRY_KEY}" "InstallLocation"
 
-#   Interface Settings
+### Interface Settings
 !define MUI_ABORTWARNING
 !define MUI_ICON "resources\icon.ico"
 !define MUI_UNICON "resources\icon.ico"
