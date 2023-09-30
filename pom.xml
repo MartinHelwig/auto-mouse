@@ -184,6 +184,7 @@ SPDX-License-Identifier: MIT
 					</descriptors>
 					<finalName>${project.artifactId}</finalName>
 					<appendAssemblyId>true</appendAssemblyId>
+					<attach>false</attach>
 				</configuration>
 				<executions>
 					<execution>
@@ -214,20 +215,6 @@ SPDX-License-Identifier: MIT
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>${buildnumber-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>create</goal>
-							<goal>create-metadata</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
@@ -293,8 +280,9 @@ SPDX-License-Identifier: MIT
 					<skip>${javadoc.skip}</skip>
 					<show>public</show>
 					<doclint>none</doclint>
-					<failOnWarnings>false</failOnWarnings>
+					<failOnWarnings>true</failOnWarnings>
 					<failOnError>true</failOnError>
+					<quiet>true</quiet>
 					<archive>
 						<manifest>
 							<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
@@ -424,8 +412,8 @@ SPDX-License-Identifier: MIT
 				</configuration>
 				<executions>
 					<execution>
-						<id>validate</id>
-						<phase>validate</phase>
+						<id>check</id>
+						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
@@ -440,6 +428,7 @@ SPDX-License-Identifier: MIT
 				<executions>
 					<execution>
 						<id>cache-linux-jre</id>
+						<phase>package</phase>
 						<goals>
 							<goal>cache-jdk</goal>
 						</goals>
@@ -457,6 +446,7 @@ SPDX-License-Identifier: MIT
 					</execution>
 					<execution>
 						<id>cache-windows-jre</id>
+						<phase>package</phase>
 						<goals>
 							<goal>cache-jdk</goal>
 						</goals>
@@ -481,6 +471,7 @@ SPDX-License-Identifier: MIT
 				<version>${maven-antrun-plugin.version}</version>
 				<executions>
 					<execution>
+						<id>extract-assembly</id>
 						<phase>package</phase>
 						<configuration>
 							<skip>${nsis.skip}</skip>
@@ -520,6 +511,55 @@ SPDX-License-Identifier: MIT
 							<goal>run</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>define-deploy-repository</id>
+						<phase>verify</phase>
+						<configuration>
+							<exportAntProperties>true</exportAntProperties>
+							<target>
+								<echo level="info" message="define which deployment repository should be used" />
+								<fail message="branch not found">
+									<condition>
+										<not>
+											<isset property="git.branch"/>
+										</not>
+									</condition>
+								</fail>
+								
+								<fail message="no SNAPSHOT version on release tag allowed">
+									<condition>
+										<and>
+											<matches pattern="^v[0-9]+.[0-9]+.[0-9]+$" string="${git.branch}"/>
+											<matches pattern=".*SNAPSHOT.*" string="${project.version}"/>
+										</and>
+									</condition>
+								</fail>
+								
+								<condition property="local-repo" value="true">
+									<and>
+										<not>
+											<matches pattern="^main$|^release/.*|^v[0-9]+.[0-9]+.[0-9]+$" string="${git.branch}"/>
+										</not>
+									</and>
+								</condition>
+								<condition property="local-repo" value="true">
+									<and>
+										<matches pattern="^main$|^release/.*" string="${git.branch}"/>
+										<not>
+											<matches pattern=".*SNAPSHOT.*" string="${project.version}"/>
+										</not>
+									</and>
+								</condition>
+								
+								<condition property="altDeploymentRepository" value="repo::file:target/local-repo">
+      								<isset property="local-repo"/>
+    							</condition>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 
@@ -547,6 +587,7 @@ SPDX-License-Identifier: MIT
 						<configuration>
 							<scriptFile>${project.basedir}/src/nsis/installer.nsi</scriptFile>
 							<outputFile>${project.artifactId}-${project.version}.exe</outputFile>
+							<attachArtifact>false</attachArtifact>
 						</configuration>
 						<goals>
 							<goal>generate-headerfile</goal>
