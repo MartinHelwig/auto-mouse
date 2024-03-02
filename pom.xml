@@ -101,25 +101,25 @@ SPDX-License-Identifier: MIT
 		<dependency-check-maven.version>8.4.0</dependency-check-maven.version>
 
 		<!-- plugin versions -->
-		<maven-surefire.version>3.1.2</maven-surefire.version>
+		<maven-surefire.version>3.2.5</maven-surefire.version>
 		<maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
-		<maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
-		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+		<maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<maven-site-plugin.version>4.0.0-M9</maven-site-plugin.version>
-		<maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+		<maven-site-plugin.version>4.0.0-M13</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
 		<maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
-		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
-		<maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
+		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+		<maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
-		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
 		<buildnumber-maven-plugin.version>3.2.0</buildnumber-maven-plugin.version>
-		<git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version>
-		<nsis-maven-plugin.version>1.0.3</nsis-maven-plugin.version>
+		<git-commit-id-maven-plugin.version>7.0.0</git-commit-id-maven-plugin.version>
+		<nsis-maven-plugin.version>1.0.5</nsis-maven-plugin.version>
 		<mvn-jlink-wrapper.version>1.2.1</mvn-jlink-wrapper.version>
-		<properties-maven-plugin.version>1.2.0</properties-maven-plugin.version>
+		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
 	</properties>
 
 	<dependencies>
