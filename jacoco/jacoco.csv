@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseConfigurationPanel.new KeyAdapter() {...},35,6,12,0,10,1,7,1,1,1
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseConfiguration,11,124,0,0,3,40,1,7,1,7
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseCommon.new UserSessionListener() {...},10,6,0,0,4,1,2,1,2,1
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouse,95,0,4,0,38,0,7,0,5,0
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseCommon,19,169,5,8,6,48,5,14,0,11
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseTrayIcon,165,0,2,0,45,0,8,0,7,0
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseTrayIcon.new MouseAdapter() {...},37,0,2,0,10,0,5,0,4,0
+auto-mouse,io.github.martinhelwig.utility.automouse,AutoMouseConfigurationPanel,14,159,0,0,6,46,1,2,1,2
