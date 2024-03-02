@@ -83,6 +83,7 @@ SPDX-License-Identifier: MIT
 		<dependency-check.skip>true</dependency-check.skip>
 		<nsis.skip>true</nsis.skip>
 		<jre.skip>true</jre.skip>
+		<gpg.skip>true</gpg.skip>
 
 
 		<junit.testFailureIgnore>true</junit.testFailureIgnore>
@@ -112,6 +113,7 @@ SPDX-License-Identifier: MIT
 		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
 		<maven-jxr-plugin.version>3.3.0</maven-jxr-plugin.version>
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
 		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
 		<buildnumber-maven-plugin.version>3.2.0</buildnumber-maven-plugin.version>
 		<git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version>
@@ -631,6 +633,30 @@ SPDX-License-Identifier: MIT
                     <commitIdGenerationMode>full</commitIdGenerationMode>
                 </configuration>
             </plugin>
+            
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>${maven-gpg-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<skip>${gpg.skip}</skip>
+					<gpgArguments>
+						<arg>--pinentry-mode</arg>
+						<arg>loopback</arg>
+					</gpgArguments>
+					<keyname>${GPG_SIGNING_KEYNAME}</keyname>
+					<passphrase>${GPG_SIGNING_PASSPHRASE}</passphrase>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
