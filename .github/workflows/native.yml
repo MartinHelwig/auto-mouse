@@ -46,7 +46,7 @@ jobs:
       - name: Build with Ant
         run: ant -noinput -lib build-environment/ant-junitlauncher-1.10.13.jar -buildfile build.xml
       
-      - uses: graalvm/setup-graalvm@0e29e36dce77b07eb899abac809c2fce9d60c140 # v1
+      - uses: graalvm/setup-graalvm@5393c3d80982e8a7fa61005137824ef53731ff9a # v1
         with:
           version: '22.3.2'
           java-version: '17'
