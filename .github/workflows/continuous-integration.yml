@@ -59,6 +59,8 @@ jobs:
       - name: Prepare Build Environment
         run: |
           sudo apt-get install nsis
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           echo ALTERNATIVE_DEPLOYMENT_REPO=$([[ "${BRANCH_NAME}" == "main" ]] && echo "" || echo "-DaltDeploymentRepository=local-repo::default::file:target/local-repo") >> $GITHUB_ENV
 
       - name: Check REUSE compliance
@@ -70,7 +72,7 @@ jobs:
           reuse lint --quiet
           
       - name: Build And Publish With Maven
-        run: xvfb-run mvn -B deploy -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true --no-transfer-progress $ALTERNATIVE_DEPLOYMENT_REPO
+        run: xvfb-run mvn -B deploy site site:stage -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true --no-transfer-progress $ALTERNATIVE_DEPLOYMENT_REPO
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
@@ -143,6 +145,12 @@ jobs:
           path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}*
           if-no-files-found: error
         if: ${{ github.event_name != 'pull_request' }}
+
+      - name: Publish GitHub Page
+        run: xvfb-run mvn scm-publish:publish-scm --no-transfer-progress
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
 
       - name: Upload Release Artifact (tar.gz)
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
