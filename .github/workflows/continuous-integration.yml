@@ -53,6 +53,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+          gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Prepare Build Environment
         run: |
@@ -71,6 +73,7 @@ jobs:
         run: xvfb-run mvn -B deploy -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true --no-transfer-progress $ALTERNATIVE_DEPLOYMENT_REPO
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
 
       - name: Add Headline Job Summary
         run: echo "## JUnit " >> $GITHUB_STEP_SUMMARY
@@ -118,20 +121,28 @@ jobs:
           FILENAME=$(find target -name "*.tar.gz" -maxdepth 1)
           [[ ${FOUNDFILES} -eq 1 ]] || { echo "Found ${FOUNDFILES} tar.gz files..."; exit 1; }
           echo "targz_filename=$(basename ${FILENAME})" >> $GITHUB_OUTPUT
-        
+
+      - name: Signing Artifacts
+        run: |
+          gpg --pinentry-mode loopback --batch --passphrase ${{ secrets.GPG_SIGNING_PASSPHRASE }} --armor --detach-sign target/${{ steps.check_artifacts_available.outputs.targz_filename }}
+          gpg --pinentry-mode loopback --batch --passphrase ${{ secrets.GPG_SIGNING_PASSPHRASE }} --armor --detach-sign target/${{ steps.check_artifacts_available.outputs.exe_filename }}
+        if: ${{ github.event_name != 'pull_request' }}
+
       - name: Upload Package
         uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
         with:
           name: ${{ github.event.repository.name }}_package
-          path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}
+          path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}*
           if-no-files-found: error
+        if: ${{ github.event_name != 'pull_request' }}
 
       - name: Upload Installer
         uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3.1.3
         with:
           name: ${{ github.event.repository.name }}_installer
-          path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}
+          path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}*
           if-no-files-found: error
+        if: ${{ github.event_name != 'pull_request' }}
 
       - name: Upload Release Artifact (tar.gz)
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
@@ -154,4 +165,3 @@ jobs:
           asset_name: ${{ steps.check_artifacts_available.outputs.exe_filename }}
           asset_content_type: application/octet-stream
         if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
-
