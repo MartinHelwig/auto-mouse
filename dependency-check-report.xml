@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8"?><analysis xmlns="https://jeremylong.github.io/DependencyCheck/dependency-check.4.0.xsd">
+  <scanInfo>
+    <engineVersion>9.0.9</engineVersion>
+    <dataSource>
+      <name>NVD API Last Checked</name>
+      <timestamp>2024-03-03T22:01:25Z</timestamp>
+    </dataSource>
+    <dataSource>
+      <name>NVD API Last Modified</name>
+      <timestamp>2024-03-03T21:15:49Z</timestamp>
+    </dataSource>
+  </scanInfo>
+  <projectInfo>
+    <name>auto-mouse</name>
+    <groupID>io.github.martinhelwig.utility.automouse</groupID>
+            
+    <artifactID>auto-mouse</artifactID>
+    <version>0.0.1-SNAPSHOT</version>
+    <reportDate>2024-03-03T22:23:21.249904Z</reportDate>
+    <credits>This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov, Github Advisory Database (via NPM Audit API): https://github.com/advisories/, and the RetireJS community.</credits>
+  </projectInfo>
+  <dependencies>
+    <dependency isVirtual="false">
+      <fileName>commons-logging-1.3.0.jar</fileName>
+      <filePath>/home/runner/.m2/repository/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar</filePath>
+      <md5>522cc4b1f42b7db1554474cb989adfb2</md5>
+      <sha1>f5e064b541f5c5fbc5e4fb49c4e8cd4eabb3afd6</sha1>
+      <sha256>66d3c980470b99b0c511dad3dfc0ae7b265ec1fb144e96bc0253a8a175fd34d9</sha256>
+      <description>Apache Commons Logging is a thin adapter allowing configurable bridging to other,
+    well known logging systems.</description>
+      <license>https://www.apache.org/licenses/LICENSE-2.0.txt</license>
+      <projectReferences>
+        <projectReference>auto-mouse:compile</projectReference>
+      </projectReferences>
+      <includedBy>
+        <reference>pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT</reference>
+      </includedBy>
+      <evidenceCollected>
+        <evidence type="vendor" confidence="HIGH">
+          <source>file</source>
+          <name>name</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>apache</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>commons</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>automatic-module-name</name>
+          <value>org.apache.commons.logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>build-jdk-spec</name>
+          <value>21</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>bundle-docurl</name>
+          <value>https://commons.apache.org/proper/commons-logging/</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>bundle-symbolicname</name>
+          <value>org.apache.commons.commons-logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Implementation-Vendor</name>
+          <value>The Apache Software Foundation</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>multi-release</name>
+          <value>true</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>specification-vendor</name>
+          <value>The Apache Software Foundation</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>pom</source>
+          <name>artifactid</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>artifactid</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>baliuka@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>costin@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>craigmcc@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>dennisl@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>donaldp@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>ggregory at apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>morgand@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>rdonkin@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>rsitze@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>rwaldhoff@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>sanders@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>skitching@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>tn@apache.org</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>baliuka</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>bstansberry</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>costin</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>craigmcc</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>dennisl</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>donaldp</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>ggregory</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>morgand</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>rdonkin</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>rsitze</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>rwaldhoff</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>sanders</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>skitching</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>tn</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Brian Stansberry</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Costin Manolache</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Craig McClanahan</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Dennis Lundberg</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Gary Gregory</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Juozas Baliuka</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Morgan Delagrange</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Peter Donald</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Richard Sitze</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Robert Burrell Donkin</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Rodney Waldhoff</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Scott Sanders</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Simon Kitching</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Thomas Neidhart</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer org</name>
+          <value>Apache</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer org</name>
+          <value>The Apache Software Foundation</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>developer org URL</name>
+          <value>https://www.apache.org/</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>pom</source>
+          <name>groupid</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGH">
+          <source>pom</source>
+          <name>name</name>
+          <value>Apache Commons Logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>parent-artifactid</name>
+          <value>commons-parent</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>pom</source>
+          <name>parent-groupid</name>
+          <value>org.apache.commons</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>pom</source>
+          <name>url</name>
+          <value>https://commons.apache.org/proper/commons-logging/</value>
+        </evidence>
+        <evidence type="product" confidence="HIGH">
+          <source>file</source>
+          <name>name</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>apache</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>commons</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>logging</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>automatic-module-name</name>
+          <value>org.apache.commons.logging</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>build-jdk-spec</name>
+          <value>21</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>bundle-docurl</name>
+          <value>https://commons.apache.org/proper/commons-logging/</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>Bundle-Name</name>
+          <value>Apache Commons Logging</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>bundle-symbolicname</name>
+          <value>org.apache.commons.commons-logging</value>
+        </evidence>
+        <evidence type="product" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Implementation-Title</name>
+          <value>Apache Commons Logging</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>multi-release</name>
+          <value>true</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>specification-title</name>
+          <value>Apache Commons Logging</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>pom</source>
+          <name>artifactid</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>baliuka@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>costin@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>craigmcc@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>dennisl@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>donaldp@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>ggregory at apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>morgand@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>rdonkin@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>rsitze@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>rwaldhoff@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>sanders@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>skitching@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer email</name>
+          <value>tn@apache.org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>baliuka</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>bstansberry</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>costin</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>craigmcc</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>dennisl</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>donaldp</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>ggregory</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>morgand</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>rdonkin</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>rsitze</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>rwaldhoff</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>sanders</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>skitching</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer id</name>
+          <value>tn</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Brian Stansberry</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Costin Manolache</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Craig McClanahan</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Dennis Lundberg</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Gary Gregory</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Juozas Baliuka</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Morgan Delagrange</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Peter Donald</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Richard Sitze</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Robert Burrell Donkin</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Rodney Waldhoff</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Scott Sanders</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Simon Kitching</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer name</name>
+          <value>Thomas Neidhart</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer org</name>
+          <value>Apache</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer org</name>
+          <value>The Apache Software Foundation</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>pom</source>
+          <name>developer org URL</name>
+          <value>https://www.apache.org/</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>pom</source>
+          <name>groupid</name>
+          <value>commons-logging</value>
+        </evidence>
+        <evidence type="product" confidence="HIGH">
+          <source>pom</source>
+          <name>name</name>
+          <value>Apache Commons Logging</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>pom</source>
+          <name>parent-artifactid</name>
+          <value>commons-parent</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>pom</source>
+          <name>parent-groupid</name>
+          <value>org.apache.commons</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>pom</source>
+          <name>url</name>
+          <value>https://commons.apache.org/proper/commons-logging/</value>
+        </evidence>
+        <evidence type="version" confidence="HIGH">
+          <source>file</source>
+          <name>version</name>
+          <value>1.3.0</value>
+        </evidence>
+        <evidence type="version" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Bundle-Version</name>
+          <value>1.3.0</value>
+        </evidence>
+        <evidence type="version" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Implementation-Version</name>
+          <value>1.3.0</value>
+        </evidence>
+        <evidence type="version" confidence="LOW">
+          <source>pom</source>
+          <name>parent-version</name>
+          <value>1.3.0</value>
+        </evidence>
+        <evidence type="version" confidence="HIGHEST">
+          <source>pom</source>
+          <name>version</name>
+          <value>1.3.0</value>
+        </evidence>
+      </evidenceCollected>
+      <identifiers>
+        <package confidence="HIGH">
+          <id>pkg:maven/commons-logging/commons-logging@1.3.0</id>
+          <url>https://ossindex.sonatype.org/component/pkg:maven/commons-logging/commons-logging@1.3.0?utm_source=dependency-check&amp;utm_medium=integration&amp;utm_content=9.0.9</url>
+        </package>
+      </identifiers>
+    </dependency>
+    <dependency isVirtual="false">
+      <fileName>log4j-core-2.23.0.jar</fileName>
+      <filePath>/home/runner/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.0/log4j-core-2.23.0.jar</filePath>
+      <md5>d771856ad69fd530e42778a4d18b2d32</md5>
+      <sha1>fe82862c4294275ed64623e8b04946e3c4cb658a</sha1>
+      <sha256>0fef441ee938719f635db7ef21ad5b1ddf7d5bf8f5abf5eca8f29c3f432681db</sha256>
+      <description>The Apache Log4j Implementation</description>
+      <license>Apache-2.0: https://www.apache.org/licenses/LICENSE-2.0.txt</license>
+      <projectReferences>
+        <projectReference>auto-mouse:compile</projectReference>
+      </projectReferences>
+      <includedBy>
+        <reference>pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT</reference>
+      </includedBy>
+      <relatedDependencies>
+        <relatedDependency>
+          <fileName>log4j-api-2.23.0.jar</fileName>
+          <filePath>/home/runner/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.0/log4j-api-2.23.0.jar</filePath>
+          <sha256>ff1a58a39df66d55534de744eb97225d4f7665482e73988a496681f5f2744938</sha256>
+          <sha1>10741ddf9effd8e04d568148c2948a22f3f4cc73</sha1>
+          <md5>a548aa8b827a461842f7602384d36822</md5>
+          <identifiers>
+            <package>
+              <id>pkg:maven/org.apache.logging.log4j/log4j-api@2.23.0</id>
+              <url>https://ossindex.sonatype.org/component/pkg:maven/org.apache.logging.log4j/log4j-api@2.23.0?utm_source=dependency-check&amp;utm_medium=integration&amp;utm_content=9.0.9</url>
+            </package>
+          </identifiers>
+        </relatedDependency>
+        <relatedDependency>
+          <fileName>log4j-jcl-2.23.0.jar</fileName>
+          <filePath>/home/runner/.m2/repository/org/apache/logging/log4j/log4j-jcl/2.23.0/log4j-jcl-2.23.0.jar</filePath>
+          <sha256>c325fe9a536ca42e41b189a2cc930edab23641058776d427c9115cd6ae0dd4fc</sha256>
+          <sha1>b0ee6048081318c848e2847ef344af8845996795</sha1>
+          <md5>9a531264ff98303adb492cb65dae2a1c</md5>
+          <identifiers>
+            <package>
+              <id>pkg:maven/org.apache.logging.log4j/log4j-jcl@2.23.0</id>
+              <url>https://ossindex.sonatype.org/component/pkg:maven/org.apache.logging.log4j/log4j-jcl@2.23.0?utm_source=dependency-check&amp;utm_medium=integration&amp;utm_content=9.0.9</url>
+            </package>
+          </identifiers>
+        </relatedDependency>
+      </relatedDependencies>
+      <evidenceCollected>
+        <evidence type="vendor" confidence="HIGH">
+          <source>file</source>
+          <name>name</name>
+          <value>log4j-core</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>apache</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>core</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>log4j</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>logging</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>org</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>build-jdk-spec</name>
+          <value>17</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>bundle-activationpolicy</name>
+          <value>lazy</value>
+        </evidence>
+        <evidence type="vendor" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>bundle-symbolicname</name>
+          <value>org.apache.logging.log4j.core</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Implementation-Vendor</name>
+          <value>The Apache Software Foundation</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>multi-release</name>
+          <value>true</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>provide-capability</name>
+          <value>osgi.service;objectClass:List=&quot;javax.annotation.processing.Processor&quot;;effective:=active,osgi.service;objectClass:List=&quot;org.apache.logging.log4j.core.util.ContextDataProvider&quot;;effective:=active,osgi.service;objectClass:List=&quot;org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory&quot;;effective:=active,osgi.service;objectClass:List=&quot;org.apache.logging.log4j.spi.Provider&quot;;effective:=active,osgi.serviceloader;osgi.serviceloader=&quot;javax.annotation.processing.Processor&quot;;register:=&quot;org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor&quot;,osgi.serviceloader;osgi.serviceloader=&quot;org.apache.logging.log4j.core.util.ContextDataProvider&quot;;register:=&quot;org.apache.logging.log4j.core.impl.ThreadContextDataProvider&quot;,osgi.serviceloader;osgi.serviceloader=&quot;org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory&quot;;register:=&quot;org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory&quot;,osgi.serviceloader;osgi.serviceloader=&quot;org.apache.logging.log4j.spi.Provider&quot;;register:=&quot;org.apache.logging.log4j.core.impl.Log4jProvider&quot;</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>Manifest</source>
+          <name>specification-vendor</name>
+          <value>The Apache Software Foundation</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>pom</source>
+          <name>artifactid</name>
+          <value>log4j-core</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>artifactid</name>
+          <value>log4j-core</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGHEST">
+          <source>pom</source>
+          <name>groupid</name>
+          <value>org.apache.logging.log4j</value>
+        </evidence>
+        <evidence type="vendor" confidence="HIGH">
+          <source>pom</source>
+          <name>name</name>
+          <value>Apache Log4j Core</value>
+        </evidence>
+        <evidence type="vendor" confidence="LOW">
+          <source>pom</source>
+          <name>parent-artifactid</name>
+          <value>log4j</value>
+        </evidence>
+        <evidence type="product" confidence="HIGH">
+          <source>file</source>
+          <name>name</name>
+          <value>log4j-core</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>apache</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>core</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>log4j</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>logging</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>jar</source>
+          <name>package name</name>
+          <value>org</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>build-jdk-spec</name>
+          <value>17</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>bundle-activationpolicy</name>
+          <value>lazy</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>Bundle-Name</name>
+          <value>Apache Log4j Core</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>bundle-symbolicname</name>
+          <value>org.apache.logging.log4j.core</value>
+        </evidence>
+        <evidence type="product" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Implementation-Title</name>
+          <value>Apache Log4j Core</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>multi-release</name>
+          <value>true</value>
+        </evidence>
+        <evidence type="product" confidence="LOW">
+          <source>Manifest</source>
+          <name>provide-capability</name>
+          <value>osgi.service;objectClass:List=&quot;javax.annotation.processing.Processor&quot;;effective:=active,osgi.service;objectClass:List=&quot;org.apache.logging.log4j.core.util.ContextDataProvider&quot;;effective:=active,osgi.service;objectClass:List=&quot;org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory&quot;;effective:=active,osgi.service;objectClass:List=&quot;org.apache.logging.log4j.spi.Provider&quot;;effective:=active,osgi.serviceloader;osgi.serviceloader=&quot;javax.annotation.processing.Processor&quot;;register:=&quot;org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor&quot;,osgi.serviceloader;osgi.serviceloader=&quot;org.apache.logging.log4j.core.util.ContextDataProvider&quot;;register:=&quot;org.apache.logging.log4j.core.impl.ThreadContextDataProvider&quot;,osgi.serviceloader;osgi.serviceloader=&quot;org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory&quot;;register:=&quot;org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory&quot;,osgi.serviceloader;osgi.serviceloader=&quot;org.apache.logging.log4j.spi.Provider&quot;;register:=&quot;org.apache.logging.log4j.core.impl.Log4jProvider&quot;</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>Manifest</source>
+          <name>specification-title</name>
+          <value>Apache Log4j Core</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>pom</source>
+          <name>artifactid</name>
+          <value>log4j-core</value>
+        </evidence>
+        <evidence type="product" confidence="HIGHEST">
+          <source>pom</source>
+          <name>groupid</name>
+          <value>org.apache.logging.log4j</value>
+        </evidence>
+        <evidence type="product" confidence="HIGH">
+          <source>pom</source>
+          <name>name</name>
+          <value>Apache Log4j Core</value>
+        </evidence>
+        <evidence type="product" confidence="MEDIUM">
+          <source>pom</source>
+          <name>parent-artifactid</name>
+          <value>log4j</value>
+        </evidence>
+        <evidence type="version" confidence="HIGH">
+          <source>file</source>
+          <name>version</name>
+          <value>2.23.0</value>
+        </evidence>
+        <evidence type="version" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Bundle-Version</name>
+          <value>2.23.0</value>
+        </evidence>
+        <evidence type="version" confidence="HIGH">
+          <source>Manifest</source>
+          <name>Implementation-Version</name>
+          <value>2.23.0</value>
+        </evidence>
+        <evidence type="version" confidence="HIGHEST">
+          <source>pom</source>
+          <name>version</name>
+          <value>2.23.0</value>
+        </evidence>
+      </evidenceCollected>
+      <identifiers>
+        <package confidence="HIGH">
+          <id>pkg:maven/org.apache.logging.log4j/log4j-core@2.23.0</id>
+          <url>https://ossindex.sonatype.org/component/pkg:maven/org.apache.logging.log4j/log4j-core@2.23.0?utm_source=dependency-check&amp;utm_medium=integration&amp;utm_content=9.0.9</url>
+        </package>
+        <vulnerabilityIds confidence="HIGHEST">
+          <id>cpe:2.3:a:apache:log4j:2.23.0:*:*:*:*:*:*:*</id>
+          <url>https://nvd.nist.gov/vuln/search/results?form_type=Advanced&amp;results_type=overview&amp;search_type=all&amp;cpe_vendor=cpe%3A%2F%3Aapache&amp;cpe_product=cpe%3A%2F%3Aapache%3Alog4j&amp;cpe_version=cpe%3A%2F%3Aapache%3Alog4j%3A2.23.0</url>
+        </vulnerabilityIds>
+      </identifiers>
+    </dependency>
+  </dependencies>
+</analysis>

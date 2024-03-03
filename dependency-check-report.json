@@ -1,0 +1,1116 @@
+{
+  "reportSchema" : "1.1",
+  "scanInfo" : {
+    "engineVersion" : "9.0.9",
+    "dataSource" : [ {
+      "name" : "NVD API Last Checked",
+      "timestamp" : "2024-03-03T22:01:25Z"
+    }, {
+      "name" : "NVD API Last Modified",
+      "timestamp" : "2024-03-03T21:15:49Z"
+    } ]
+  },
+  "projectInfo" : {
+    "name" : "auto-mouse",
+    "groupID" : "io.github.martinhelwig.utility.automouse",
+    "artifactID" : "auto-mouse",
+    "version" : "0.0.1-SNAPSHOT",
+    "reportDate" : "2024-03-03T22:23:21.249904Z",
+    "credits" : {
+      "NVD" : "This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov",
+      "CISA" : "This report may contain data retrieved from the CISA Known Exploited Vulnerability Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "NPM" : "This report may contain data retrieved from the Github Advisory Database (via NPM Audit API): https://github.com/advisories/",
+      "RETIREJS" : "This report may contain data retrieved from the RetireJS community: https://retirejs.github.io/retire.js/",
+      "OSSINDEX" : "This report may contain data retrieved from the Sonatype OSS Index: https://ossindex.sonatype.org"
+    }
+  },
+  "dependencies" : [ {
+    "isVirtual" : false,
+    "fileName" : "commons-logging-1.3.0.jar",
+    "filePath" : "/home/runner/.m2/repository/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar",
+    "md5" : "522cc4b1f42b7db1554474cb989adfb2",
+    "sha1" : "f5e064b541f5c5fbc5e4fb49c4e8cd4eabb3afd6",
+    "sha256" : "66d3c980470b99b0c511dad3dfc0ae7b265ec1fb144e96bc0253a8a175fd34d9",
+    "description" : "Apache Commons Logging is a thin adapter allowing configurable bridging to other,\n    well known logging systems.",
+    "license" : "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "projectReferences" : [ "auto-mouse:compile" ],
+    "includedBy" : [ {
+      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT"
+    } ],
+    "evidenceCollected" : {
+      "vendorEvidence" : [ {
+        "type" : "vendor",
+        "confidence" : "HIGH",
+        "source" : "file",
+        "name" : "name",
+        "value" : "commons-logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "apache"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "commons"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "automatic-module-name",
+        "value" : "org.apache.commons.logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "build-jdk-spec",
+        "value" : "21"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "bundle-docurl",
+        "value" : "https://commons.apache.org/proper/commons-logging/"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "bundle-symbolicname",
+        "value" : "org.apache.commons.commons-logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Implementation-Vendor",
+        "value" : "The Apache Software Foundation"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "multi-release",
+        "value" : "true"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "specification-vendor",
+        "value" : "The Apache Software Foundation"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "artifactid",
+        "value" : "commons-logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "artifactid",
+        "value" : "commons-logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "baliuka@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "costin@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "craigmcc@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "dennisl@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "donaldp@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "ggregory at apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "morgand@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "rdonkin@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "rsitze@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "rwaldhoff@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "sanders@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "skitching@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "tn@apache.org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "baliuka"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "bstansberry"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "costin"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "craigmcc"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "dennisl"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "donaldp"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "ggregory"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "morgand"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "rdonkin"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "rsitze"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "rwaldhoff"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "sanders"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "skitching"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "tn"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Brian Stansberry"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Costin Manolache"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Craig McClanahan"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Dennis Lundberg"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Gary Gregory"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Juozas Baliuka"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Morgan Delagrange"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Peter Donald"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Richard Sitze"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Robert Burrell Donkin"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Rodney Waldhoff"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Scott Sanders"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Simon Kitching"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Thomas Neidhart"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer org",
+        "value" : "Apache"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer org",
+        "value" : "The Apache Software Foundation"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "developer org URL",
+        "value" : "https://www.apache.org/"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "groupid",
+        "value" : "commons-logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGH",
+        "source" : "pom",
+        "name" : "name",
+        "value" : "Apache Commons Logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "parent-artifactid",
+        "value" : "commons-parent"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "parent-groupid",
+        "value" : "org.apache.commons"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "url",
+        "value" : "https://commons.apache.org/proper/commons-logging/"
+      } ],
+      "productEvidence" : [ {
+        "type" : "product",
+        "confidence" : "HIGH",
+        "source" : "file",
+        "name" : "name",
+        "value" : "commons-logging"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "apache"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "commons"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "logging"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "automatic-module-name",
+        "value" : "org.apache.commons.logging"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "build-jdk-spec",
+        "value" : "21"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "bundle-docurl",
+        "value" : "https://commons.apache.org/proper/commons-logging/"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "Bundle-Name",
+        "value" : "Apache Commons Logging"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "bundle-symbolicname",
+        "value" : "org.apache.commons.commons-logging"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Implementation-Title",
+        "value" : "Apache Commons Logging"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "multi-release",
+        "value" : "true"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "specification-title",
+        "value" : "Apache Commons Logging"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "artifactid",
+        "value" : "commons-logging"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "baliuka@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "costin@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "craigmcc@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "dennisl@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "donaldp@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "ggregory at apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "morgand@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "rdonkin@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "rsitze@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "rwaldhoff@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "sanders@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "skitching@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer email",
+        "value" : "tn@apache.org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "baliuka"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "bstansberry"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "costin"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "craigmcc"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "dennisl"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "donaldp"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "ggregory"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "morgand"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "rdonkin"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "rsitze"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "rwaldhoff"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "sanders"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "skitching"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer id",
+        "value" : "tn"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Brian Stansberry"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Costin Manolache"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Craig McClanahan"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Dennis Lundberg"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Gary Gregory"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Juozas Baliuka"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Morgan Delagrange"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Peter Donald"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Richard Sitze"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Robert Burrell Donkin"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Rodney Waldhoff"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Scott Sanders"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Simon Kitching"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer name",
+        "value" : "Thomas Neidhart"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer org",
+        "value" : "Apache"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer org",
+        "value" : "The Apache Software Foundation"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "developer org URL",
+        "value" : "https://www.apache.org/"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "groupid",
+        "value" : "commons-logging"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGH",
+        "source" : "pom",
+        "name" : "name",
+        "value" : "Apache Commons Logging"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "parent-artifactid",
+        "value" : "commons-parent"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "parent-groupid",
+        "value" : "org.apache.commons"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "url",
+        "value" : "https://commons.apache.org/proper/commons-logging/"
+      } ],
+      "versionEvidence" : [ {
+        "type" : "version",
+        "confidence" : "HIGH",
+        "source" : "file",
+        "name" : "version",
+        "value" : "1.3.0"
+      }, {
+        "type" : "version",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Bundle-Version",
+        "value" : "1.3.0"
+      }, {
+        "type" : "version",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Implementation-Version",
+        "value" : "1.3.0"
+      }, {
+        "type" : "version",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "parent-version",
+        "value" : "1.3.0"
+      }, {
+        "type" : "version",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "version",
+        "value" : "1.3.0"
+      } ]
+    },
+    "packages" : [ {
+      "id" : "pkg:maven/commons-logging/commons-logging@1.3.0",
+      "confidence" : "HIGH",
+      "url" : "https://ossindex.sonatype.org/component/pkg:maven/commons-logging/commons-logging@1.3.0?utm_source=dependency-check&utm_medium=integration&utm_content=9.0.9"
+    } ]
+  }, {
+    "isVirtual" : false,
+    "fileName" : "log4j-core-2.23.0.jar",
+    "filePath" : "/home/runner/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.0/log4j-core-2.23.0.jar",
+    "md5" : "d771856ad69fd530e42778a4d18b2d32",
+    "sha1" : "fe82862c4294275ed64623e8b04946e3c4cb658a",
+    "sha256" : "0fef441ee938719f635db7ef21ad5b1ddf7d5bf8f5abf5eca8f29c3f432681db",
+    "description" : "The Apache Log4j Implementation",
+    "license" : "Apache-2.0: https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "projectReferences" : [ "auto-mouse:compile" ],
+    "includedBy" : [ {
+      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT"
+    } ],
+    "relatedDependencies" : [ {
+      "isVirtual" : false,
+      "fileName" : "log4j-api-2.23.0.jar",
+      "filePath" : "/home/runner/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.0/log4j-api-2.23.0.jar",
+      "sha256" : "ff1a58a39df66d55534de744eb97225d4f7665482e73988a496681f5f2744938",
+      "sha1" : "10741ddf9effd8e04d568148c2948a22f3f4cc73",
+      "md5" : "a548aa8b827a461842f7602384d36822",
+      "packageIds" : [ {
+        "id" : "pkg:maven/org.apache.logging.log4j/log4j-api@2.23.0",
+        "url" : "https://ossindex.sonatype.org/component/pkg:maven/org.apache.logging.log4j/log4j-api@2.23.0?utm_source=dependency-check&utm_medium=integration&utm_content=9.0.9"
+      } ]
+    }, {
+      "isVirtual" : false,
+      "fileName" : "log4j-jcl-2.23.0.jar",
+      "filePath" : "/home/runner/.m2/repository/org/apache/logging/log4j/log4j-jcl/2.23.0/log4j-jcl-2.23.0.jar",
+      "sha256" : "c325fe9a536ca42e41b189a2cc930edab23641058776d427c9115cd6ae0dd4fc",
+      "sha1" : "b0ee6048081318c848e2847ef344af8845996795",
+      "md5" : "9a531264ff98303adb492cb65dae2a1c",
+      "packageIds" : [ {
+        "id" : "pkg:maven/org.apache.logging.log4j/log4j-jcl@2.23.0",
+        "url" : "https://ossindex.sonatype.org/component/pkg:maven/org.apache.logging.log4j/log4j-jcl@2.23.0?utm_source=dependency-check&utm_medium=integration&utm_content=9.0.9"
+      } ]
+    } ],
+    "evidenceCollected" : {
+      "vendorEvidence" : [ {
+        "type" : "vendor",
+        "confidence" : "HIGH",
+        "source" : "file",
+        "name" : "name",
+        "value" : "log4j-core"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "apache"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "core"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "log4j"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "logging"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "org"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "build-jdk-spec",
+        "value" : "17"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "bundle-activationpolicy",
+        "value" : "lazy"
+      }, {
+        "type" : "vendor",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "bundle-symbolicname",
+        "value" : "org.apache.logging.log4j.core"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Implementation-Vendor",
+        "value" : "The Apache Software Foundation"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "multi-release",
+        "value" : "true"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "provide-capability",
+        "value" : "osgi.service;objectClass:List=\"javax.annotation.processing.Processor\";effective:=active,osgi.service;objectClass:List=\"org.apache.logging.log4j.core.util.ContextDataProvider\";effective:=active,osgi.service;objectClass:List=\"org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory\";effective:=active,osgi.service;objectClass:List=\"org.apache.logging.log4j.spi.Provider\";effective:=active,osgi.serviceloader;osgi.serviceloader=\"javax.annotation.processing.Processor\";register:=\"org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor\",osgi.serviceloader;osgi.serviceloader=\"org.apache.logging.log4j.core.util.ContextDataProvider\";register:=\"org.apache.logging.log4j.core.impl.ThreadContextDataProvider\",osgi.serviceloader;osgi.serviceloader=\"org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory\";register:=\"org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory\",osgi.serviceloader;osgi.serviceloader=\"org.apache.logging.log4j.spi.Provider\";register:=\"org.apache.logging.log4j.core.impl.Log4jProvider\""
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "specification-vendor",
+        "value" : "The Apache Software Foundation"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "artifactid",
+        "value" : "log4j-core"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "artifactid",
+        "value" : "log4j-core"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "groupid",
+        "value" : "org.apache.logging.log4j"
+      }, {
+        "type" : "vendor",
+        "confidence" : "HIGH",
+        "source" : "pom",
+        "name" : "name",
+        "value" : "Apache Log4j Core"
+      }, {
+        "type" : "vendor",
+        "confidence" : "LOW",
+        "source" : "pom",
+        "name" : "parent-artifactid",
+        "value" : "log4j"
+      } ],
+      "productEvidence" : [ {
+        "type" : "product",
+        "confidence" : "HIGH",
+        "source" : "file",
+        "name" : "name",
+        "value" : "log4j-core"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "apache"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "core"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "log4j"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "logging"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "jar",
+        "name" : "package name",
+        "value" : "org"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "build-jdk-spec",
+        "value" : "17"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "bundle-activationpolicy",
+        "value" : "lazy"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "Bundle-Name",
+        "value" : "Apache Log4j Core"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "bundle-symbolicname",
+        "value" : "org.apache.logging.log4j.core"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Implementation-Title",
+        "value" : "Apache Log4j Core"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "multi-release",
+        "value" : "true"
+      }, {
+        "type" : "product",
+        "confidence" : "LOW",
+        "source" : "Manifest",
+        "name" : "provide-capability",
+        "value" : "osgi.service;objectClass:List=\"javax.annotation.processing.Processor\";effective:=active,osgi.service;objectClass:List=\"org.apache.logging.log4j.core.util.ContextDataProvider\";effective:=active,osgi.service;objectClass:List=\"org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory\";effective:=active,osgi.service;objectClass:List=\"org.apache.logging.log4j.spi.Provider\";effective:=active,osgi.serviceloader;osgi.serviceloader=\"javax.annotation.processing.Processor\";register:=\"org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor\",osgi.serviceloader;osgi.serviceloader=\"org.apache.logging.log4j.core.util.ContextDataProvider\";register:=\"org.apache.logging.log4j.core.impl.ThreadContextDataProvider\",osgi.serviceloader;osgi.serviceloader=\"org.apache.logging.log4j.message.ThreadDumpMessage$ThreadInfoFactory\";register:=\"org.apache.logging.log4j.core.message.ExtendedThreadInfoFactory\",osgi.serviceloader;osgi.serviceloader=\"org.apache.logging.log4j.spi.Provider\";register:=\"org.apache.logging.log4j.core.impl.Log4jProvider\""
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "Manifest",
+        "name" : "specification-title",
+        "value" : "Apache Log4j Core"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "artifactid",
+        "value" : "log4j-core"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "groupid",
+        "value" : "org.apache.logging.log4j"
+      }, {
+        "type" : "product",
+        "confidence" : "HIGH",
+        "source" : "pom",
+        "name" : "name",
+        "value" : "Apache Log4j Core"
+      }, {
+        "type" : "product",
+        "confidence" : "MEDIUM",
+        "source" : "pom",
+        "name" : "parent-artifactid",
+        "value" : "log4j"
+      } ],
+      "versionEvidence" : [ {
+        "type" : "version",
+        "confidence" : "HIGH",
+        "source" : "file",
+        "name" : "version",
+        "value" : "2.23.0"
+      }, {
+        "type" : "version",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Bundle-Version",
+        "value" : "2.23.0"
+      }, {
+        "type" : "version",
+        "confidence" : "HIGH",
+        "source" : "Manifest",
+        "name" : "Implementation-Version",
+        "value" : "2.23.0"
+      }, {
+        "type" : "version",
+        "confidence" : "HIGHEST",
+        "source" : "pom",
+        "name" : "version",
+        "value" : "2.23.0"
+      } ]
+    },
+    "packages" : [ {
+      "id" : "pkg:maven/org.apache.logging.log4j/log4j-core@2.23.0",
+      "confidence" : "HIGH",
+      "url" : "https://ossindex.sonatype.org/component/pkg:maven/org.apache.logging.log4j/log4j-core@2.23.0?utm_source=dependency-check&utm_medium=integration&utm_content=9.0.9"
+    } ],
+    "vulnerabilityIds" : [ {
+      "id" : "cpe:2.3:a:apache:log4j:2.23.0:*:*:*:*:*:*:*",
+      "confidence" : "HIGHEST",
+      "url" : "https://nvd.nist.gov/vuln/search/results?form_type=Advanced&results_type=overview&search_type=all&cpe_vendor=cpe%3A%2F%3Aapache&cpe_product=cpe%3A%2F%3Aapache%3Alog4j&cpe_version=cpe%3A%2F%3Aapache%3Alog4j%3A2.23.0"
+    } ]
+  } ]
+}
