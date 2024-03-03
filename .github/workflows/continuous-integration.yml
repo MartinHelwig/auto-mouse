@@ -55,7 +55,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
-          cache-dependency-path: LICENSE
+          cache-dependency-path: src/cache/cache.info
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
