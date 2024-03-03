@@ -1,0 +1,72 @@
+# SPDX-FileCopyrightText: 2024 Martin Helwig
+#
+# SPDX-License-Identifier: MIT
+
+name: Recreate Cache
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+# Declare default permissions as read only.
+permissions: read-all
+
+jobs:
+  build:
+    name: Recreate Cache
+    permissions:
+      contents: write
+      packages: none
+      checks: none
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    env:
+      PROJECT_NAME: ${{ github.event.repository.name }}
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # v4.0.0
+
+      - name: Generate New Uuid
+        run: |
+          sed -i -E 's/[a-fA-F0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}//' src/cache/cache.info
+          sed -i '/^$/d' src/cache/cache.info
+          uuidgen >> src/cache/cache.info
+          
+      - name: Set up JDK 11
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
+          cache-dependency-path: src/cache/cache.info
+
+      - name: Resolve Dependenies & Update Database
+        run: xvfb-run mvn -B dependency:resolve dependency:resolve-plugins dependency-check:update-only -Ddependency-check.skip=false --no-transfer-progress
+
+      - name: Prepare Build Environment
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Push New Uuid
+        run: |
+          git add src/cache/cache.info
+          git commit -m "add new uuid to recreate cache"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
