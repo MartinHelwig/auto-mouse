@@ -90,7 +90,6 @@ SPDX-License-Identifier: MIT
 		<junit.reportDirectory>${project.basedir}/target/reports/junit</junit.reportDirectory>
 
 		<dependency-check-maven.failBuildOnAnyVulnerability>true</dependency-check-maven.failBuildOnAnyVulnerability>
-		<dependency-check-maven.dataDirectory>${project.basedir}/target/build-environment/dependencyCheckDataDirectory</dependency-check-maven.dataDirectory>
 		<dependency-check-maven.outputDirectory>${project.basedir}/target/reports/dependency-check</dependency-check-maven.outputDirectory>
 
 		<!-- dependency versions -->
@@ -98,7 +97,7 @@ SPDX-License-Identifier: MIT
 		<log4j.version>2.23.0</log4j.version>
 		<junit.version>5.10.2</junit.version>
 		<junit.platform.version>1.9.2</junit.platform.version>
-		<dependency-check-maven.version>8.4.0</dependency-check-maven.version>
+		<dependency-check-maven.version>9.0.9</dependency-check-maven.version>
 
 		<!-- plugin versions -->
 		<maven-surefire.version>3.2.5</maven-surefire.version>
@@ -377,9 +376,9 @@ SPDX-License-Identifier: MIT
 				<version>${dependency-check-maven.version}</version>
 				<configuration>
 					<skip>${dependency-check.skip}</skip>
-					<cveValidForHours>12</cveValidForHours>
+					<nvdValidForHours>6</nvdValidForHours>
+					<hostedSuppressionsValidForHours>6</hostedSuppressionsValidForHours>
 					<failBuildOnAnyVulnerability>${dependency-check-mavenfailBuildOnAnyVulnerability}</failBuildOnAnyVulnerability>
-					<dataDirectory>${dependency-check-mavendataDirectory}</dataDirectory>
 					<outputDirectory>${dependency-check-mavenoutputDirectory}</outputDirectory>
 					<prettyPrint>true</prettyPrint>
 					<formats>
@@ -698,8 +697,8 @@ SPDX-License-Identifier: MIT
 				<artifactId>dependency-check-maven</artifactId>
 				<version>${dependency-check-maven.version}</version>
 				<configuration>
-					<cveValidForHours>12</cveValidForHours>
-					<dataDirectory>${dependency-check-mavendataDirectory}</dataDirectory>
+					<nvdValidForHours>6</nvdValidForHours>
+					<hostedSuppressionsValidForHours>6</hostedSuppressionsValidForHours>
 					<prettyPrint>true</prettyPrint>
 					<formats>
 						<format>ALL</format>
