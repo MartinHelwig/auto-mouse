@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+# SPDX-License-Identifier: MIT
+
+name: Issue Updater
+
+on:
+  issues:
+    types: [opened, closed]
+
+# Declare default permissions as read only.
+permissions: read-all
+
+jobs:
+  build:
+    name: Issue Updater
+    permissions:
+      contents: none
+      packages: none
+      checks: none
+      actions: none
+      deployments: none
+      id-token: none
+      issues: write
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Welcome
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'welcome'
+          body: |
+            Welcome @${{ github.event.issue.user.login }}, thanks for submitting your first issue to the project.
+        if: ${{ github.event_name == 'issues' && github.event.action == 'opened' && !endsWith(github.event.issue.user.login, '[bot]') && github.event.issue.user.login != 'MartinHelwig' }}
+
+      - name: Comment Issue On Opened
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment'
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hello @${{ github.event.issue.user.login }}, thanks for submitting this issue. We will have a look at it as soon as possible.
+            We also add an additional tasklist to the issue.
+        if: ${{ github.event_name == 'issues' && github.event.action == 'opened' && !endsWith(github.event.issue.user.login, '[bot]') && github.event.issue.user.login != 'MartinHelwig' }}
+
+      - name: Update Issue On Opened
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'update-issue'
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ---
+            > [!note]  
+            _Additional Tasklist_
+
+            - [ ] _Ensure that there is currently no issue that covers this topic._ | #${{ github.event.issue.number }}
+            - [ ] _Ensure that the issue title represents the desired changelog entry._ | #${{ github.event.issue.number }}
+          update-mode: 'append'
+          assignees: 'MartinHelwig'
+          emoji: '+1'
+        if: ${{ github.event_name == 'issues' && github.event.action == 'opened' && !endsWith(github.event.issue.user.login, '[bot]') }}
+
+      - name: Thanks Contributor On Close
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment'
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            @${{ github.event.issue.user.login }}, thanks for contributing.
+        if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && !endsWith(github.event.issue.user.login, '[bot]') && github.event.issue.user.login != 'MartinHelwig' }}
