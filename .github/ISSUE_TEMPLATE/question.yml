@@ -1,0 +1,36 @@
+#SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+#SPDX-License-Identifier: MIT
+
+name: ❓ Question
+description: Create an issue to ask a question
+
+body:
+- type: markdown
+  id: greeting
+  attributes:
+    value: |
+      :star: ***Thank you for creating a question issue! Use the sections below to submit your question.***
+
+      > [!important]  
+      Please do not report security vulnerabilities through public issues, discussions, or pull requests.
+      Follow these instruction to report security issues: [Security Policy](../security/policy).
+
+- type: textarea
+  id: question
+  validations:
+    required: true
+  attributes:
+    label: Question
+    description: What question do you have?
+    placeholder: Please ask your question here.
+
+- type: dropdown
+  id: terms
+  attributes:
+    label: By submitting this issue, you agree to follow our Code of Conduct.
+    description: I agree to follow this project's [Code of Conduct](../?tab=coc-ov-file#readme).
+    options:
+      - 'Yes'
+  validations:
+    required: true
