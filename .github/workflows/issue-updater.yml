@@ -55,6 +55,8 @@ jobs:
           actions: 'update-issue'
           issue-number: ${{ github.event.issue.number }}
           body: |
+            <!-- automatically added list -->
+            
             ---
             > [!note]  
             _Additional Tasklist_
