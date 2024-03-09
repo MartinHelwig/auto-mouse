@@ -65,7 +65,7 @@ jobs:
 
       - name: Set Project Name
         run: |
-          echo "# <a href='url'><img src='https://github.com/MartinHelwig/auto-mouse/tree/main/src/main/resources/io/github/martinhelwig/utility/automouse/images/auto-mouse_black.png?raw=true' align='left' height='48' width='48'></a> Project ${PROJECT_NAME} on ${BRANCH_NAME}" >> $GITHUB_STEP_SUMMARY
+          echo "# <a href='url'><img src='https://raw.githubusercontent.com/MartinHelwig/auto-mouse/main/src/main/resources/io/github/martinhelwig/utility/automouse/images/auto-mouse_black.png' align='left' height='48' width='48'></a> Project ${PROJECT_NAME} on ${BRANCH_NAME}" >> $GITHUB_STEP_SUMMARY
 
       - name: Check REUSE
         run: |
@@ -139,10 +139,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #os: [ubuntu-latest, windows-latest, macos-latest]
-        os: [ubuntu-latest]
-        #java: [ 11, 17, 21 ]
-        java: [ 11 ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        #os: [ubuntu-latest]
+        java: [ 11, 17, 21 ]
+        #java: [ 11 ]
 
     steps:
       - name: Checkout
