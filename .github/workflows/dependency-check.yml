@@ -43,6 +43,9 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        cache: 'maven'
+        check-latest: true
+        cache-dependency-path: src/cache/cache.info
       
     - name: Dependency Check
       run: xvfb-run mvn -B dependency-check:check -Ddependency-check.skip=false --no-transfer-progress
