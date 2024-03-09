@@ -126,16 +126,21 @@ SPDX-License-Identifier: MIT
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commons.logging.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
 			<version>${log4j.version}</version>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -242,6 +247,9 @@ SPDX-License-Identifier: MIT
 							<Class-Path>lib/*</Class-Path>
 						</manifestEntries>
 					</archive>
+					<excludes>
+                        <exclude>log4j2.xml</exclude>
+                    </excludes>
 				</configuration>
 			</plugin>
 
