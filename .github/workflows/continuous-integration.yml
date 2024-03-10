@@ -110,7 +110,7 @@ jobs:
 
       - name: OWASP Check
         shell: bash
-        run: ${{ env.COMMAND_MAVEN }} dependency-check:check -Dgpg.skip=true -Dmaven.test.skip=true -Djavadoc.skip=true -Dsource.skip=true -Ddependency-check.skip=false -Dnsis.skip=true -Djre.skip=true ${{ env.ALTERNATIVE_DEPLOYMENT_REPO }}
+        run: ${{ env.COMMAND_MAVEN }} dependency-check:check -Dgpg.skip=true -Dmaven.test.skip=true -Djavadoc.skip=true -Dsource.skip=true -Ddependency-check.skip=false -Dnsis.skip=true -Djre.skip=true
         env:
           COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
 
@@ -159,7 +159,7 @@ jobs:
 
       - name: Running Tests
         shell: bash
-        run: ${{ env.COMMAND_MAVEN }} test -Dgpg.skip=true -Dmaven.test.skip=false -Djavadoc.skip=true -Dsource.skip=true -Ddependency-check.skip=true -Dnsis.skip=true -Djre.skip=true ${{ env.ALTERNATIVE_DEPLOYMENT_REPO }}
+        run: ${{ env.COMMAND_MAVEN }} test -Dgpg.skip=true -Dmaven.test.skip=false -Djavadoc.skip=true -Dsource.skip=true -Ddependency-check.skip=true -Dnsis.skip=true -Djre.skip=true
         env:
           COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
 
@@ -241,20 +241,17 @@ jobs:
         run: |
           echo "preparing environment on linux"
           sudo apt-get install nsis
-          echo ALTERNATIVE_DEPLOYMENT_REPO=$([[ "${BRANCH_NAME}" == "main" || "${BRANCH_NAME}" == release/* || "${BRANCH_NAME}" =~ ^v[0-9]+.[0-9]+.[0-9]+$.* ]] && echo "" || echo "-DaltDeploymentRepository=local-repo::default::file:target/local-repo") >> $GITHUB_ENV
 
       - name: Prepare Environment (Windows)
         if: runner.os == 'Windows'
         run: |
           echo "preparing environment on windows"
-          echo "ALTERNATIVE_DEPLOYMENT_REPO=-DaltDeploymentRepository=local-repo::default::file:target/local-repo" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Prepare Environment (macOS)
         if: runner.os == 'macOS'
         run: |
           echo "preparing environment on macOS"
           brew install makensis
-          echo ALTERNATIVE_DEPLOYMENT_REPO=$([[ "${BRANCH_NAME}" == "main" || "${BRANCH_NAME}" == release/* || "${BRANCH_NAME}" =~ ^v[0-9]+.[0-9]+.[0-9]+$.* ]] && echo "" || echo "-DaltDeploymentRepository=local-repo::default::file:target/local-repo") >> $GITHUB_ENV
 
       - name: Prepare Release Version
         if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
@@ -265,7 +262,7 @@ jobs:
 
       - name: Build With Maven
         shell: bash
-        run: ${{ env.COMMAND_MAVEN }} deploy site site:stage -Dgpg.skip=false -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true ${{ env.ALTERNATIVE_DEPLOYMENT_REPO }}
+        run: ${{ env.COMMAND_MAVEN }} deploy site site:stage -Dgpg.skip=false -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true
         env:
           COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
           GITHUB_TOKEN: ${{ github.token }}
