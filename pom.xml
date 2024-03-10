@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
 
 	<groupId>io.github.martinhelwig.utility.automouse</groupId>
 	<artifactId>auto-mouse</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 
 	<name>auto-mouse</name>
 	<description>The auto-mouse utility moves the mouse in a configurable intervall to stop locking the screen.</description>
