@@ -527,7 +527,7 @@ SPDX-License-Identifier: MIT
 						<configuration>
 							<exportAntProperties>true</exportAntProperties>
 							<target>
-								<echo level="info" message="define which deployment repository should be used" />
+								<echo level="info" message="define which deployment repository should be used for ${git.branch}" />
 								<fail message="branch not found">
 									<condition>
 										<not>
