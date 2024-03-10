@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Martin Helwig
+
+SPDX-License-Identifier: MIT
+-->
+
 ### Contributing
 This project is released under the [MIT license](LICENSE). If you would like to contribute something, here is some basic information.
 
