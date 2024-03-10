@@ -4,7 +4,7 @@
     "engineVersion" : "9.0.9",
     "dataSource" : [ {
       "name" : "NVD API Last Checked",
-      "timestamp" : "2024-03-10T17:41:33Z"
+      "timestamp" : "2024-03-10T18:25:26Z"
     }, {
       "name" : "NVD API Last Modified",
       "timestamp" : "2024-03-10T12:15:06Z"
@@ -15,7 +15,7 @@
     "groupID" : "io.github.martinhelwig.utility.automouse",
     "artifactID" : "auto-mouse",
     "version" : "1.0.0",
-    "reportDate" : "2024-03-10T17:42:10.459825Z",
+    "reportDate" : "2024-03-10T18:26:15.125078Z",
     "credits" : {
       "NVD" : "This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov",
       "CISA" : "This report may contain data retrieved from the CISA Known Exploited Vulnerability Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",

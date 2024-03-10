@@ -3,7 +3,7 @@
     <engineVersion>9.0.9</engineVersion>
     <dataSource>
       <name>NVD API Last Checked</name>
-      <timestamp>2024-03-10T17:41:33Z</timestamp>
+      <timestamp>2024-03-10T18:25:26Z</timestamp>
     </dataSource>
     <dataSource>
       <name>NVD API Last Modified</name>
@@ -16,7 +16,7 @@
             
     <artifactID>auto-mouse</artifactID>
     <version>1.0.0</version>
-    <reportDate>2024-03-10T17:42:10.459825Z</reportDate>
+    <reportDate>2024-03-10T18:26:15.125078Z</reportDate>
     <credits>This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov, Github Advisory Database (via NPM Audit API): https://github.com/advisories/, and the RetireJS community.</credits>
   </projectInfo>
   <dependencies>

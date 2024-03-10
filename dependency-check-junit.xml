@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><testsuites failures="0" name="dependency-check" tests="2">
-  <testsuite failures="0" errors="0" time="0" id="0" name="/home/runner/.m2/repository/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar" package="commons-logging-1.3.0.jar" skipped="0" tests="1" timestamp="2024-03-10T17:42:10.459825">
+  <testsuite failures="0" errors="0" time="0" id="0" name="/home/runner/.m2/repository/commons-logging/commons-logging/1.3.0/commons-logging-1.3.0.jar" package="commons-logging-1.3.0.jar" skipped="0" tests="1" timestamp="2024-03-10T18:26:15.125078">
     <testcase classname="dependency-check" name="commons-logging-1.3.0.jar"/>
   </testsuite>
-  <testsuite failures="0" errors="0" time="0" id="1" name="/home/runner/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.0/log4j-core-2.23.0.jar" package="log4j-core-2.23.0.jar" skipped="0" tests="1" timestamp="2024-03-10T17:42:10.459825">
+  <testsuite failures="0" errors="0" time="0" id="1" name="/home/runner/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.0/log4j-core-2.23.0.jar" package="log4j-core-2.23.0.jar" skipped="0" tests="1" timestamp="2024-03-10T18:26:15.125078">
     <testcase classname="dependency-check" name="log4j-core-2.23.0.jar"/>
   </testsuite>
 </testsuites>
