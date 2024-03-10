@@ -544,24 +544,17 @@ SPDX-License-Identifier: MIT
 										</and>
 									</condition>
 								</fail>
-								
+								<!-- only publish from special branches -->
 								<condition property="local-repo" value="true">
-									<and>
+									<or>
 										<not>
-											<matches pattern="^main$|^release/.*|^v[0-9]+.[0-9]+.[0-9]+$" string="${git.branch}"/>
+											<matches pattern="^release/.*|^v[0-9]+.[0-9]+.[0-9]+$" string="${git.branch}"/>
 										</not>
-									</and>
+										<matches pattern=".*SNAPSHOT.*" string="${project.version}"/>
+									</or>
 								</condition>
-								<condition property="local-repo" value="true">
-									<and>
-										<matches pattern="^main$|^release/.*" string="${git.branch}"/>
-										<not>
-											<matches pattern=".*SNAPSHOT.*" string="${project.version}"/>
-										</not>
-									</and>
-								</condition>
-								
-								<condition property="altDeploymentRepository" value="repo::file:target/local-repo">
+
+								<condition property="altDeploymentRepository" value="repo::default::file:target/local-repo">
       								<isset property="local-repo"/>
     							</condition>
 							</target>
@@ -684,11 +677,11 @@ SPDX-License-Identifier: MIT
 				<version>${maven-javadoc-plugin.version}</version>
 				<reportSets>
 					<reportSet>
-						<!-- aggregate reportSet, to define in poms having modules -->
-						<id>aggregate</id>
-						<inherited>false</inherited> <!-- don't run aggregate in child modules -->
+						<id>default</id>
+						<inherited>false</inherited>
 						<reports>
-							<report>aggregate</report>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
 						</reports>
 					</reportSet>
 				</reportSets>
