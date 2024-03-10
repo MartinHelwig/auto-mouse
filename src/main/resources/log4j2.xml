@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Martin Helwig
+
+SPDX-License-Identifier: MIT
+-->
+
+<!--  This config is only for development and is not included in final jar file -->
+<Configuration monitorInterval="300">
+	<Loggers>
+		<Root level="ERROR">
+			<AppenderRef ref="CONSOLE"/>
+		</Root>
+			
+		<Logger name="io.github.martinhelwig" additivity="false" level="WARN">
+			<AppenderRef ref="CONSOLE"/>
+		</Logger>
+			
+		<Logger name="io.github.martinhelwig.utility.automouse" additivity="false" level="TRACE">
+			<AppenderRef ref="CONSOLE"/>
+		</Logger>
+	</Loggers>
+		
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy/MM/dd HH:mm:ss,SSS} : %t%x : %p : %C : %M : %m%n"/>
+		</Console>
+	</Appenders>
+</Configuration>
