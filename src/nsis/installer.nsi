@@ -46,7 +46,7 @@ VIAddVersionKey /LANG=0 "LegalCopyright" "Copyright © 2023 ${PRODUCT_PUBLISHER}
 VIAddVersionKey /LANG=0 "FileDescription" "${PRODUCT_COMMENT}"
 
 #Version number of the file—for example, "3.10" or "5.00.RC2". This string is required.
-#VIAddVersionKey /LANG=0 "FileVersion" "${PRODUCT_VERSION}"
+VIAddVersionKey /LANG=0 "FileVersion" "${PRODUCT_VERSION}"
 
 #Version of the product with which the file is distributed—for example, "3.10" or "5.00.RC2". This string is required.
 VIAddVersionKey /LANG=0 "ProductVersion" "${PRODUCT_VERSION}"
