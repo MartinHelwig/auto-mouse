@@ -255,7 +255,14 @@ jobs:
           echo "preparing environment on macOS"
           brew install makensis
           echo ALTERNATIVE_DEPLOYMENT_REPO=$([[ "${BRANCH_NAME}" == "main" || "${BRANCH_NAME}" == release/* || "${BRANCH_NAME}" =~ ^v[0-9]+.[0-9]+.[0-9]+$.* ]] && echo "" || echo "-DaltDeploymentRepository=local-repo::default::file:target/local-repo") >> $GITHUB_ENV
-      
+
+      - name: Prepare Release Version
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+        shell: bash
+        run: ${{ env.COMMAND_MAVEN }} versions:set -DremoveSnapshot=true
+        env:
+          COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
+
       - name: Build With Maven
         shell: bash
         run: ${{ env.COMMAND_MAVEN }} deploy site site:stage -Dgpg.skip=false -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true ${{ env.ALTERNATIVE_DEPLOYMENT_REPO }}
