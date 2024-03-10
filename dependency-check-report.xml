@@ -3,11 +3,11 @@
     <engineVersion>9.0.9</engineVersion>
     <dataSource>
       <name>NVD API Last Checked</name>
-      <timestamp>2024-03-03T22:01:25Z</timestamp>
+      <timestamp>2024-03-10T17:14:45Z</timestamp>
     </dataSource>
     <dataSource>
       <name>NVD API Last Modified</name>
-      <timestamp>2024-03-03T21:15:49Z</timestamp>
+      <timestamp>2024-03-10T12:15:06Z</timestamp>
     </dataSource>
   </scanInfo>
   <projectInfo>
@@ -15,8 +15,8 @@
     <groupID>io.github.martinhelwig.utility.automouse</groupID>
             
     <artifactID>auto-mouse</artifactID>
-    <version>0.0.1-SNAPSHOT</version>
-    <reportDate>2024-03-03T22:23:21.249904Z</reportDate>
+    <version>1.0.0</version>
+    <reportDate>2024-03-10T17:15:21.596918Z</reportDate>
     <credits>This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov, Github Advisory Database (via NPM Audit API): https://github.com/advisories/, and the RetireJS community.</credits>
   </projectInfo>
   <dependencies>
@@ -33,7 +33,7 @@
         <projectReference>auto-mouse:compile</projectReference>
       </projectReferences>
       <includedBy>
-        <reference>pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT</reference>
+        <reference>pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.0.0</reference>
       </includedBy>
       <evidenceCollected>
         <evidence type="vendor" confidence="HIGH">
@@ -698,10 +698,10 @@
       <description>The Apache Log4j Implementation</description>
       <license>Apache-2.0: https://www.apache.org/licenses/LICENSE-2.0.txt</license>
       <projectReferences>
-        <projectReference>auto-mouse:compile</projectReference>
+        <projectReference>auto-mouse:runtime</projectReference>
       </projectReferences>
       <includedBy>
-        <reference>pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT</reference>
+        <reference>pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.0.0</reference>
       </includedBy>
       <relatedDependencies>
         <relatedDependency>

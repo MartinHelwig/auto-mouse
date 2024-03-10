@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"io.github.martinhelwig.utility.automouse"},{"l":"io.github.martinhelwig.utility.automouse.manual"}]

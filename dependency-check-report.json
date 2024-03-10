@@ -4,18 +4,18 @@
     "engineVersion" : "9.0.9",
     "dataSource" : [ {
       "name" : "NVD API Last Checked",
-      "timestamp" : "2024-03-03T22:01:25Z"
+      "timestamp" : "2024-03-10T17:14:45Z"
     }, {
       "name" : "NVD API Last Modified",
-      "timestamp" : "2024-03-03T21:15:49Z"
+      "timestamp" : "2024-03-10T12:15:06Z"
     } ]
   },
   "projectInfo" : {
     "name" : "auto-mouse",
     "groupID" : "io.github.martinhelwig.utility.automouse",
     "artifactID" : "auto-mouse",
-    "version" : "0.0.1-SNAPSHOT",
-    "reportDate" : "2024-03-03T22:23:21.249904Z",
+    "version" : "1.0.0",
+    "reportDate" : "2024-03-10T17:15:21.596918Z",
     "credits" : {
       "NVD" : "This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov",
       "CISA" : "This report may contain data retrieved from the CISA Known Exploited Vulnerability Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
@@ -35,7 +35,7 @@
     "license" : "https://www.apache.org/licenses/LICENSE-2.0.txt",
     "projectReferences" : [ "auto-mouse:compile" ],
     "includedBy" : [ {
-      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT"
+      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.0.0"
     } ],
     "evidenceCollected" : {
       "vendorEvidence" : [ {
@@ -830,9 +830,9 @@
     "sha256" : "0fef441ee938719f635db7ef21ad5b1ddf7d5bf8f5abf5eca8f29c3f432681db",
     "description" : "The Apache Log4j Implementation",
     "license" : "Apache-2.0: https://www.apache.org/licenses/LICENSE-2.0.txt",
-    "projectReferences" : [ "auto-mouse:compile" ],
+    "projectReferences" : [ "auto-mouse:runtime" ],
     "includedBy" : [ {
-      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@0.0.1-SNAPSHOT"
+      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.0.0"
     } ],
     "relatedDependencies" : [ {
       "isVirtual" : false,
