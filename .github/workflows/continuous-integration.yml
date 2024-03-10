@@ -344,6 +344,17 @@ jobs:
           asset_name: ${{ steps.check_artifacts_available.outputs.exe_filename }}
           asset_content_type: application/octet-stream
 
+      - name: Upload Release Artifact (exe) Signature
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}.asc
+          asset_name: ${{ steps.check_artifacts_available.outputs.exe_filename }}.asc
+          asset_content_type: application/octet-stream
+
   generate-authors-summary:
     if: ${{ always() }}
     needs: [build]
