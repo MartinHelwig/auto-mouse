@@ -527,7 +527,7 @@ SPDX-License-Identifier: MIT
 						<configuration>
 							<exportAntProperties>true</exportAntProperties>
 							<target>
-								<echo level="info" message="define which deployment repository should be used for ${git.branch}" />
+								<echo level="info" message="define which deployment repository should be used" />
 								<fail message="branch not found">
 									<condition>
 										<not>
@@ -539,7 +539,7 @@ SPDX-License-Identifier: MIT
 								<fail message="no SNAPSHOT version on release tag allowed">
 									<condition>
 										<and>
-											<matches pattern="^v[0-9]+.[0-9]+.[0-9]+$" string="${git.branch}"/>
+											<matches pattern="^v[0-9]+.[0-9]+.[0-9]+$" string="${git.tags}"/>
 											<matches pattern=".*SNAPSHOT.*" string="${project.version}"/>
 										</and>
 									</condition>
@@ -548,7 +548,7 @@ SPDX-License-Identifier: MIT
 								<condition property="local-repo" value="true">
 									<or>
 										<not>
-											<matches pattern="^release/.*|^v[0-9]+.[0-9]+.[0-9]+$" string="${git.branch}"/>
+											<matches pattern="^v[0-9]+.[0-9]+.[0-9]+$" string="${git.tags}"/>
 										</not>
 										<matches pattern=".*SNAPSHOT.*" string="${project.version}"/>
 									</or>
