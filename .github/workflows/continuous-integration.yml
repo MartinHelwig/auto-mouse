@@ -17,13 +17,6 @@ on:
       - '.project'
   pull_request:
     types: [opened, reopened, synchronize]
-    paths-ignore:
-      - '.gitignore'
-      - '*.md'
-      - '.github/**/*'
-      - '.settings'
-      - '.classpath'
-      - '.project'
   release:
     types: [created]
 
