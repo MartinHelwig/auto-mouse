@@ -101,7 +101,7 @@ SPDX-License-Identifier: MIT
 
 		<!-- plugin versions -->
 		<maven-surefire.version>3.2.5</maven-surefire.version>
-		<maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+		<maven-assembly-plugin.version>3.7.0</maven-assembly-plugin.version>
 		<maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
 		<maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
@@ -112,7 +112,7 @@ SPDX-License-Identifier: MIT
 		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
 		<maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
-		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<maven-gpg-plugin.version>3.2.0</maven-gpg-plugin.version>
 		<jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
 		<buildnumber-maven-plugin.version>3.2.0</buildnumber-maven-plugin.version>
 		<git-commit-id-maven-plugin.version>7.0.0</git-commit-id-maven-plugin.version>
