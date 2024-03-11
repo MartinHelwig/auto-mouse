@@ -11,7 +11,6 @@ on:
     paths-ignore:
       - '.gitignore'
       - '*.md'
-      - '.github/**/*'
       - '.settings'
       - '.classpath'
       - '.project'
