@@ -4,18 +4,18 @@
     "engineVersion" : "9.0.9",
     "dataSource" : [ {
       "name" : "NVD API Last Checked",
-      "timestamp" : "2024-03-12T19:12:08Z"
+      "timestamp" : "2024-03-12T19:34:23Z"
     }, {
       "name" : "NVD API Last Modified",
-      "timestamp" : "2024-03-12T18:15:07Z"
+      "timestamp" : "2024-03-12T19:15:48Z"
     } ]
   },
   "projectInfo" : {
     "name" : "auto-mouse",
     "groupID" : "io.github.martinhelwig.utility.automouse",
     "artifactID" : "auto-mouse",
-    "version" : "1.1.0",
-    "reportDate" : "2024-03-12T19:12:57.816778Z",
+    "version" : "1.0.0",
+    "reportDate" : "2024-03-12T19:35:20.729354Z",
     "credits" : {
       "NVD" : "This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov",
       "CISA" : "This report may contain data retrieved from the CISA Known Exploited Vulnerability Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
@@ -35,7 +35,7 @@
     "license" : "https://www.apache.org/licenses/LICENSE-2.0.txt",
     "projectReferences" : [ "auto-mouse:compile" ],
     "includedBy" : [ {
-      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.1.0"
+      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.0.0"
     } ],
     "evidenceCollected" : {
       "vendorEvidence" : [ {
@@ -832,7 +832,7 @@
     "license" : "Apache-2.0: https://www.apache.org/licenses/LICENSE-2.0.txt",
     "projectReferences" : [ "auto-mouse:runtime" ],
     "includedBy" : [ {
-      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.1.0"
+      "reference" : "pkg:maven/io.github.martinhelwig.utility.automouse/auto-mouse@1.0.0"
     } ],
     "relatedDependencies" : [ {
       "isVirtual" : false,
