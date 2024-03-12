@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2023 Martin Helwig
+#
+# SPDX-License-Identifier: MIT
+
+name: Pull Request Updater
+
+on:
+  pull_request_target:
+    types: [opened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+# Declare default permissions as read only.
+permissions: read-all
+
+jobs:
+  build:
+    name: Issue Updater
+    permissions:
+      contents: none
+      packages: none
+      checks: none
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: write
+      repository-projects: none
+      security-events: none
+      statuses: none
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Welcome
+        uses: actions-cool/pr-welcome@1c2b1c3e3ab926424a4464fbf7b6321efb67c871 # v1.4.0
+        with:
+          comment: |
+            Hello @${{ github.event.pull_request.user.login }}, thanks for submitting this pull request. We will have a look at it as soon as possible.
+                        
+            ---
+            > [!note]  
+            _Additional Tasklist_
+            
+            - [ ] _Ensure that the pull request title represents the desired changelog entry._ | #${{ github.event.pull_request.number }}
+          reviewers: 'MartinHelwig'
+          review-creator: false
+        if: ${{ github.event_name == 'pull_request_target' && github.event.action == 'opened' && !endsWith(github.event.pull_request.user.login, '[bot]') }}

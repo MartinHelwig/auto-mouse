@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Welcome
-        uses: actions-cool/issues-helper@v3
+        uses: actions-cool/issues-helper@a610082f8ac0cf03e357eb8dd0d5e2ba075e017e # v3.6.0
         with:
           actions: 'welcome'
           body: |
@@ -40,7 +40,7 @@ jobs:
         if: ${{ github.event_name == 'issues' && github.event.action == 'opened' && !endsWith(github.event.issue.user.login, '[bot]') && github.event.issue.user.login != 'MartinHelwig' }}
 
       - name: Comment Issue On Opened
-        uses: actions-cool/issues-helper@v3
+        uses: actions-cool/issues-helper@a610082f8ac0cf03e357eb8dd0d5e2ba075e017e # v3.6.0
         with:
           actions: 'create-comment'
           issue-number: ${{ github.event.issue.number }}
@@ -50,11 +50,13 @@ jobs:
         if: ${{ github.event_name == 'issues' && github.event.action == 'opened' && !endsWith(github.event.issue.user.login, '[bot]') && github.event.issue.user.login != 'MartinHelwig' }}
 
       - name: Update Issue On Opened
-        uses: actions-cool/issues-helper@v3
+        uses: actions-cool/issues-helper@a610082f8ac0cf03e357eb8dd0d5e2ba075e017e # v3.6.0
         with:
           actions: 'update-issue'
           issue-number: ${{ github.event.issue.number }}
           body: |
+            <!-- automatically added list -->
+            
             ---
             > [!note]  
             _Additional Tasklist_
@@ -67,7 +69,7 @@ jobs:
         if: ${{ github.event_name == 'issues' && github.event.action == 'opened' && !endsWith(github.event.issue.user.login, '[bot]') }}
 
       - name: Thanks Contributor On Close
-        uses: actions-cool/issues-helper@v3
+        uses: actions-cool/issues-helper@a610082f8ac0cf03e357eb8dd0d5e2ba075e017e # v3.6.0
         with:
           actions: 'create-comment'
           issue-number: ${{ github.event.issue.number }}

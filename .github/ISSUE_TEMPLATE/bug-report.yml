@@ -2,7 +2,7 @@
 #
 #SPDX-License-Identifier: MIT
 
-name: 🐞 Bug Report
+name: 🐛 Bug Report
 description: Create an issue to report a bug
 labels: ["bug"]
 

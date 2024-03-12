@@ -43,9 +43,12 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        cache: 'maven'
+        check-latest: true
+        cache-dependency-path: src/cache/cache.info
       
     - name: Dependency Check
       run: xvfb-run mvn -B dependency-check:check -Ddependency-check.skip=false --no-transfer-progress
 
     - name: Maven Dependency Tree Dependency Submission
-      uses: advanced-security/maven-dependency-submission-action@73da25169f2ac4d336320399ba58070deebc1208 # v4.0.1
+      uses: advanced-security/maven-dependency-submission-action@bfd2106013da0957cdede0b6c39fb5ca25ae375e # v4.0.2

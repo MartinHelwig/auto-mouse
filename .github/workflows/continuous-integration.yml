@@ -8,6 +8,12 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main", "release/*" ]
+    paths-ignore:
+      - '.gitignore'
+      - '*.md'
+      - '.settings'
+      - '.classpath'
+      - '.project'
   pull_request:
     types: [opened, reopened, synchronize]
   release:
@@ -20,9 +26,168 @@ concurrency:
 # Declare default permissions as read only.
 permissions: read-all
 
+env:
+  GLOBAL_MAVEN_ARGS: --batch-mode --no-transfer-progress --errors
+
 jobs:
+  check-reuse:
+    name: Reuse Compliance Check
+    permissions:
+      contents: read
+      packages: none
+      checks: none
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    env:
+      PROJECT_NAME: ${{ github.event.repository.name }}
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set Project Name
+        run: |
+          echo "# <a href='url'><img src='https://raw.githubusercontent.com/MartinHelwig/auto-mouse/main/src/main/resources/io/github/martinhelwig/utility/automouse/images/auto-mouse_black.png' align='left' height='48' width='48'></a> Project ${PROJECT_NAME} on ${BRANCH_NAME}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check REUSE
+        run: |
+          echo "pip install reuse" > install.sh && chmod +x install.sh && ./install.sh && rm install.sh
+          echo "## REUSE Compliance" >> $GITHUB_STEP_SUMMARY
+          echo "For more information about REUSE see [official page](https://reuse.software/)."
+          reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
+          reuse lint --quiet
+
+  dependency-check:
+    if: ${{ always() }}
+    needs: [check-reuse]
+    name: Dependency Check
+    permissions:
+      contents: read
+      packages: none
+      checks: none
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8 # v4.1.0
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
+          cache-dependency-path: src/cache/cache.info
+
+      - name: OWASP Check
+        shell: bash
+        run: ${{ env.COMMAND_MAVEN }} dependency-check:check -Dgpg.skip=true -Dmaven.test.skip=true -Djavadoc.skip=true -Dsource.skip=true -Ddependency-check.skip=false -Dnsis.skip=true -Djre.skip=true
+        env:
+          COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
+
+  execute-tests:
+    if: ${{ always() }}
+    needs: [check-reuse]
+    name: JUnit Test (Java ${{ matrix.java }} | ${{ matrix.os }})
+    permissions:
+      contents: read
+      packages: none
+      checks: write
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    env:
+      PROJECT_NAME: ${{ github.event.repository.name }}
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        #os: [ubuntu-latest]
+        java: [ 11, 17, 21 ]
+        #java: [ 11 ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8 # v4.1.0
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          cache: 'maven'
+          check-latest: true
+          cache-dependency-path: src/cache/cache.info
+
+      - name: Running Tests
+        shell: bash
+        run: ${{ env.COMMAND_MAVEN }} test -Dgpg.skip=true -Dmaven.test.skip=false -Djavadoc.skip=true -Dsource.skip=true -Ddependency-check.skip=true -Dnsis.skip=true -Djre.skip=true
+        env:
+          COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
+
+      - name: Add Headline Job Summary
+        run: echo "## JUnit " >> $GITHUB_STEP_SUMMARY
+      
+      - name: Publish Test Report
+        if: success() || failure() # always run even if the previous step fails
+        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4.1.0
+        with:
+          report_paths: target/surefire-reports/TEST-*.xml
+          detailed_summary: true
+          include_passed: true
+          fail_on_failure: true
+          require_tests: true
+          check_name: 'JUnit Report (Java ${{ matrix.java }} | ${{ matrix.os }})'
+
+      - name: JaCoCo Code Coverage Report
+        id: jacoco_reporter
+        uses: PavanMudigonda/jacoco-reporter@4fc6bf270fe893e8dda5467e432253a6961345b8 # v5.0
+        with:
+          coverage_results_path: target/reports/jacoco/jacoco.xml
+          coverage_report_name: Coverage
+          coverage_report_title: ${{ env.PROJECT_NAME }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_check_run: false
+          minimum_coverage: 80
+          fail_below_threshold: false
+          publish_only_summary: false
+        
+      - name: Add Coverage Job Summary
+        run: echo "## Code Coverage ${{ env.coveragePercentageString }}" >> $GITHUB_STEP_SUMMARY
+
   build:
-    name: Continuous Integration
+    needs: [dependency-check, execute-tests]
+    name: Build Project
     permissions:
       contents: write
       packages: write
@@ -45,17 +210,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-        with:
-          fetch-depth: "0" # to get the authors summary
-
-      - name: Set Project Name
-        run: |
-          echo "# Project $(PROJECT_NAME) on ${BRANCH_NAME}" >> $GITHUB_STEP_SUMMARY
 
       - name: Set up JDK 11
         uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8 # v4.1.0
         with:
-          java-version: '11'
+          java-version: 11
           distribution: 'temurin'
           cache: 'maven'
           check-latest: true
@@ -63,60 +222,43 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Prepare Build Environment
+      - name: Prepare Environment (Global)
         run: |
-          sudo apt-get install nsis
+          echo "preparing global environment"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          echo ALTERNATIVE_DEPLOYMENT_REPO=$([[ "${BRANCH_NAME}" == "main" ]] && echo "" || echo "-DaltDeploymentRepository=local-repo::default::file:target/local-repo") >> $GITHUB_ENV
 
-      - name: Check REUSE compliance
+      - name: Prepare Environment (Linux)
+        if: runner.os == 'Linux'
         run: |
-          echo "pip install reuse" > install.sh && chmod +x install.sh && ./install.sh && rm install.sh
-          echo "## REUSE Compliance" >> $GITHUB_STEP_SUMMARY
-          echo "For more information about REUSE see [official page](https://reuse.software/)."
-          reuse lint | sed  s'/# /### /g' >> $GITHUB_STEP_SUMMARY
-          reuse lint --quiet
-          
-      - name: Build And Publish With Maven
-        run: xvfb-run mvn -B deploy site site:stage -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true --no-transfer-progress $ALTERNATIVE_DEPLOYMENT_REPO
+          echo "preparing environment on linux"
+          sudo apt-get install nsis
+
+      - name: Prepare Environment (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          echo "preparing environment on windows"
+
+      - name: Prepare Environment (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          echo "preparing environment on macOS"
+          brew install makensis
+
+      - name: Prepare Release Version
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+        shell: bash
+        run: ${{ env.COMMAND_MAVEN }} versions:set -DremoveSnapshot=true
         env:
+          COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
+
+      - name: Build With Maven
+        shell: bash
+        run: ${{ env.COMMAND_MAVEN }} deploy site site:stage -Dgpg.skip=false -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true
+        env:
+          COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
           GITHUB_TOKEN: ${{ github.token }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}
-
-      - name: Add Headline Job Summary
-        run: echo "## JUnit " >> $GITHUB_STEP_SUMMARY
-      
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4.1.0
-        if: success() || failure() # always run even if the previous step fails
-        with:
-          report_paths: target/surefire-reports/TEST-*.xml
-          detailed_summary: true
-          include_passed: true
-          fail_on_failure: true
-          require_tests: true
-
-      - name: JaCoCo Code Coverage Report
-        id: jacoco_reporter
-        uses: PavanMudigonda/jacoco-reporter@76044ebc031589dcbce0bb1048ffee1072a43f97 # v4.9
-        with:
-          coverage_results_path: target/reports/jacoco/jacoco.xml
-          coverage_report_name: Coverage
-          coverage_report_title: ${{ env.PROJECT_NAME }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          skip_check_run: false
-          minimum_coverage: 80
-          fail_below_threshold: false
-          publish_only_summary: false
-        
-      - name: Add Coverage Job Summary
-        run: echo "## Code Coverage ${{ env.coveragePercentageString }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: Add Authors Summary
-        run: |
-          echo "## Authors Summary" >> $GITHUB_STEP_SUMMARY
-          git shortlog -sce --all >> $GITHUB_STEP_SUMMARY
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_PASSPHRASE }}         
 
       - name: Check Artifacts Available
         id: check_artifacts_available
@@ -132,34 +274,37 @@ jobs:
           echo "targz_filename=$(basename ${FILENAME})" >> $GITHUB_OUTPUT
 
       - name: Signing Artifacts
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           gpg --pinentry-mode loopback --batch --passphrase ${{ secrets.GPG_SIGNING_PASSPHRASE }} --armor --detach-sign target/${{ steps.check_artifacts_available.outputs.targz_filename }}
           gpg --pinentry-mode loopback --batch --passphrase ${{ secrets.GPG_SIGNING_PASSPHRASE }} --armor --detach-sign target/${{ steps.check_artifacts_available.outputs.exe_filename }}
-        if: ${{ github.event_name != 'pull_request' }}
-
+          
       - name: Upload Package
+        if: ${{ github.event_name != 'pull_request' }}
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: ${{ github.event.repository.name }}_package
           path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}*
           if-no-files-found: error
-        if: ${{ github.event_name != 'pull_request' }}
 
       - name: Upload Installer
+        if: ${{ github.event_name != 'pull_request' }}
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: ${{ github.event.repository.name }}_installer
           path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}*
           if-no-files-found: error
-        if: ${{ github.event_name != 'pull_request' }}
 
       - name: Publish GitHub Page
-        run: xvfb-run mvn scm-publish:publish-scm --no-transfer-progress
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
+        shell: bash
+        run: ${{ env.COMMAND_MAVEN }} scm-publish:publish-scm
         env:
+          COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
           GITHUB_TOKEN: ${{ github.token }}
-        if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
 
       - name: Upload Release Artifact (tar.gz)
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -168,9 +313,9 @@ jobs:
           asset_path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}
           asset_name: ${{ steps.check_artifacts_available.outputs.targz_filename }}
           asset_content_type: application/gzip
-        if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
 
       - name: Upload Release Artifact (tar.gz) Signature
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -178,10 +323,10 @@ jobs:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}.asc
           asset_name: ${{ steps.check_artifacts_available.outputs.targz_filename }}.asc
-          asset_content_type: application/gzip
-        if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
-
+          asset_content_type: application/octet-stream
+        
       - name: Upload Release Artifact (exe)
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -190,9 +335,9 @@ jobs:
           asset_path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}
           asset_name: ${{ steps.check_artifacts_available.outputs.exe_filename }}
           asset_content_type: application/octet-stream
-        if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
 
       - name: Upload Release Artifact (exe) Signature
+        if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -201,4 +346,34 @@ jobs:
           asset_path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}.asc
           asset_name: ${{ steps.check_artifacts_available.outputs.exe_filename }}.asc
           asset_content_type: application/octet-stream
-        if: ${{ github.event_name == 'release' && github.event.action == 'created'}}
+
+  generate-authors-summary:
+    if: ${{ always() }}
+    needs: [build]
+    name: Generate Authors Summary
+    permissions:
+      contents: read
+      packages: none
+      checks: none
+      actions: none
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      pages: none
+      pull-requests: none
+      repository-projects: none
+      security-events: none
+      statuses: none
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          fetch-depth: "0" # to get the authors summary
+
+      - name: Add Authors Summary
+        run: |
+          echo "## Authors Summary" >> $GITHUB_STEP_SUMMARY
+          git shortlog -sce --all >> $GITHUB_STEP_SUMMARY
