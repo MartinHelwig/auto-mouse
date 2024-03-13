@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
 
 	<groupId>io.github.martinhelwig.utility.automouse</groupId>
 	<artifactId>auto-mouse</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<name>auto-mouse</name>
 	<description>The auto-mouse utility moves the mouse in a configurable intervall to stop locking the screen.</description>
@@ -654,8 +654,6 @@ SPDX-License-Identifier: MIT
 						<arg>--pinentry-mode</arg>
 						<arg>loopback</arg>
 					</gpgArguments>
-					<keyname>${GPG_SIGNING_KEYNAME}</keyname>
-					<passphrase>${GPG_SIGNING_PASSPHRASE}</passphrase>
 				</configuration>
 			</plugin>
 		</plugins>
