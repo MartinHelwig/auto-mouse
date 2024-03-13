@@ -654,6 +654,8 @@ SPDX-License-Identifier: MIT
 						<arg>--pinentry-mode</arg>
 						<arg>loopback</arg>
 					</gpgArguments>
+					<keyname>${GPG_SIGNING_KEYNAME}</keyname>
+					<passphrase>${GPG_SIGNING_PASSPHRASE}</passphrase>
 				</configuration>
 			</plugin>
 		</plugins>
