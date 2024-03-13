@@ -254,7 +254,7 @@ jobs:
 
       - name: Build With Maven
         shell: bash
-        run: ${{ env.COMMAND_MAVEN }} deploy site site:stage -Dgpg.skip=false -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true
+        run: ${{ env.COMMAND_MAVEN }} deploy site site:stage -Dgpg.skip=${{ github.event_name == 'pull_request' && 'true' || 'false' }} -Dmaven.test.skip=false -Djavadoc.skip=false -Dsource.skip=false -Ddependency-check.skip=false -Dnsis.skip=false -Djre.skip=true
         env:
           COMMAND_MAVEN: "${{ runner.os == 'Linux' && 'xvfb-run mvn' || 'mvn' }} ${{ env.GLOBAL_MAVEN_ARGS }}"
           GITHUB_TOKEN: ${{ github.token }}
