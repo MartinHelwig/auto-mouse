@@ -106,7 +106,7 @@ SPDX-License-Identifier: MIT
 		<maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
 		<maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-		<maven-site-plugin.version>4.0.0-M14</maven-site-plugin.version> <!-- until M13 problem with $banner.name -->
+		<maven-site-plugin.version>4.0.0-M15</maven-site-plugin.version> <!-- until M13 problem with $banner.name -->
 		<maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
 		<maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
 		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
