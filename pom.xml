@@ -108,7 +108,7 @@ SPDX-License-Identifier: MIT
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
 		<maven-site-plugin.version>4.0.0-M15</maven-site-plugin.version> <!-- until M13 problem with $banner.name -->
 		<maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
-		<maven-scm-publish-plugin.version>3.2.1</maven-scm-publish-plugin.version>
+		<maven-scm-publish-plugin.version>3.3.0</maven-scm-publish-plugin.version>
 		<maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
 		<maven-jxr-plugin.version>3.4.0</maven-jxr-plugin.version>
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
