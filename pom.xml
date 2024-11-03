@@ -117,7 +117,7 @@ SPDX-License-Identifier: MIT
 		<buildnumber-maven-plugin.version>3.2.0</buildnumber-maven-plugin.version>
 		<git-commit-id-maven-plugin.version>9.0.0</git-commit-id-maven-plugin.version>
 		<nsis-maven-plugin.version>1.0.6</nsis-maven-plugin.version>
-		<mvn-jlink-wrapper.version>1.2.2</mvn-jlink-wrapper.version>
+		<mvn-jlink-wrapper.version>1.2.4</mvn-jlink-wrapper.version>
 		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
 	</properties>
 
