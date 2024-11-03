@@ -160,7 +160,7 @@ jobs:
       
       - name: Publish Test Report
         if: success() || failure() # always run even if the previous step fails
-        uses: mikepenz/action-junit-report@ac30be7acb0a361e5492575ab42e47fcadec4928 # v4.2.2
+        uses: mikepenz/action-junit-report@db71d41eb79864e25ab0337e395c352e84523afe # v4.3.1
         with:
           report_paths: target/surefire-reports/TEST-*.xml
           detailed_summary: true
