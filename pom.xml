@@ -97,7 +97,7 @@ SPDX-License-Identifier: MIT
 		<log4j.version>2.23.1</log4j.version>
 		<junit.version>5.10.2</junit.version>
 		<junit.platform.version>1.9.2</junit.platform.version>
-		<dependency-check-maven.version>9.2.0</dependency-check-maven.version>
+		<dependency-check-maven.version>11.1.0</dependency-check-maven.version>
 
 		<!-- plugin versions -->
 		<maven-surefire.version>3.3.0</maven-surefire.version>
