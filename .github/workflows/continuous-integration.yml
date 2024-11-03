@@ -160,7 +160,7 @@ jobs:
       
       - name: Publish Test Report
         if: success() || failure() # always run even if the previous step fails
-        uses: mikepenz/action-junit-report@ac30be7acb0a361e5492575ab42e47fcadec4928 # v4.2.2
+        uses: mikepenz/action-junit-report@db71d41eb79864e25ab0337e395c352e84523afe # v4.3.1
         with:
           report_paths: target/surefire-reports/TEST-*.xml
           detailed_summary: true
@@ -281,7 +281,7 @@ jobs:
           
       - name: Upload Package
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: ${{ github.event.repository.name }}_package
           path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}*
@@ -289,7 +289,7 @@ jobs:
 
       - name: Upload Installer
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: ${{ github.event.repository.name }}_installer
           path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}*
