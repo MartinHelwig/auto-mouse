@@ -281,7 +281,7 @@ jobs:
           
       - name: Upload Package
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: ${{ github.event.repository.name }}_package
           path: target/${{ steps.check_artifacts_available.outputs.targz_filename }}*
@@ -289,7 +289,7 @@ jobs:
 
       - name: Upload Installer
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
         with:
           name: ${{ github.event.repository.name }}_installer
           path: target/${{ steps.check_artifacts_available.outputs.exe_filename }}*
